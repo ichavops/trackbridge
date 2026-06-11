@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TrackBridge — Ask. Know. Decide.</title>
+<meta name="description" content="TrackBridge is an AI intelligence layer for professional services firms. Instant plain-English answers from your live PSA data." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F8FAFC;
+  --surface:#FFFFFF;
+  --card:#F1F5F9;
+  --card2:#E9D5FF;
+  --teal:#7C3AED;
+  --teal-dim:rgba(124,58,237,0.08);
+  --teal-border:rgba(124,58,237,0.25);
+  --text:#0F172A;
+  --muted:#64748B;
+  --subtle:#94A3B8;
+  --border:#E2E8F0;
+  --border2:#CBD5E1;
+  --nav-h:68px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,h5{font-family:'Plus Jakarta Sans',sans-serif;line-height:1.2}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+ul{list-style:none}
+button,input,select,textarea{font-family:inherit;font-size:inherit}
+
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:var(--nav-h);
+  background:rgba(248,250,252,0.95);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;padding:0 24px;
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;
+  cursor:pointer;
+}
+.logo-icon{
+  width:32px;height:32px;
+  background:var(--teal);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.logo-icon svg{width:18px;height:18px;stroke:#fff;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-link{
+  padding:6px 14px;border-radius:6px;
+  font-size:14px;font-weight:500;color:var(--muted);
+  cursor:pointer;transition:color .2s,background .2s;
+}
+.nav-link:hover{color:var(--text);background:rgba(124,58,237,0.07)}
+.nav-link.active{color:var(--text)}
+.nav-cta{
+  padding:9px 20px;border-radius:8px;
+  background:var(--teal);color:#fff;
+  font-weight:600;font-size:14px;cursor:pointer;
+  transition:opacity .2s,transform .15s;border:none;
+}
+.nav-cta:hover{opacity:.9;transform:translateY(-1px)}
+.nav-mobile-btn{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--text)}
+.mobile-menu{
+  display:none;position:fixed;top:var(--nav-h);left:0;right:0;
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:16px 24px 24px;z-index:99;
+}
+.mobile-menu.open{display:block}
+.mobile-menu .nav-link{display:block;padding:10px 0;border-bottom:1px solid var(--border);border-radius:0}
+.mobile-menu .nav-cta{margin-top:16px;width:100%;display:block;text-align:center}
+
+/* ── PAGES ── */
+.page{display:none;padding-top:var(--nav-h)}
+.page.active{display:block}
+
+/* ── SHARED ── */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:96px 0}
+.section-sm{padding:64px 0}
+.eyebrow{
+  display:inline-block;
+  font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:16px;
+}
+.section-title{font-size:clamp(32px,5vw,48px);font-weight:800;margin-bottom:16px}
+.section-sub{font-size:18px;color:var(--muted);max-width:600px;line-height:1.7}
+.center{text-align:center}
+.center .section-sub{margin:0 auto}
+
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:10px;
+  background:var(--teal);color:#fff;
+  font-weight:700;font-size:16px;cursor:pointer;
+  border:none;transition:opacity .2s,transform .15s;
+}
+.btn-primary:hover{opacity:.9;transform:translateY(-2px)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:10px;
+  background:transparent;color:var(--text);
+  font-weight:600;font-size:16px;cursor:pointer;
+  border:1px solid var(--border2);
+  transition:border-color .2s,background .2s,transform .15s;
+}
+.btn-ghost:hover{border-color:var(--teal);background:var(--teal-dim);transform:translateY(-2px)}
+.tag{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 10px;border-radius:20px;
+  font-size:12px;font-weight:600;
+  background:var(--teal-dim);color:var(--teal);
+  border:1px solid var(--teal-border);
+}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.dot.amber{background:#f59e0b}
+.dot.gray{background:var(--muted)}
+
+/* ── HOME HERO ── */
+.hero{
+  padding:120px 0 96px;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 16px;border-radius:20px;
+  background:var(--teal-dim);border:1px solid var(--teal-border);
+  font-size:13px;font-weight:600;color:var(--teal);
+  margin-bottom:24px;
+}
+.hero h1{
+  font-size:clamp(48px,7vw,80px);font-weight:800;
+  letter-spacing:-.02em;margin-bottom:24px;
+  color:var(--text);
+}
+.hero-sub{font-size:clamp(18px,2.5vw,22px);color:var(--muted);max-width:640px;line-height:1.7;margin-bottom:40px}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:64px}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--border);border-radius:16px;overflow:hidden;
+  max-width:700px;
+}
+.hero-stat{
+  background:var(--surface);padding:24px;text-align:center;
+}
+.hero-stat-val{font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:var(--teal);margin-bottom:4px}
+.hero-stat-lbl{font-size:13px;color:var(--muted)}
+
+/* chat demo */
+.chat-demo{
+  background:var(--surface);border:1px solid var(--border2);border-radius:16px;
+  overflow:hidden;max-width:560px;margin:0 auto;
+}
+.chat-bar{
+  background:var(--card);padding:12px 16px;
+  display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid var(--border);
+}
+.chat-dot{width:10px;height:10px;border-radius:50%}
+.chat-dot:nth-child(1){background:#ff5f57}
+.chat-dot:nth-child(2){background:#ffbc2e}
+.chat-dot:nth-child(3){background:#2ac63a}
+.chat-title{font-size:13px;color:var(--muted);margin-left:auto;margin-right:auto}
+.chat-body{padding:20px;display:flex;flex-direction:column;gap:12px}
+.chat-msg{display:flex;gap:10px;align-items:flex-start}
+.chat-msg.user{flex-direction:row-reverse}
+.chat-avatar{
+  width:32px;height:32px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;
+}
+.chat-avatar.tb{background:var(--teal);color:#fff}
+.chat-avatar.usr{background:var(--card2);color:var(--text)}
+.chat-bubble{
+  padding:10px 14px;border-radius:12px;font-size:14px;line-height:1.5;max-width:380px;
+}
+.chat-msg.bot .chat-bubble{background:var(--card);border:1px solid var(--border)}
+.chat-msg.user .chat-bubble{background:var(--teal);color:#fff;font-weight:500}
+.chat-input-row{
+  padding:12px 16px;border-top:1px solid var(--border);
+  display:flex;gap:10px;align-items:center;
+}
+.chat-input{
+  flex:1;background:var(--card);border:1px solid var(--border2);border-radius:8px;
+  padding:9px 14px;color:var(--text);font-size:14px;outline:none;
+}
+.chat-input::placeholder{color:var(--subtle)}
+.chat-send{
+  width:36px;height:36px;border-radius:8px;background:var(--teal);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.chat-send svg{width:16px;height:16px;stroke:#fff;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* hero 2-col */
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+
+/* features */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.feature-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:28px;transition:border-color .2s,transform .2s;
+}
+.feature-card:hover{border-color:var(--teal-border);transform:translateY(-4px)}
+.feature-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:var(--teal-dim);border:1px solid var(--teal-border);
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+}
+.feature-icon svg{width:22px;height:22px;stroke:var(--teal);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.feature-card h3{font-size:18px;font-weight:700;margin-bottom:10px}
+.feature-card p{font-size:14px;color:var(--muted);line-height:1.6}
+
+/* platforms */
+.platforms-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.platforms-inner{display:flex;flex-direction:column;align-items:center;gap:40px;padding:64px 24px}
+.platform-logos{display:flex;gap:32px;flex-wrap:wrap;justify-content:center;align-items:center}
+.platform-logo{
+  padding:14px 24px;border-radius:10px;background:var(--card);
+  border:1px solid var(--border);color:var(--muted);font-weight:600;font-size:15px;
+  display:flex;align-items:center;gap:8px;
+}
+.platform-logo .tag{font-size:10px;padding:2px 8px}
+
+/* testimonial */
+.quote-card{
+  background:var(--surface);border:1px solid var(--border2);border-radius:20px;
+  padding:48px;max-width:760px;margin:0 auto;position:relative;overflow:hidden;
+}
+.quote-card::before{
+  content:'"';position:absolute;top:-20px;left:32px;
+  font-size:200px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
+  color:rgba(124,58,237,0.08);line-height:1;pointer-events:none;
+}
+.quote-text{font-size:clamp(18px,2.5vw,22px);line-height:1.7;color:var(--text);font-style:italic;margin-bottom:28px;position:relative;z-index:1}
+.quote-author{display:flex;align-items:center;gap:14px}
+.quote-avatar{width:44px;height:44px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff}
+.quote-name{font-weight:600;font-size:15px}
+.quote-role{font-size:13px;color:var(--muted)}
+
+/* ── HOW IT WORKS ── */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:64px;position:relative}
+.steps-grid::before{
+  content:'';position:absolute;top:48px;left:16%;right:16%;height:2px;
+  background:var(--teal-border);
+  z-index:0;
+}
+.step{text-align:center;padding:0 24px;position:relative;z-index:1}
+.step-num{
+  width:96px;height:96px;border-radius:50%;margin:0 auto 24px;
+  background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:800;color:#fff;
+  box-shadow:0 0 40px rgba(124,58,237,0.3);
+}
+.step h3{font-size:22px;font-weight:700;margin-bottom:12px}
+.step p{font-size:15px;color:var(--muted);line-height:1.6}
+
+.arch-box{
+  background:var(--surface);border:1px solid var(--border2);border-radius:16px;
+  padding:32px;margin-top:64px;display:flex;gap:24px;align-items:flex-start;
+}
+.arch-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.arch-icon svg{width:22px;height:22px;stroke:#f59e0b;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.arch-box h4{font-size:17px;font-weight:700;margin-bottom:8px}
+.arch-box p{font-size:15px;color:var(--muted);line-height:1.65}
+
+.delivery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px}
+.delivery-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px;text-align:center;
+}
+.delivery-card .icon{width:52px;height:52px;border-radius:14px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.delivery-card h4{font-size:16px;font-weight:700;margin-bottom:8px}
+.delivery-card p{font-size:13px;color:var(--muted)}
+
+/* ── WHO WE SERVE ── */
+.personas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
+.persona-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:28px;display:flex;gap:20px;align-items:flex-start;
+  transition:border-color .2s;
+}
+.persona-card:hover{border-color:var(--teal-border)}
+.persona-emoji{font-size:36px;flex-shrink:0;line-height:1}
+.persona-card h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.persona-card p{font-size:14px;color:var(--muted);line-height:1.6}
+
+.verticals-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:48px}
+.vertical-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:24px;display:flex;gap:16px;align-items:flex-start;
+}
+.vertical-tag{
+  flex-shrink:0;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.05em;
+}
+.vertical-tag.gov{background:rgba(37,99,235,0.1);color:#1D4ED8}
+.vertical-tag.it{background:rgba(109,40,217,0.1);color:#6D28D9}
+.vertical-tag.eng{background:rgba(180,83,9,0.1);color:#B45309}
+.vertical-tag.con{background:rgba(190,24,93,0.1);color:#BE185D}
+.vertical-card h4{font-size:16px;font-weight:700;margin-bottom:6px}
+.vertical-card p{font-size:13px;color:var(--muted);line-height:1.6}
+
+.size-banner{
+  background:var(--teal-dim);
+  border:1px solid var(--teal-border);border-radius:16px;
+  padding:32px 40px;margin-top:48px;
+  display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+}
+.size-banner h3{font-size:22px;font-weight:700;flex:1;min-width:200px}
+.size-banner p{font-size:15px;color:var(--muted);flex:2;min-width:200px}
+
+/* ── WHY TRACKBRIDGE ── */
+.diff-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
+.diff-item{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:28px;
+}
+.diff-item h3{font-size:17px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.diff-item p{font-size:14px;color:var(--muted);line-height:1.65}
+
+.compare-table{margin-top:48px;border-radius:16px;overflow:hidden;border:1px solid var(--border)}
+.compare-row{display:grid;grid-template-columns:2fr 1fr 1fr;background:var(--surface)}
+.compare-row:not(:last-child){border-bottom:1px solid var(--border)}
+.compare-row.head{background:var(--card);font-weight:700}
+.compare-cell{padding:16px 20px;font-size:14px;color:var(--muted)}
+.compare-cell:first-child{color:var(--text)}
+.compare-cell.yes{color:var(--teal);font-weight:600}
+.compare-cell.no{color:var(--subtle)}
+.compare-cell.tb-col{color:var(--teal)}
+.check{margin-right:4px}
+
+.founder-card{
+  background:var(--surface);border:1px solid var(--border2);border-radius:20px;
+  padding:40px;margin-top:48px;display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;
+}
+.founder-avatar{
+  width:80px;height:80px;border-radius:16px;flex-shrink:0;
+  background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#fff;
+}
+.founder-info{flex:1}
+.founder-info h3{font-size:22px;font-weight:700;margin-bottom:6px}
+.founder-info .role{font-size:14px;color:var(--teal);font-weight:600;margin-bottom:16px}
+.founder-info p{font-size:15px;color:var(--muted);line-height:1.7}
+.founder-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.founder-tag{padding:4px 12px;border-radius:6px;font-size:12px;font-weight:600;background:var(--card);border:1px solid var(--border2);color:var(--muted)}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.pricing-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:32px;display:flex;flex-direction:column;
+  transition:border-color .2s,transform .2s;
+}
+.pricing-card.featured{
+  border-color:var(--teal);background:var(--card);
+  transform:scale(1.03);
+  box-shadow:0 0 60px rgba(124,58,237,0.15);
+}
+.pricing-card:hover:not(.featured){border-color:var(--border2);transform:translateY(-4px)}
+.pricing-badge{
+  display:inline-block;padding:4px 12px;border-radius:20px;
+  background:var(--teal);color:#fff;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px;align-self:flex-start;
+}
+.pricing-name{font-size:24px;font-weight:800;margin-bottom:8px}
+.pricing-desc{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.6}
+.pricing-price{font-family:'Plus Jakarta Sans',sans-serif;font-size:36px;font-weight:800;margin-bottom:4px}
+.pricing-price span{font-size:16px;font-weight:400;color:var(--muted)}
+.pricing-note{font-size:13px;color:var(--muted);margin-bottom:28px}
+.pricing-features{flex:1;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.pricing-feat{display:flex;gap:10px;align-items:flex-start;font-size:14px}
+.pricing-feat svg{width:16px;height:16px;flex-shrink:0;margin-top:2px;stroke:var(--teal);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.pricing-feat.no svg{stroke:var(--subtle)}
+.pricing-feat.no{color:var(--subtle)}
+.pricing-btn{
+  padding:13px;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer;
+  border:none;text-align:center;transition:opacity .2s,transform .15s;
+}
+.pricing-btn.primary{background:var(--teal);color:#fff}
+.pricing-btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border2)}
+.pricing-btn:hover{opacity:.9;transform:translateY(-1px)}
+
+.pricing-footer{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:32px;margin-top:40px;text-align:center;
+}
+.pricing-footer h3{font-size:22px;font-weight:700;margin-bottom:10px}
+.pricing-footer p{color:var(--muted);font-size:15px;margin-bottom:24px}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:flex-start}
+.contact-info h2{font-size:36px;font-weight:800;margin-bottom:16px}
+.contact-info p{color:var(--muted);font-size:16px;line-height:1.7;margin-bottom:32px}
+.contact-detail{display:flex;gap:12px;align-items:flex-start;margin-bottom:20px}
+.contact-detail-icon{
+  width:40px;height:40px;border-radius:10px;background:var(--teal-dim);border:1px solid var(--teal-border);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.contact-detail-icon svg{width:18px;height:18px;stroke:var(--teal);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.contact-detail-text strong{display:block;font-weight:600;font-size:15px;margin-bottom:2px}
+.contact-detail-text span{font-size:14px;color:var(--muted)}
+
+.contact-form{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.form-group label{font-size:13px;font-weight:600;color:var(--muted)}
+.form-control{
+  background:var(--card);border:1px solid var(--border2);border-radius:10px;
+  padding:12px 16px;color:var(--text);outline:none;
+  transition:border-color .2s;
+}
+.form-control:focus{border-color:var(--teal)}
+.form-control::placeholder{color:var(--subtle)}
+select.form-control option{background:var(--card)}
+textarea.form-control{resize:vertical;min-height:120px}
+.form-submit{
+  width:100%;padding:15px;border-radius:12px;
+  background:var(--teal);color:#fff;font-weight:700;font-size:16px;
+  border:none;cursor:pointer;transition:opacity .2s,transform .15s;
+}
+.form-submit:hover{opacity:.9;transform:translateY(-1px)}
+.form-success{
+  display:none;text-align:center;padding:32px;
+}
+.form-success svg{width:56px;height:56px;stroke:var(--teal);stroke-width:1.5;fill:none;margin:0 auto 16px}
+.form-success h3{font-size:22px;font-weight:700;margin-bottom:8px}
+.form-success p{color:var(--muted);font-size:15px}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:64px 0 32px;
+}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.footer-brand p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:16px;max-width:280px}
+.footer-col h5{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:16px}
+.footer-link{display:block;font-size:14px;color:var(--muted);margin-bottom:10px;cursor:pointer;transition:color .2s}
+.footer-link:hover{color:var(--teal)}
+.footer-bottom{
+  padding-top:32px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.footer-bottom p{font-size:13px;color:var(--subtle)}
+.footer-status{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* ── CTA BANNER ── */
+.cta-banner{
+  background:var(--teal-dim);
+  border:1px solid var(--teal-border);border-radius:24px;
+  padding:64px 48px;text-align:center;margin:96px 0;
+}
+.cta-banner h2{font-size:clamp(28px,4vw,40px);font-weight:800;margin-bottom:16px}
+.cta-banner p{font-size:18px;color:var(--muted);margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* roadmap */
+.roadmap{margin-top:48px;display:flex;flex-direction:column;gap:0;border-left:2px solid var(--border2);padding-left:0}
+.roadmap-item{
+  display:flex;gap:24px;align-items:flex-start;padding:0 0 32px 36px;position:relative;
+}
+.roadmap-item::before{
+  content:'';position:absolute;left:-7px;top:6px;
+  width:12px;height:12px;border-radius:50%;background:var(--border2);border:2px solid var(--border2);
+}
+.roadmap-item.done::before{background:var(--teal);border-color:var(--teal);box-shadow:0 0 12px rgba(124,58,237,0.45)}
+.roadmap-item.active::before{background:var(--bg);border-color:var(--teal);border-width:3px}
+.roadmap-when{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);min-width:80px;padding-top:2px}
+.roadmap-content h4{font-size:16px;font-weight:700;margin-bottom:4px}
+.roadmap-content p{font-size:13px;color:var(--muted)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-mobile-btn{display:flex}
+  .hero-grid{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:1fr 1fr}
+  .steps-grid{grid-template-columns:1fr;gap:40px}
+  .steps-grid::before{display:none}
+  .delivery-grid{grid-template-columns:1fr 1fr}
+  .personas-grid{grid-template-columns:1fr}
+  .verticals-grid{grid-template-columns:1fr}
+  .diff-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .pricing-card.featured{transform:none}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .compare-table{overflow-x:auto}
+}
+@media(max-width:600px){
+  .section{padding:64px 0}
+  .hero{padding:80px 0 64px}
+  .hero-stats{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column}
+  .features-grid{grid-template-columns:1fr}
+  .delivery-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .cta-banner{padding:40px 24px}
+  .footer-grid{grid-template-columns:1fr}
+  .contact-form{padding:24px}
+}
+
+/* ── PAGE TRANSITIONS ── */
+.page{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home')">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 17 L8 12 L12 16 L16 10 L21 14"/><path d="M19 6 h2 v2"/></svg>
+      </div>
+      TrackBridge
+    </div>
+    <div class="nav-links" id="navLinks">
+      <span class="nav-link" data-page="home">Home</span>
+      <span class="nav-link" data-page="how">How It Works</span>
+      <span class="nav-link" data-page="who">Who We Serve</span>
+      <span class="nav-link" data-page="why">Why TrackBridge</span>
+      <span class="nav-link" data-page="pricing">Pricing</span>
+      <span class="nav-link" data-page="contact">Contact</span>
+    </div>
+    <button class="nav-cta" onclick="showPage('contact')">Book a Demo</button>
+    <button class="nav-mobile-btn" onclick="toggleMenu()" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="nav-link" data-page="home">Home</span>
+  <span class="nav-link" data-page="how">How It Works</span>
+  <span class="nav-link" data-page="who">Who We Serve</span>
+  <span class="nav-link" data-page="why">Why TrackBridge</span>
+  <span class="nav-link" data-page="pricing">Pricing</span>
+  <span class="nav-link" data-page="contact">Contact</span>
+  <button class="nav-cta" onclick="showPage('contact');toggleMenu()">Book a Demo</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-badge">
+            <span class="dot"></span>
+            Now live — NetSuite SuiteProjects Pro (OpenAir)
+          </div>
+          <h1>Ask. Know.<br/>Decide.</h1>
+          <p class="hero-sub">Fewer surprises. Better margins. Faster decisions. TrackBridge connects your PSA to an AI copilot so delivery leaders get the answers they need — instantly, in plain English, from live data.</p>
+          <div class="hero-btns">
+            <button class="btn-primary" onclick="showPage('contact')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              Book a Demo
+            </button>
+            <button class="btn-ghost" onclick="showPage('how')">
+              See How It Works
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-val">0</div>
+              <div class="hero-stat-lbl">Reports to run</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-val">&lt;5s</div>
+              <div class="hero-stat-lbl">Time to answer</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-val">Live</div>
+              <div class="hero-stat-lbl">PSA data, always</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="chat-demo">
+            <div class="chat-bar">
+              <div class="chat-dot"></div><div class="chat-dot"></div><div class="chat-dot"></div>
+              <span class="chat-title">TrackBridge AI</span>
+            </div>
+            <div class="chat-body">
+              <div class="chat-msg user">
+                <div class="chat-avatar usr">JM</div>
+                <div class="chat-bubble">Which projects are at risk of going over budget this month?</div>
+              </div>
+              <div class="chat-msg bot">
+                <div class="chat-avatar tb">TB</div>
+                <div class="chat-bubble">3 projects are showing elevated budget risk right now:<br/><br/>
+                  <strong>Apex Modernization</strong> — 87% consumed, 34% complete<br/>
+                  <strong>TriState Portal</strong> — burn rate 2.1× plan, escalating<br/>
+                  <strong>Clearview Phase 2</strong> — $18K over baseline, change order pending<br/><br/>
+                  Want me to break down the root cause for any of these?
+                </div>
+              </div>
+              <div class="chat-msg user">
+                <div class="chat-avatar usr">JM</div>
+                <div class="chat-bubble">Yes — show me Apex Modernization</div>
+              </div>
+            </div>
+            <div class="chat-input-row">
+              <input class="chat-input" type="text" placeholder="Ask about utilization, budget, projects..." readonly />
+              <button class="chat-send">
+                <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORMS -->
+  <section class="platforms-section">
+    <div class="platforms-inner">
+      <p style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--subtle)">Works with your PSA platform</p>
+      <div class="platform-logos">
+        <div class="platform-logo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          NetSuite SuiteProjects Pro (OpenAir) <span class="tag" style="background:rgba(34,197,94,0.12);color:#16a34a;border-color:rgba(34,197,94,0.35)"><span class="dot" style="background:#16a34a"></span>Live</span>
+        </div>
+        <div class="platform-logo" style="opacity:.7">
+          Kantata (Mavenlink) <span class="tag" style="background:rgba(245,158,11,.12);color:#d97706;border-color:rgba(245,158,11,.35)"><span class="dot amber"></span>Roadmap</span>
+        </div>
+        <div class="platform-logo" style="opacity:.5">
+          BigTime <span class="tag" style="background:rgba(245,158,11,.12);color:#d97706;border-color:rgba(245,158,11,.35)"><span class="dot amber"></span>Roadmap</span>
+        </div>
+        <div class="platform-logo" style="opacity:.5">
+          Unanet <span class="tag" style="background:rgba(245,158,11,.12);color:#d97706;border-color:rgba(245,158,11,.35)"><span class="dot amber"></span>Roadmap</span>
+        </div>
+        <div class="platform-logo" style="opacity:.5">
+          SuiteProjects (NetSuite) <span class="tag" style="background:rgba(245,158,11,.12);color:#d97706;border-color:rgba(245,158,11,.35)"><span class="dot amber"></span>Roadmap</span>
+        </div>
+        <div class="platform-logo" style="opacity:.5">
+          Microsoft Dynamics 365 Project Operations <span class="tag" style="background:rgba(245,158,11,.12);color:#d97706;border-color:rgba(245,158,11,.35)"><span class="dot amber"></span>Roadmap</span>
+        </div>
+        <div class="platform-logo" style="opacity:.5">
+          Certinia (FinancialForce) <span class="tag" style="background:rgba(245,158,11,.12);color:#d97706;border-color:rgba(245,158,11,.35)"><span class="dot amber"></span>Roadmap</span>
+        </div>
+        <div class="platform-logo" style="opacity:.5">
+          Deltek Vantagepoint <span class="tag" style="background:rgba(245,158,11,.12);color:#d97706;border-color:rgba(245,158,11,.35)"><span class="dot amber"></span>Roadmap</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">Capabilities</span>
+        <h2 class="section-title">Everything you need to know,<br/>nothing you don't</h2>
+        <p class="section-sub">TrackBridge surfaces operational intelligence your PSA already has — without requiring you to know where to look.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3>Spot budget overruns before your client does.</h3>
+          <p>TrackBridge flags which projects are burning ahead of plan — before the conversation gets uncomfortable.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+          </div>
+          <h3>Find underutilized consultants in seconds.</h3>
+          <p>See who has capacity, who's overcommitted, and where to redeploy — without touching a single report.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3>Know which projects need attention before they turn red.</h3>
+          <p>Get a plain-English health check on any project, any time — stage, billing position, and risk signals in one answer.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Stay Audit-Ready Without the Overhead</h3>
+          <p>For government contractors: surface missing timesheets and compliance gaps before they become audit findings. DCAA readiness built into every answer.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>Just Ask — No Training Required</h3>
+          <p>Skip the filters, skip the dashboards. Type your question the way you'd ask a colleague and get a precise, data-backed answer from your live PSA data in seconds.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+          </div>
+          <h3>Works Where Your Team Already Works</h3>
+          <p>Get answers in the TrackBridge web app, Slack, Microsoft Teams, or a Chrome extension inside your PSA. No new tools to adopt, no new habits to build.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <div class="container">
+    <div class="cta-banner">
+      <span class="eyebrow">Early Access</span>
+      <h2>Be first when we launch</h2>
+      <p>TrackBridge is in active development. Join the waitlist for early access and priority onboarding when we go live.</p>
+      <div class="cta-btns">
+        <button class="btn-primary" onclick="showPage('contact')">Request Early Access</button>
+        <button class="btn-ghost" onclick="showPage('how')">See How It Works</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" onclick="showPage('home')" style="cursor:pointer">
+            <div class="logo-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 17 L8 12 L12 16 L16 10 L21 14"/><path d="M19 6 h2 v2"/></svg>
+            </div>
+            TrackBridge
+          </div>
+          <p>An AI intelligence layer for professional services firms. Instant answers from your live PSA data.</p>
+        </div>
+        <div>
+          <h5>Product</h5>
+          <span class="footer-link" onclick="showPage('how')">How It Works</span>
+          <span class="footer-link" onclick="showPage('why')">Why TrackBridge</span>
+          <span class="footer-link" onclick="showPage('pricing')">Pricing</span>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <span class="footer-link" onclick="showPage('who')">Who We Serve</span>
+          <span class="footer-link" onclick="showPage('contact')">Contact</span>
+          <a class="footer-link" href="https://trackbridge.ai" target="_blank">trackbridge.ai</a>
+        </div>
+        <div>
+          <h5>PSA Platforms</h5>
+          <span class="footer-link">NetSuite SuiteProjects Pro (OpenAir)</span>
+          <span class="footer-link">Kantata</span>
+          <span class="footer-link">BigTime</span>
+          <span class="footer-link">Unanet</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 TrackBridge LLC · Richmond, Texas</p>
+        <div class="footer-status">
+          <span class="status-dot"></span>
+          All systems operational
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE: HOW IT WORKS
+══════════════════════════════════════════ -->
+<div class="page" id="page-how">
+  <section class="section">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">How It Works</span>
+        <h2 class="section-title">Three steps.<br/>Seconds to an answer.</h2>
+        <p class="section-sub">TrackBridge connects directly to your PSA, interprets your live operational data, and delivers plain-English intelligence wherever your team works.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Connect Your PSA</h3>
+          <p>Link TrackBridge to your existing PSA platform via secure API. No data migration. No parallel systems. Your data stays exactly where it is — we just make it accessible.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Ask a Question</h3>
+          <p>Type your question in plain English — in the TrackBridge web app, in Slack, or in Microsoft Teams. No dashboards to navigate. No filters to configure.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Get Your Answer</h3>
+          <p>TrackBridge retrieves the relevant live data from your PSA and returns a precise, context-aware response in seconds — with the numbers, the context, and what to do about it.</p>
+        </div>
+      </div>
+
+      <div class="arch-box">
+        <div class="arch-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+        </div>
+        <div>
+          <h4>A note on data accuracy</h4>
+          <p>TrackBridge never calculates core metrics itself. Your PSA platform computes utilization, budget consumption, and project financials using your existing business rules and configurations. TrackBridge retrieves those figures and explains what they mean, what changed, and what to watch. This architecture ensures full data fidelity and maintains trust with finance and operations leadership — the numbers you see are your PSA's numbers, not an approximation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="container">
+      <div class="center" style="margin-bottom:0">
+        <span class="eyebrow">Delivery Options</span>
+        <h2 class="section-title">Meet your team where they work</h2>
+        <p class="section-sub">TrackBridge delivers answers through the channels your team already uses — no new tools to adopt.</p>
+      </div>
+      <div class="delivery-grid">
+        <div class="delivery-card">
+          <div class="icon" style="background:var(--teal-dim)">🌐</div>
+          <h4>TrackBridge.ai</h4>
+          <p>Dedicated web interface with full chat history, project views, and team collaboration features.</p>
+          <div style="margin-top:12px"><span class="tag"><span class="dot"></span>Q3 2026</span></div>
+        </div>
+        <div class="delivery-card">
+          <div class="icon" style="background:rgba(74,108,247,0.15)">💬</div>
+          <h4>Slack</h4>
+          <p>Ask questions directly in your existing Slack workspace. Get answers without leaving the tool your team lives in.</p>
+          <div style="margin-top:12px"><span class="tag"><span class="dot"></span>Q3 2026</span></div>
+        </div>
+        <div class="delivery-card">
+          <div class="icon" style="background:rgba(100,160,255,0.15)">🔷</div>
+          <h4>Microsoft Teams</h4>
+          <p>Native Teams integration for organizations that run on Microsoft 365. Ask from any channel or DM.</p>
+          <div style="margin-top:12px"><span class="tag" style="background:var(--card);color:var(--muted);border-color:var(--border2)"><span class="dot gray"></span>Roadmap</span></div>
+        </div>
+        <div class="delivery-card">
+          <div class="icon" style="background:rgba(245,158,11,0.12)">🔌</div>
+          <h4>Chrome Extension</h4>
+          <p>A floating TrackBridge chat window that appears directly inside your PSA platform. Ask without switching tabs.</p>
+          <div style="margin-top:12px"><span class="tag" style="background:var(--card);color:var(--muted);border-color:var(--border2)"><span class="dot gray"></span>Roadmap</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Product Roadmap</span>
+      <h2 class="section-title">Where we're headed</h2>
+      <div class="roadmap">
+        <div class="roadmap-item done">
+          <div class="roadmap-when">Now</div>
+          <div class="roadmap-content">
+            <h4>SuiteProjects Pro — Live</h4>
+            <p>Natural language project health queries including budget status, project stage, customer data, and project notes. Proof of concept confirmed working against live SPP data.</p>
+          </div>
+        </div>
+        <div class="roadmap-item active">
+          <div class="roadmap-when">Q3 2026</div>
+          <div class="roadmap-content">
+            <h4>TrackBridge.ai Web Platform + Slack</h4>
+            <p>Full web interface with client login, chat history, and Slack integration. Utilization, resource bookings, timesheet analysis, and budget burn tracking.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-when">Q4 2026</div>
+          <div class="roadmap-content">
+            <h4>Kantata (Mavenlink) Integration</h4>
+            <p>Full feature parity with SuiteProjects Pro integration. Complete operational intelligence for Kantata (Mavenlink) customers.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-when">2027</div>
+          <div class="roadmap-content">
+            <h4>BigTime + Unanet</h4>
+            <p>Expanding to two additional major PSA platforms with full TrackBridge intelligence layer support.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-when">2027+</div>
+          <div class="roadmap-content">
+            <h4>Full Professional Services AI Platform</h4>
+            <p>Cross-platform analytics, predictive risk scoring, proactive alerts, and advanced workflow automation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Ready to ask your first question?</h2>
+      <p>Join the waitlist and be among the first to experience TrackBridge when we launch.</p>
+      <div class="cta-btns">
+        <button class="btn-primary" onclick="showPage('contact')">Request Early Access</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" onclick="showPage('home')" style="cursor:pointer">
+            <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M3 17 L8 12 L12 16 L16 10 L21 14"/><path d="M19 6 h2 v2"/></svg></div>
+            TrackBridge
+          </div>
+          <p>An AI intelligence layer for professional services firms. Instant answers from your live PSA data.</p>
+        </div>
+        <div><h5>Product</h5><span class="footer-link" onclick="showPage('how')">How It Works</span><span class="footer-link" onclick="showPage('why')">Why TrackBridge</span><span class="footer-link" onclick="showPage('pricing')">Pricing</span></div>
+        <div><h5>Company</h5><span class="footer-link" onclick="showPage('who')">Who We Serve</span><span class="footer-link" onclick="showPage('contact')">Contact</span><a class="footer-link" href="https://trackbridge.ai" target="_blank">trackbridge.ai</a></div>
+        <div><h5>PSA Platforms</h5><span class="footer-link">NetSuite SuiteProjects Pro (OpenAir)</span><span class="footer-link">Kantata (Mavenlink)</span><span class="footer-link">BigTime</span><span class="footer-link">Unanet</span></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 TrackBridge LLC · Richmond, Texas</p>
+        <div class="footer-status"><span class="status-dot"></span>All systems operational</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE: WHO WE SERVE
+══════════════════════════════════════════ -->
+<div class="page" id="page-who">
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Who We Serve</span>
+      <h2 class="section-title">Built for the people who run delivery</h2>
+      <p class="section-sub">TrackBridge is purpose-built for professional services leaders who need operational clarity — not more dashboards.</p>
+
+      <div class="personas-grid">
+        <div class="persona-card">
+          <div class="persona-emoji">📋</div>
+          <div>
+            <h3>Delivery Managers</h3>
+            <p>You're responsible for on-time, on-budget delivery across multiple concurrent projects. You need instant answers about project health, budget burn, and resource availability — not a 30-minute reporting exercise. TrackBridge gives you that in seconds.</p>
+          </div>
+        </div>
+        <div class="persona-card">
+          <div class="persona-emoji">🗂️</div>
+          <div>
+            <h3>PMO Leaders</h3>
+            <p>You oversee the portfolio. You need to know which projects are at risk, where capacity gaps are developing, and how the bench looks next quarter. TrackBridge surfaces portfolio-level intelligence from your live PSA data — no aggregation required.</p>
+          </div>
+        </div>
+        <div class="persona-card">
+          <div class="persona-emoji">📈</div>
+          <div>
+            <h3>VPs of Professional Services</h3>
+            <p>You're accountable for utilization targets, margin performance, and client satisfaction. TrackBridge gives you the operational view your PSA was supposed to provide — without the manual work that was always supposed to be automated.</p>
+          </div>
+        </div>
+        <div class="persona-card">
+          <div class="persona-emoji">💼</div>
+          <div>
+            <h3>CFOs &amp; Finance Leaders</h3>
+            <p>You need accurate, real-time visibility into project financials, billing status, and revenue at risk. TrackBridge pulls directly from your PSA's financial data — the same source your team trusts — and makes it instantly queryable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="container">
+      <span class="eyebrow">Verticals</span>
+      <h2 class="section-title">Industries we understand deeply</h2>
+      <p class="section-sub">TrackBridge isn't a generic tool. It was built with deep knowledge of how professional services firms in specific verticals actually operate.</p>
+      <div class="verticals-grid">
+        <div class="vertical-card">
+          <div>
+            <span class="vertical-tag gov">Gov</span>
+          </div>
+          <div>
+            <h4>Government Contractors</h4>
+            <p>DCAA compliance is non-negotiable. TrackBridge understands timesheet accuracy requirements, project accounting integrity, and audit readiness — baked into every answer for government contracting environments.</p>
+          </div>
+        </div>
+        <div class="vertical-card">
+          <div>
+            <span class="vertical-tag it">IT</span>
+          </div>
+          <div>
+            <h4>IT &amp; Technology Consulting</h4>
+            <p>Managing multiple concurrent client engagements with complex billing structures, mixed contract types, and resource sharing across projects. TrackBridge handles the complexity your PSA already tracks.</p>
+          </div>
+        </div>
+        <div class="vertical-card">
+          <div>
+            <span class="vertical-tag eng">Eng</span>
+          </div>
+          <div>
+            <h4>Engineering Firms</h4>
+            <p>Running fixed-fee and time-and-materials projects simultaneously. TrackBridge understands the nuance — billing rule logic, revenue recognition, and the operational signals that matter for engineering service delivery.</p>
+          </div>
+        </div>
+        <div class="vertical-card">
+          <div>
+            <span class="vertical-tag con">Con</span>
+          </div>
+          <div>
+            <h4>Mid-Market Consulting</h4>
+            <p>You've outgrown spreadsheet-based reporting but aren't ready for enterprise BI. TrackBridge gives you the intelligence layer that makes your PSA investment pay off — without the implementation complexity of a full BI stack.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="size-banner">
+        <div>
+          <span class="eyebrow">Firm Size</span>
+          <h3>10 to 500 billable resources</h3>
+        </div>
+        <p>TrackBridge is designed for mid-market professional services firms that are large enough to have real operational complexity — but don't have a dedicated analytics team to wrangle it. If your team spends meaningful time pulling reports to answer operational questions, TrackBridge was built for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Sound like your firm?</h2>
+      <p>Tell us about your PSA platform and team size — we'll reach out when TrackBridge is ready for you.</p>
+      <div class="cta-btns">
+        <button class="btn-primary" onclick="showPage('contact')">Get in Touch</button>
+        <button class="btn-ghost" onclick="showPage('why')">Why TrackBridge</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" onclick="showPage('home')" style="cursor:pointer"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M3 17 L8 12 L12 16 L16 10 L21 14"/><path d="M19 6 h2 v2"/></svg></div>TrackBridge</div>
+          <p>An AI intelligence layer for professional services firms. Instant answers from your live PSA data.</p>
+        </div>
+        <div><h5>Product</h5><span class="footer-link" onclick="showPage('how')">How It Works</span><span class="footer-link" onclick="showPage('why')">Why TrackBridge</span><span class="footer-link" onclick="showPage('pricing')">Pricing</span></div>
+        <div><h5>Company</h5><span class="footer-link" onclick="showPage('who')">Who We Serve</span><span class="footer-link" onclick="showPage('contact')">Contact</span><a class="footer-link" href="https://trackbridge.ai" target="_blank">trackbridge.ai</a></div>
+        <div><h5>PSA Platforms</h5><span class="footer-link">NetSuite SuiteProjects Pro (OpenAir)</span><span class="footer-link">Kantata (Mavenlink)</span><span class="footer-link">BigTime</span><span class="footer-link">Unanet</span></div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 TrackBridge LLC · Richmond, Texas</p><div class="footer-status"><span class="status-dot"></span>All systems operational</div></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE: WHY TRACKBRIDGE
+══════════════════════════════════════════ -->
+<div class="page" id="page-why">
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Why TrackBridge</span>
+      <h2 class="section-title">Not a generic AI tool.<br/>A PSA intelligence specialist.</h2>
+      <p class="section-sub">Anyone can wrap an LLM around a database and call it an AI reporting tool. TrackBridge was built by someone who has spent a decade inside these platforms — and that difference is measurable.</p>
+
+      <div style="margin-top:56px;margin-bottom:8px">
+        <span class="eyebrow">Our Origin Story</span>
+        <h2 class="section-title" style="margin-bottom:0">Why TrackBridge Exists</h2>
+      </div>
+
+      <div class="founder-card" style="margin-top:24px">
+        <div class="founder-avatar">TB</div>
+        <div class="founder-info">
+          <h3>Built by a PSA practitioner</h3>
+          <div class="role">Founder — Nearly a decade of hands-on PSA implementation experience</div>
+          <p>TrackBridge was founded by a consultant with direct implementation and administration experience across NetSuite SuiteProjects Pro (OpenAir), Kantata (Mavenlink), BigTime, NetSuite Projects, Unanet, and adjacent platforms including construction PM tools. That experience spans government contracting environments with DCAA compliance requirements — one of the most demanding operational contexts in professional services. The product isn't built from documentation. It's built from knowing what breaks, what gets misconfigured, what causes bad data, and what questions actually matter.</p>
+          <div class="founder-tags">
+            <span class="founder-tag">NetSuite SuiteProjects Pro (OpenAir)</span>
+            <span class="founder-tag">Kantata (Mavenlink)</span>
+            <span class="founder-tag">BigTime</span>
+            <span class="founder-tag">Unanet</span>
+            <span class="founder-tag">NetSuite Projects</span>
+            <span class="founder-tag">DCAA Compliance</span>
+            <span class="founder-tag">Gov Contracting</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="diff-grid" style="margin-top:56px">
+        <div class="diff-item">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Domain knowledge baked in
+          </h3>
+          <p>Utilization logic varies by platform and configuration. Billing rules differ across contract types. DCAA compliance has specific timesheet requirements. TrackBridge understands these nuances — it doesn't just relay data, it interprets it correctly.</p>
+        </div>
+        <div class="diff-item">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Platform-native accuracy
+          </h3>
+          <p>We know how NetSuite SuiteProjects Pro (OpenAir) calculates utilization. We know how Kantata (Mavenlink) handles resource bookings. We know the custom field patterns that carry real business meaning. Generic AI tools don't — and it shows in the answers.</p>
+        </div>
+        <div class="diff-item">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            No PSA replacement required
+          </h3>
+          <p>TrackBridge is an intelligence layer — not a competing system. Your PSA stays exactly where it is. We connect to it, amplify it, and make it dramatically more accessible. Your existing investment gets more valuable, not obsolete.</p>
+        </div>
+        <div class="diff-item">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Trusted by finance &amp; operations
+          </h3>
+          <p>Because TrackBridge retrieves metrics from your PSA rather than recalculating them, the numbers are exactly what your finance team sees. No reconciliation. No "but our system says something different." One source of truth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="container">
+      <span class="eyebrow">How We're Different</span>
+      <h2 class="section-title">How TrackBridge compares</h2>
+      <p class="section-sub" style="margin-bottom:0">TrackBridge operates in the PSA intelligence category alongside horizontal workforce planning and resource management tools. Here's the honest comparison.</p>
+      <div class="compare-table">
+        <div class="compare-row head">
+          <div class="compare-cell">Capability</div>
+          <div class="compare-cell tb-col">TrackBridge</div>
+          <div class="compare-cell">Typical Planning Platforms</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Natural language PSA queries</div>
+          <div class="compare-cell yes"><span class="check">✓</span>Yes</div>
+          <div class="compare-cell no">Limited</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Deep PSA domain expertise</div>
+          <div class="compare-cell yes"><span class="check">✓</span>Native</div>
+          <div class="compare-cell no">Generic</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">DCAA-aware intelligence</div>
+          <div class="compare-cell yes"><span class="check">✓</span>Built-in</div>
+          <div class="compare-cell no">Not specialized</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Uses PSA-native calculations</div>
+          <div class="compare-cell yes"><span class="check">✓</span>Yes</div>
+          <div class="compare-cell no">Often recalculated</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Works alongside existing PSA</div>
+          <div class="compare-cell yes"><span class="check">✓</span>Always</div>
+          <div class="compare-cell no">Varies</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Chat-first experience</div>
+          <div class="compare-cell yes"><span class="check">✓</span>Yes</div>
+          <div class="compare-cell no">Dashboard-first</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Experience the difference</h2>
+      <p>See how TrackBridge answers questions your PSA reports can't — in seconds, with full data fidelity.</p>
+      <div class="cta-btns">
+        <button class="btn-primary" onclick="showPage('contact')">Book a Demo</button>
+        <button class="btn-ghost" onclick="showPage('pricing')">See Pricing</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="nav-logo" onclick="showPage('home')" style="cursor:pointer"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M3 17 L8 12 L12 16 L16 10 L21 14"/><path d="M19 6 h2 v2"/></svg></div>TrackBridge</div><p>An AI intelligence layer for professional services firms. Instant answers from your live PSA data.</p></div>
+        <div><h5>Product</h5><span class="footer-link" onclick="showPage('how')">How It Works</span><span class="footer-link" onclick="showPage('why')">Why TrackBridge</span><span class="footer-link" onclick="showPage('pricing')">Pricing</span></div>
+        <div><h5>Company</h5><span class="footer-link" onclick="showPage('who')">Who We Serve</span><span class="footer-link" onclick="showPage('contact')">Contact</span><a class="footer-link" href="https://trackbridge.ai" target="_blank">trackbridge.ai</a></div>
+        <div><h5>PSA Platforms</h5><span class="footer-link">NetSuite SuiteProjects Pro (OpenAir)</span><span class="footer-link">Kantata (Mavenlink)</span><span class="footer-link">BigTime</span><span class="footer-link">Unanet</span></div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 TrackBridge LLC · Richmond, Texas</p><div class="footer-status"><span class="status-dot"></span>All systems operational</div></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE: PRICING
+══════════════════════════════════════════ -->
+<div class="page" id="page-pricing">
+  <section class="section">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">Pricing</span>
+        <h2 class="section-title">Simple, transparent pricing<br/>for every stage of growth</h2>
+        <p class="section-sub">TrackBridge is currently in early access. Pricing below reflects our planned tiers — contact us to lock in early access rates.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- STARTER -->
+        <div class="pricing-card">
+          <div class="pricing-name">Starter</div>
+          <div class="pricing-desc">For smaller teams getting started with PSA intelligence. One platform, core queries, up to 5 users.</div>
+          <div class="pricing-price">Contact Us<span></span></div>
+          <div class="pricing-note">Pricing available upon request</div>
+          <div class="pricing-features">
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 PSA platform connected</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Up to 5 users</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Project health queries</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Budget status &amp; risk</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Web interface access</div>
+            <div class="pricing-feat no"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Slack / Teams integration</div>
+            <div class="pricing-feat no"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>DCAA compliance queries</div>
+            <div class="pricing-feat no"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated support</div>
+          </div>
+          <button class="pricing-btn ghost" onclick="showPage('contact')">Contact for Pricing</button>
+        </div>
+
+        <!-- GROWTH -->
+        <div class="pricing-card featured">
+          <span class="pricing-badge">Most Popular</span>
+          <div class="pricing-name">Growth</div>
+          <div class="pricing-desc">For mid-market firms with active delivery operations and PMO leadership. Full intelligence, up to 25 users.</div>
+          <div class="pricing-price">Contact Us<span></span></div>
+          <div class="pricing-note">Early access pricing available</div>
+          <div class="pricing-features">
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 PSA platform connected</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Up to 25 users</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full project intelligence suite</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Resource utilization queries</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Slack integration</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>DCAA compliance queries</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Chat history &amp; exports</div>
+            <div class="pricing-feat no"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated success manager</div>
+          </div>
+          <button class="pricing-btn primary" onclick="showPage('contact')">Request Early Access</button>
+        </div>
+
+        <!-- ENTERPRISE -->
+        <div class="pricing-card">
+          <div class="pricing-name">Enterprise</div>
+          <div class="pricing-desc">For larger firms with complex multi-platform environments, compliance requirements, and enterprise security needs.</div>
+          <div class="pricing-price">Custom<span></span></div>
+          <div class="pricing-note">Tailored to your firm's needs</div>
+          <div class="pricing-features">
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Multiple PSA platforms</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Unlimited users</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Growth</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Microsoft Teams integration</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SSO / enterprise security</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated success manager</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom onboarding</div>
+            <div class="pricing-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SLA &amp; priority support</div>
+          </div>
+          <button class="pricing-btn ghost" onclick="showPage('contact')">Talk to Sales</button>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:28px;font-size:14px;color:var(--muted)"><strong>Government contractors and DCAA-compliant environments</strong> — contact us for custom deployment options.</p>
+
+      <div class="pricing-footer">
+        <h3>Not sure which plan fits?</h3>
+        <p>Tell us about your firm — number of billable resources, PSA platform, and how your team currently accesses operational data. We'll recommend the right fit.</p>
+        <button class="btn-primary" onclick="showPage('contact')">Talk to Us</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="container center">
+      <span class="eyebrow">Early Access Program</span>
+      <h2 class="section-title">Join before we launch</h2>
+      <p class="section-sub">Early access customers get priority onboarding, locked-in founding rates, and direct input into our product roadmap. We're accepting a limited number of firms now.</p>
+      <div style="margin-top:36px">
+        <button class="btn-primary" onclick="showPage('contact')">Apply for Early Access</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="nav-logo" onclick="showPage('home')" style="cursor:pointer"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M3 17 L8 12 L12 16 L16 10 L21 14"/><path d="M19 6 h2 v2"/></svg></div>TrackBridge</div><p>An AI intelligence layer for professional services firms. Instant answers from your live PSA data.</p></div>
+        <div><h5>Product</h5><span class="footer-link" onclick="showPage('how')">How It Works</span><span class="footer-link" onclick="showPage('why')">Why TrackBridge</span><span class="footer-link" onclick="showPage('pricing')">Pricing</span></div>
+        <div><h5>Company</h5><span class="footer-link" onclick="showPage('who')">Who We Serve</span><span class="footer-link" onclick="showPage('contact')">Contact</span><a class="footer-link" href="https://trackbridge.ai" target="_blank">trackbridge.ai</a></div>
+        <div><h5>PSA Platforms</h5><span class="footer-link">NetSuite SuiteProjects Pro (OpenAir)</span><span class="footer-link">Kantata (Mavenlink)</span><span class="footer-link">BigTime</span><span class="footer-link">Unanet</span></div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 TrackBridge LLC · Richmond, Texas</p><div class="footer-status"><span class="status-dot"></span>All systems operational</div></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE: CONTACT
+══════════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <span class="eyebrow">Contact Us</span>
+          <h2>Let's talk about your PSA data</h2>
+          <p>Whether you want to book a demo, join the early access waitlist, or just have questions about how TrackBridge works with your platform — we'd love to hear from you.</p>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div class="contact-detail-text">
+              <strong>Headquarters</strong>
+              <span>Richmond, Texas</span>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+            <div class="contact-detail-text">
+              <strong>Website</strong>
+              <span>trackbridge.ai</span>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
+            <div class="contact-detail-text">
+              <strong>Current PSA support</strong>
+              <span>NetSuite SuiteProjects Pro (OpenAir) — live now</span>
+            </div>
+          </div>
+
+          <div style="margin-top:40px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:14px">
+            <h4 style="font-size:16px;font-weight:700;margin-bottom:12px">What happens after you submit?</h4>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--muted)">
+                <span style="color:var(--teal);font-weight:700;flex-shrink:0">01.</span>We review your submission within 1 business day
+              </div>
+              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--muted)">
+                <span style="color:var(--teal);font-weight:700;flex-shrink:0">02.</span>We reach out to schedule a 30-minute intro call
+              </div>
+              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--muted)">
+                <span style="color:var(--teal);font-weight:700;flex-shrink:0">03.</span>We walk you through a live demo using your PSA context
+              </div>
+              <div style="display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--muted)">
+                <span style="color:var(--teal);font-weight:700;flex-shrink:0">04.</span>Early access customers get onboarded as capacity allows
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <h3 style="font-size:22px;font-weight:700;margin-bottom:24px">Book a Demo or Join the Waitlist</h3>
+            <div class="form-row">
+              <div class="form-group" style="margin-bottom:0">
+                <label for="fname">First Name *</label>
+                <input class="form-control" type="text" id="fname" name="firstName" placeholder="Jane" required />
+              </div>
+              <div class="form-group" style="margin-bottom:0">
+                <label for="lname">Last Name *</label>
+                <input class="form-control" type="text" id="lname" name="lastName" placeholder="Smith" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="company">Company *</label>
+              <input class="form-control" type="text" id="company" name="company" placeholder="Acme Consulting LLC" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Work Email *</label>
+              <input class="form-control" type="email" id="email" name="email" placeholder="jane@acmeconsulting.com" required />
+            </div>
+            <div class="form-group">
+              <label for="psa">PSA Platform *</label>
+              <select class="form-control" id="psa" name="psaPlatform" required>
+                <option value="" disabled selected>Select your primary PSA platform</option>
+                <option value="spp">NetSuite SuiteProjects Pro (OpenAir)</option>
+                <option value="kantata">Kantata (Mavenlink)</option>
+                <option value="bigtime">BigTime</option>
+                <option value="unanet">Unanet</option>
+                <option value="netsuite">NetSuite Projects</option>
+                <option value="other">Other</option>
+                <option value="evaluating">Still evaluating / not sure</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="size">Approximate number of billable resources</label>
+              <select class="form-control" id="size" name="teamSize">
+                <option value="" disabled selected>Select team size</option>
+                <option value="1-10">1–10</option>
+                <option value="10-50">10–50</option>
+                <option value="50-150">50–150</option>
+                <option value="150-500">150–500</option>
+                <option value="500+">500+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell us about your biggest operational data challenge</label>
+              <textarea class="form-control" id="message" name="message" placeholder="What questions do you wish you could answer instantly from your PSA data?"></textarea>
+            </div>
+            <button type="submit" class="form-submit" id="formSubmitBtn">Submit — Request Demo / Waitlist</button>
+          </form>
+          <div class="form-success" id="formSuccess">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/></svg>
+            <h3>You're on the list</h3>
+            <p>Thanks for reaching out. We'll be in touch within one business day to schedule your intro call.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="nav-logo" onclick="showPage('home')" style="cursor:pointer"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M3 17 L8 12 L12 16 L16 10 L21 14"/><path d="M19 6 h2 v2"/></svg></div>TrackBridge</div><p>An AI intelligence layer for professional services firms. Instant answers from your live PSA data.</p></div>
+        <div><h5>Product</h5><span class="footer-link" onclick="showPage('how')">How It Works</span><span class="footer-link" onclick="showPage('why')">Why TrackBridge</span><span class="footer-link" onclick="showPage('pricing')">Pricing</span></div>
+        <div><h5>Company</h5><span class="footer-link" onclick="showPage('who')">Who We Serve</span><span class="footer-link" onclick="showPage('contact')">Contact</span><a class="footer-link" href="https://trackbridge.ai" target="_blank">trackbridge.ai</a></div>
+        <div><h5>PSA Platforms</h5><span class="footer-link">NetSuite SuiteProjects Pro (OpenAir)</span><span class="footer-link">Kantata (Mavenlink)</span><span class="footer-link">BigTime</span><span class="footer-link">Unanet</span></div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 TrackBridge LLC · Richmond, Texas</p><div class="footer-status"><span class="status-dot"></span>All systems operational</div></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+const pages = ['home','how','who','why','pricing','contact'];
+
+function showPage(id) {
+  pages.forEach(p => {
+    const el = document.getElementById('page-' + p);
+    const links = document.querySelectorAll('[data-page="' + p + '"]');
+    if (el) el.classList.toggle('active', p === id);
+    links.forEach(l => l.classList.toggle('active', p === id));
+  });
+  window.scrollTo({top: 0, behavior: 'instant'});
+  history.replaceState(null, '', '#' + id);
+  const menu = document.getElementById('mobileMenu');
+  if (menu.classList.contains('open')) menu.classList.remove('open');
+}
+
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('contactForm');
+  const btn = document.getElementById('formSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Submit — Request Demo / Waitlist';
+      alert('Something went wrong. Please try again or email us directly.');
+    }
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Submit — Request Demo / Waitlist';
+    alert('Something went wrong. Please check your connection and try again.');
+  }
+}
+
+// nav link clicks
+document.querySelectorAll('[data-page]').forEach(el => {
+  el.addEventListener('click', () => showPage(el.dataset.page));
+});
+
+// hash routing on load
+(function() {
+  const hash = location.hash.replace('#','');
+  if (pages.includes(hash)) showPage(hash);
+  else showPage('home');
+})();
+</script>
+</body>
+</html>
