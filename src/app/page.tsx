@@ -84,11 +84,11 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="bg-cosmos h-[calc(100vh-68px)] overflow-hidden flex">
+      {/* Mobile: stacked (content → image). Desktop: side-by-side panels */}
+      <section className="bg-cosmos overflow-hidden flex flex-col lg:flex-row lg:h-[calc(100vh-68px)]">
 
-        {/* LEFT — solid dark panel, content only, never overlaps image */}
-        <div className="relative flex-shrink-0 w-full lg:w-[46%] flex items-center px-10 lg:px-16 xl:px-20">
-          {/* Dot grid texture */}
+        {/* LEFT — solid dark panel, content only */}
+        <div className="relative flex-shrink-0 w-full lg:w-[46%] flex items-center px-10 lg:px-16 xl:px-20 py-16 lg:py-0">
           <div className="absolute inset-0 hero-dots opacity-[0.07]" aria-hidden="true" />
 
           <div className="relative z-10 max-w-[480px]">
@@ -101,17 +101,14 @@ export default function HomePage() {
               </svg>
             </a>
 
-            {/* Headline */}
             <h1 className="text-[clamp(48px,5vw,82px)] font-extrabold text-white leading-[0.94] tracking-display mb-6">
               Ask.<br />Know.<br />Decide.
             </h1>
 
-            {/* Sub */}
             <p className="text-[16px] text-white/50 leading-[1.75] mb-9">
               The AI copilot for professional services teams. Instant answers from your live PSA data — no reports, no dashboards.
             </p>
 
-            {/* CTAs */}
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/contact"
@@ -129,17 +126,19 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* RIGHT — image panel, no text on top */}
-        <div className="relative flex-1 hidden lg:block">
-          {/* Soft fade from dark left panel into image */}
-          <div className="absolute inset-y-0 left-0 w-24 z-10 bg-gradient-to-r from-cosmos to-transparent" aria-hidden="true" />
+        {/* RIGHT — image panel. Mobile: fixed height below content. Desktop: fills remaining height */}
+        <div className="relative flex-1 h-[72vw] lg:h-auto">
+          {/* Fade seam — desktop only */}
+          <div className="absolute inset-y-0 left-0 w-24 z-10 bg-gradient-to-r from-cosmos to-transparent hidden lg:block" aria-hidden="true" />
+          {/* Fade top on mobile so it blends into the dark content panel above */}
+          <div className="absolute inset-x-0 top-0 h-16 z-10 bg-gradient-to-b from-cosmos to-transparent lg:hidden" aria-hidden="true" />
           <Image
             src="/images/hero_1.jpeg"
             alt="Professional services delivery leader"
             fill
-            className="object-cover object-center"
+            className="object-cover object-top lg:object-center"
             priority
-            sizes="54vw"
+            sizes="(max-width: 1024px) 100vw, 54vw"
           />
         </div>
 
