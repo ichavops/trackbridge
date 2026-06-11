@@ -84,27 +84,14 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative bg-cosmos h-[calc(100vh-68px)] overflow-hidden">
+      <section className="bg-cosmos h-[calc(100vh-68px)] overflow-hidden flex">
 
-        {/* Dot grid — left content area */}
-        <div className="absolute inset-y-0 left-0 w-[45%] hero-dots opacity-[0.07]" aria-hidden="true" />
+        {/* LEFT — solid dark panel, content only, never overlaps image */}
+        <div className="relative flex-shrink-0 w-full lg:w-[46%] flex items-center px-10 lg:px-16 xl:px-20">
+          {/* Dot grid texture */}
+          <div className="absolute inset-0 hero-dots opacity-[0.07]" aria-hidden="true" />
 
-        {/* Image — full bleed */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero_1.jpeg"
-            alt="Professional services delivery leader"
-            fill
-            className="object-cover object-center"
-            priority
-            sizes="100vw"
-          />
-        </div>
-
-        {/* Content — left ~42%, vertically centered */}
-        <div className="relative z-10 h-full flex items-center">
-          <div className="w-full lg:w-[42%] px-10 lg:px-16 xl:px-20">
-
+          <div className="relative z-10 max-w-[480px]">
             {/* Announcement pill */}
             <a href="/how" className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.06] mb-8 hover:bg-white/[0.10] transition-colors group">
               <span className="px-2 py-0.5 rounded-full bg-brand text-white text-[10px] font-bold uppercase tracking-wider">Live</span>
@@ -120,12 +107,12 @@ export default function HomePage() {
             </h1>
 
             {/* Sub */}
-            <p className="text-[16px] text-white/50 max-w-[380px] leading-[1.75] mb-9">
+            <p className="text-[16px] text-white/50 leading-[1.75] mb-9">
               The AI copilot for professional services teams. Instant answers from your live PSA data — no reports, no dashboards.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-3 mb-10">
+            <div className="flex flex-wrap gap-3">
               <Link
                 href="/contact"
                 className="px-7 py-3 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
@@ -139,9 +126,23 @@ export default function HomePage() {
                 See How It Works
               </Link>
             </div>
-
           </div>
         </div>
+
+        {/* RIGHT — image panel, no text on top */}
+        <div className="relative flex-1 hidden lg:block">
+          {/* Soft fade from dark left panel into image */}
+          <div className="absolute inset-y-0 left-0 w-24 z-10 bg-gradient-to-r from-cosmos to-transparent" aria-hidden="true" />
+          <Image
+            src="/images/hero_1.jpeg"
+            alt="Professional services delivery leader"
+            fill
+            className="object-cover object-center"
+            priority
+            sizes="54vw"
+          />
+        </div>
+
       </section>
 
       {/* ── PLATFORMS — scrolling ticker ── */}
