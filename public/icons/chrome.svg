@@ -1,0 +1,10 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer ring segments -->
+  <path d="M12 2a10 10 0 0 1 8.66 5H12a5 5 0 0 0-4.33 2.5L5.07 5.27A9.97 9.97 0 0 1 12 2z" fill="#EA4335"/>
+  <path d="M20.66 7H12a5 5 0 0 1 4.33 7.5l3.61 6.23A10 10 0 0 0 20.66 7z" fill="#FBBC04"/>
+  <path d="M7.67 14.5A5 5 0 0 1 12 7H3.34a10 10 0 0 0 .66 12.73L7.67 14.5z" fill="#34A853"/>
+  <path d="M7.67 14.5l-3.67 5.23A10 10 0 0 0 19.94 20.73L16.33 14.5a5 5 0 0 1-8.66 0z" fill="#4285F4" opacity="0.15"/>
+  <!-- Center circle -->
+  <circle cx="12" cy="12" r="3.5" fill="#4285F4"/>
+  <circle cx="12" cy="12" r="2" fill="white"/>
+</svg>

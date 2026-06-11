@@ -26,22 +26,10 @@ const steps = [
 ]
 
 const deliveryOptions = [
-  {
-    icon: <svg className="w-5 h-5 stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
-    title: 'TrackBridge.ai', body: 'Dedicated web interface with full chat history, project views, and team collaboration features.', tag: 'Q3 2026', live: true,
-  },
-  {
-    icon: <svg className="w-5 h-5 stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
-    title: 'Slack', body: 'Ask questions directly in your existing Slack workspace. Get answers without leaving the tool your team lives in.', tag: 'Q3 2026', live: true,
-  },
-  {
-    icon: <svg className="w-5 h-5 stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>,
-    title: 'Microsoft Teams', body: 'Native Teams integration for organizations that run on Microsoft 365. Ask from any channel or DM.', tag: 'Roadmap', live: false,
-  },
-  {
-    icon: <svg className="w-5 h-5 stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5l6.74-6.76z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>,
-    title: 'Chrome Extension', body: 'A floating TrackBridge chat window inside your PSA platform. Ask without switching tabs.', tag: 'Roadmap', live: false,
-  },
+  { img: '/icons/trackbridge-app.svg', title: 'TrackBridge.ai', body: 'Dedicated web interface with full chat history, project views, and team collaboration features.', tag: 'Q3 2026', live: true },
+  { img: '/icons/slack.svg', title: 'Slack', body: 'Ask questions directly in your existing Slack workspace. Get answers without leaving the tool your team lives in.', tag: 'Q3 2026', live: true },
+  { img: '/icons/teams.svg', title: 'Microsoft Teams', body: 'Native Teams integration for organizations that run on Microsoft 365. Ask from any channel or DM.', tag: 'Roadmap', live: false },
+  { img: '/icons/chrome.svg', title: 'Chrome Extension', body: 'A floating TrackBridge chat window inside your PSA platform. Ask without switching tabs.', tag: 'Roadmap', live: false },
 ]
 
 const roadmap = [
@@ -130,7 +118,9 @@ export default function HowPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {deliveryOptions.map((d) => (
               <div key={d.title} className="bg-white rounded-card shadow-card p-6 text-center">
-                <div className="w-10 h-10 rounded-xl bg-brand/[8%] flex items-center justify-center mx-auto mb-4">{d.icon}</div>
+                <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center mx-auto mb-4 shadow-badge overflow-hidden">
+                  <img src={d.img} alt={d.title} width={32} height={32} className="object-contain" />
+                </div>
                 <h3 className="text-[15px] font-bold mb-2 tracking-heading">{d.title}</h3>
                 <p className="text-[13px] text-slate-ink leading-relaxed mb-4">{d.body}</p>
                 <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold shadow-pill ${d.live ? 'bg-brand/[8%] text-brand' : 'bg-canvas text-ash'}`}>
