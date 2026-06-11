@@ -126,8 +126,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* RIGHT — image panel. Mobile: fixed height below content. Desktop: fills remaining height */}
-        <div className="relative flex-1 h-[72vw] lg:h-auto">
+        {/* RIGHT — image panel. Mobile: full-width block below content. Desktop: fills remaining height */}
+        <div className="relative w-full h-[80vw] lg:flex-1 lg:h-auto lg:w-auto">
           {/* Fade seam — desktop only */}
           <div className="absolute inset-y-0 left-0 w-24 z-10 bg-gradient-to-r from-cosmos to-transparent hidden lg:block" aria-hidden="true" />
           {/* Fade top on mobile so it blends into the dark content panel above */}
