@@ -83,30 +83,30 @@ const platforms = [
 export default function HomePage() {
   return (
     <>
-      {/* ── HERO — full viewport, image covers right half absolutely ── */}
+      {/* ── HERO ── */}
       <section className="relative bg-cosmos h-[calc(100vh-68px)] overflow-hidden">
 
-        {/* Dot grid — left side only */}
-        <div className="absolute inset-y-0 left-0 w-1/2 hero-dots opacity-[0.07]" aria-hidden="true" />
+        {/* Dot grid — left content area */}
+        <div className="absolute inset-y-0 left-0 w-[45%] hero-dots opacity-[0.07]" aria-hidden="true" />
 
-        {/* Image — right 50% of viewport, no max-width constraint */}
-        <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full hidden lg:block">
+        {/* Image — covers right ~70% of viewport, fades into cosmos on the left */}
+        <div className="absolute top-0 right-0 w-[72%] h-full hidden lg:block hero-image-fade">
           <Image
             src="/images/hero_1.jpeg"
             alt="Professional services delivery leader"
             fill
-            className="object-cover object-center"
+            className="object-cover object-left-top"
             priority
-            sizes="50vw"
+            sizes="72vw"
           />
         </div>
 
-        {/* Content — left half, vertically centered */}
+        {/* Content — left ~42%, vertically centered */}
         <div className="relative z-10 h-full flex items-center">
-          <div className="w-full lg:w-1/2 px-8 lg:px-16 xl:px-24 py-16">
+          <div className="w-full lg:w-[42%] px-10 lg:px-16 xl:px-20">
 
             {/* Announcement pill */}
-            <a href="/how" className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.06] mb-10 hover:bg-white/[0.10] transition-colors group">
+            <a href="/how" className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.06] mb-8 hover:bg-white/[0.10] transition-colors group">
               <span className="px-2 py-0.5 rounded-full bg-brand text-white text-[10px] font-bold uppercase tracking-wider">Live</span>
               <span className="text-white/55 text-[12px] tracking-ui">NetSuite SuiteProjects Pro — first integration</span>
               <svg className="w-3.5 h-3.5 stroke-white/30 group-hover:stroke-white/60 transition-colors flex-shrink-0" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -115,33 +115,33 @@ export default function HomePage() {
             </a>
 
             {/* Headline */}
-            <h1 className="text-[clamp(52px,5.5vw,88px)] font-extrabold text-white leading-[0.95] tracking-display mb-7">
+            <h1 className="text-[clamp(48px,5vw,82px)] font-extrabold text-white leading-[0.94] tracking-display mb-6">
               Ask.<br />Know.<br />Decide.
             </h1>
 
             {/* Sub */}
-            <p className="text-[clamp(15px,1.4vw,18px)] text-white/50 max-w-[420px] leading-[1.75] mb-10">
-              The AI copilot for professional services delivery teams. Instant, plain-English answers from your live PSA data — no reports, no dashboards.
+            <p className="text-[16px] text-white/50 max-w-[380px] leading-[1.75] mb-9">
+              The AI copilot for professional services teams. Instant answers from your live PSA data — no reports, no dashboards.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-3 mb-12">
+            <div className="flex flex-wrap gap-3 mb-10">
               <Link
                 href="/contact"
-                className="px-8 py-3.5 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
+                className="px-7 py-3 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
               >
                 Book a Demo
               </Link>
               <Link
                 href="/how"
-                className="px-8 py-3.5 rounded-full text-white text-[15px] font-medium tracking-ui border border-white/15 shadow-ghost-dark hover:bg-white/[0.07] transition-colors"
+                className="px-7 py-3 rounded-full text-white text-[15px] font-medium tracking-ui border border-white/20 hover:bg-white/[0.07] transition-colors"
               >
                 See How It Works
               </Link>
             </div>
 
             {/* Stat pills */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2.5">
               {[
                 { val: '0 reports', lbl: 'to run' },
                 { val: '<5 sec', lbl: 'to answer' },
