@@ -66,16 +66,8 @@ export default function Nav() {
             ))}
           </div>
 
-          {/* Desktop right CTAs */}
-          <div className="hidden md:flex items-center gap-2.5">
-            {/* Ghost pill — Log in */}
-            <Link
-              href="/contact"
-              className="px-4 py-[7px] rounded-full text-white text-[14px] font-medium tracking-ui border border-ice/30 shadow-ghost-dark hover:bg-white/5 transition-colors"
-            >
-              Log in
-            </Link>
-            {/* Filled brand pill — Book a Demo */}
+          {/* Desktop right CTA */}
+          <div className="hidden md:flex items-center">
             <Link
               href="/contact"
               className="px-5 py-[7px] rounded-full bg-brand text-white text-[14px] font-semibold tracking-ui shadow-cta hover:opacity-90 transition-opacity"
@@ -131,14 +123,7 @@ export default function Nav() {
               {label}
             </Link>
           ))}
-          <div className="flex flex-col gap-2.5 mt-5">
-            <Link
-              href="/contact"
-              className="block py-3 rounded-full text-center text-white text-sm font-medium border border-ice/30"
-              onClick={() => setOpen(false)}
-            >
-              Log in
-            </Link>
+          <div className="mt-5">
             <Link
               href="/contact"
               className="block py-3 rounded-full text-center bg-brand text-white text-sm font-semibold shadow-cta"
