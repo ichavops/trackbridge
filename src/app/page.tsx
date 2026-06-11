@@ -83,19 +83,30 @@ const platforms = [
 export default function HomePage() {
   return (
     <>
-      {/* ── HERO — split: content left, person image right ── */}
-      <section className="relative bg-cosmos overflow-hidden min-h-[calc(100vh-68px)]">
+      {/* ── HERO — full viewport, image covers right half absolutely ── */}
+      <section className="relative bg-cosmos h-[calc(100vh-68px)] overflow-hidden">
 
-        {/* Dot grid on content side only */}
+        {/* Dot grid — left side only */}
         <div className="absolute inset-y-0 left-0 w-1/2 hero-dots opacity-[0.07]" aria-hidden="true" />
 
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-68px)]">
+        {/* Image — right 50% of viewport, no max-width constraint */}
+        <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full hidden lg:block">
+          <Image
+            src="/images/hero_1.jpeg"
+            alt="Professional services delivery leader"
+            fill
+            className="object-cover object-center"
+            priority
+            sizes="50vw"
+          />
+        </div>
 
-          {/* ── Left: content ── */}
-          <div className="flex flex-col justify-center px-8 lg:px-16 py-20 relative z-10">
+        {/* Content — left half, vertically centered */}
+        <div className="relative z-10 h-full flex items-center">
+          <div className="w-full lg:w-1/2 px-8 lg:px-16 xl:px-24 py-16">
 
             {/* Announcement pill */}
-            <a href="/how" className="inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.06] mb-10 hover:bg-white/[0.10] transition-colors group">
+            <a href="/how" className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.06] mb-10 hover:bg-white/[0.10] transition-colors group">
               <span className="px-2 py-0.5 rounded-full bg-brand text-white text-[10px] font-bold uppercase tracking-wider">Live</span>
               <span className="text-white/55 text-[12px] tracking-ui">NetSuite SuiteProjects Pro — first integration</span>
               <svg className="w-3.5 h-3.5 stroke-white/30 group-hover:stroke-white/60 transition-colors flex-shrink-0" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -104,17 +115,17 @@ export default function HomePage() {
             </a>
 
             {/* Headline */}
-            <h1 className="text-[clamp(52px,6vw,88px)] font-extrabold text-white leading-[0.95] tracking-display mb-7">
+            <h1 className="text-[clamp(52px,5.5vw,88px)] font-extrabold text-white leading-[0.95] tracking-display mb-7">
               Ask.<br />Know.<br />Decide.
             </h1>
 
             {/* Sub */}
-            <p className="text-[clamp(15px,1.5vw,18px)] text-white/50 max-w-[440px] leading-[1.75] mb-10">
+            <p className="text-[clamp(15px,1.4vw,18px)] text-white/50 max-w-[420px] leading-[1.75] mb-10">
               The AI copilot for professional services delivery teams. Instant, plain-English answers from your live PSA data — no reports, no dashboards.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-3 mb-14">
+            <div className="flex flex-wrap gap-3 mb-12">
               <Link
                 href="/contact"
                 className="px-8 py-3.5 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
@@ -142,18 +153,6 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* ── Right: hero image ── */}
-          <div className="relative hidden lg:block h-full min-h-[calc(100vh-68px)]">
-            <Image
-              src="/images/hero_1.jpeg"
-              alt="Professional services delivery leader"
-              fill
-              className="object-cover object-center"
-              priority
-              sizes="50vw"
-            />
           </div>
         </div>
       </section>

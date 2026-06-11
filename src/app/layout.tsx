@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={jakarta.variable}>
+    <html lang="en" className={jakarta.variable} suppressHydrationWarning>
       {/* bg-canvas = #f8f9fc ghost canvas; text-navy = #1b2540 */}
       <body className="bg-canvas text-navy font-sans">
         <Nav />
