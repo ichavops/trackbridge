@@ -3,21 +3,12 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Pricing',
-  description:
-    'Simple, transparent pricing for every stage of growth. TrackBridge is currently in early access — contact us to lock in founding rates.',
+  description: 'Simple, transparent pricing for every stage of growth. TrackBridge is currently in early access — contact us to lock in founding rates.',
 }
 
 function CheckIcon({ muted = false }: { muted?: boolean }) {
   return (
-    <svg
-      className={`w-4 h-4 flex-shrink-0 mt-0.5 ${muted ? 'stroke-slate-300' : 'stroke-brand'}`}
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
+    <svg className={`w-4 h-4 flex-shrink-0 mt-0.5 ${muted ? 'stroke-fog' : 'stroke-brand'}`} viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <polyline points="20 6 9 17 4 12" />
     </svg>
   )
@@ -32,16 +23,16 @@ const plans = [
     featured: false,
     badge: null,
     cta: 'Contact for Pricing',
-    ctaStyle: 'border border-slate-300 text-slate-950 hover:border-brand hover:bg-brand/[8%]',
+    ctaStyle: 'border border-fog/60 text-navy shadow-ghost-light hover:shadow-badge',
     features: [
-      { text: '1 PSA platform connected', included: true },
-      { text: 'Up to 5 users', included: true },
-      { text: 'Project health queries', included: true },
-      { text: 'Budget status & risk', included: true },
-      { text: 'Web interface access', included: true },
-      { text: 'Slack / Teams integration', included: false },
-      { text: 'DCAA compliance queries', included: false },
-      { text: 'Dedicated support', included: false },
+      { text: '1 PSA platform connected', on: true },
+      { text: 'Up to 5 users', on: true },
+      { text: 'Project health queries', on: true },
+      { text: 'Budget status & risk', on: true },
+      { text: 'Web interface access', on: true },
+      { text: 'Slack / Teams integration', on: false },
+      { text: 'DCAA compliance queries', on: false },
+      { text: 'Dedicated support', on: false },
     ],
   },
   {
@@ -52,36 +43,36 @@ const plans = [
     featured: true,
     badge: 'Most Popular',
     cta: 'Request Early Access',
-    ctaStyle: 'bg-brand text-white hover:opacity-90',
+    ctaStyle: 'bg-brand text-white shadow-cta hover:opacity-90',
     features: [
-      { text: '1 PSA platform connected', included: true },
-      { text: 'Up to 25 users', included: true },
-      { text: 'Full project intelligence suite', included: true },
-      { text: 'Resource utilization queries', included: true },
-      { text: 'Slack integration', included: true },
-      { text: 'DCAA compliance queries', included: true },
-      { text: 'Chat history & exports', included: true },
-      { text: 'Dedicated success manager', included: false },
+      { text: '1 PSA platform connected', on: true },
+      { text: 'Up to 25 users', on: true },
+      { text: 'Full project intelligence suite', on: true },
+      { text: 'Resource utilization queries', on: true },
+      { text: 'Slack integration', on: true },
+      { text: 'DCAA compliance queries', on: true },
+      { text: 'Chat history & exports', on: true },
+      { text: 'Dedicated success manager', on: false },
     ],
   },
   {
     name: 'Enterprise',
     desc: 'For larger firms with complex multi-platform environments, compliance requirements, and enterprise security needs.',
     price: 'Custom',
-    note: 'Tailored to your firm\'s needs',
+    note: "Tailored to your firm's needs",
     featured: false,
     badge: null,
     cta: 'Talk to Sales',
-    ctaStyle: 'border border-slate-300 text-slate-950 hover:border-brand hover:bg-brand/[8%]',
+    ctaStyle: 'border border-fog/60 text-navy shadow-ghost-light hover:shadow-badge',
     features: [
-      { text: 'Multiple PSA platforms', included: true },
-      { text: 'Unlimited users', included: true },
-      { text: 'Everything in Growth', included: true },
-      { text: 'Microsoft Teams integration', included: true },
-      { text: 'SSO / enterprise security', included: true },
-      { text: 'Dedicated success manager', included: true },
-      { text: 'Custom onboarding', included: true },
-      { text: 'SLA & priority support', included: true },
+      { text: 'Multiple PSA platforms', on: true },
+      { text: 'Unlimited users', on: true },
+      { text: 'Everything in Growth', on: true },
+      { text: 'Microsoft Teams integration', on: true },
+      { text: 'SSO / enterprise security', on: true },
+      { text: 'Dedicated success manager', on: true },
+      { text: 'Custom onboarding', on: true },
+      { text: 'SLA & priority support', on: true },
     ],
   },
 ]
@@ -90,42 +81,42 @@ export default function PricingPage() {
   return (
     <>
       {/* ── PLANS ── */}
-      <section className="py-24">
+      <section className="bg-white py-24">
         <div className="max-w-site mx-auto px-6">
           <div className="text-center mb-14">
-            <span className="text-xs font-semibold uppercase tracking-widest text-brand mb-4 block">Pricing</span>
-            <h1 className="text-[clamp(32px,5vw,48px)] font-extrabold mb-4">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-4 block">Pricing</span>
+            <h1 className="text-[clamp(30px,4vw,44px)] font-extrabold mb-4 tracking-heading">
               Simple, transparent pricing<br />for every stage of growth
             </h1>
-            <p className="text-lg text-slate-500 max-w-[600px] mx-auto leading-[1.7]">
-              TrackBridge is currently in early access. Pricing below reflects our planned tiers — contact us to lock in early access rates.
+            <p className="text-[17px] text-slate-ink max-w-[560px] mx-auto leading-[1.7]">
+              Currently in early access. Pricing below reflects our planned tiers — contact us to lock in founding rates.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
             {plans.map((plan) => (
               <article
                 key={plan.name}
-                className={`bg-white rounded-2xl p-8 flex flex-col transition-all duration-200 ${
+                className={`bg-canvas rounded-card flex flex-col transition-all duration-200 p-8 ${
                   plan.featured
-                    ? 'border-2 border-brand shadow-[0_0_60px_rgba(124,58,237,0.15)] md:scale-[1.03]'
-                    : 'border border-slate-200 hover:-translate-y-1 hover:border-slate-300'
+                    ? 'shadow-[rgba(124,58,237,0.25)_0px_0px_0px_2px,rgba(0,39,80,0.06)_0px_32px_48px_-8px] md:scale-[1.03]'
+                    : 'shadow-card hover:-translate-y-1'
                 }`}
               >
                 {plan.badge && (
-                  <span className="self-start px-3 py-1 rounded-full bg-brand text-white text-[11px] font-bold uppercase tracking-widest mb-5">
+                  <span className="self-start px-3 py-1 rounded-full bg-brand text-white text-[11px] font-semibold uppercase tracking-wide mb-5 shadow-cta">
                     {plan.badge}
                   </span>
                 )}
-                <h2 className="text-2xl font-extrabold mb-2">{plan.name}</h2>
-                <p className="text-sm text-slate-500 leading-relaxed mb-6">{plan.desc}</p>
-                <div className="text-[36px] font-extrabold mb-1">{plan.price}</div>
-                <p className="text-xs text-slate-500 mb-7">{plan.note}</p>
+                <h2 className="text-[22px] font-extrabold mb-2 tracking-heading">{plan.name}</h2>
+                <p className="text-[13px] text-slate-ink leading-relaxed mb-6">{plan.desc}</p>
+                <div className="text-[32px] font-extrabold mb-1 tracking-tight">{plan.price}</div>
+                <p className="text-[12px] text-ash mb-7">{plan.note}</p>
 
-                <ul className="flex-1 flex flex-col gap-2.5 mb-7" aria-label={`${plan.name} plan features`}>
+                <ul className="flex-1 flex flex-col gap-2.5 mb-7" aria-label={`${plan.name} features`}>
                   {plan.features.map((f) => (
-                    <li key={f.text} className={`flex gap-2.5 items-start text-sm ${f.included ? '' : 'text-slate-400'}`}>
-                      <CheckIcon muted={!f.included} />
+                    <li key={f.text} className={`flex gap-2.5 items-start text-[13px] tracking-ui ${f.on ? 'text-navy' : 'text-fog'}`}>
+                      <CheckIcon muted={!f.on} />
                       {f.text}
                     </li>
                   ))}
@@ -133,7 +124,7 @@ export default function PricingPage() {
 
                 <Link
                   href="/contact"
-                  className={`block w-full py-3.5 rounded-xl font-bold text-sm text-center transition-all hover:-translate-y-0.5 ${plan.ctaStyle}`}
+                  className={`block w-full py-3 rounded-full text-[14px] font-semibold text-center tracking-ui transition-all hover:-translate-y-0.5 ${plan.ctaStyle}`}
                 >
                   {plan.cta}
                 </Link>
@@ -141,16 +132,17 @@ export default function PricingPage() {
             ))}
           </div>
 
-          <p className="text-center mt-7 text-sm text-slate-500">
+          <p className="text-center mt-7 text-[13px] text-slate-ink">
             <strong>Government contractors and DCAA-compliant environments</strong> — contact us for custom deployment options.
           </p>
 
-          <div className="bg-white border border-slate-200 rounded-2xl p-8 mt-10 text-center">
-            <h3 className="text-xl font-bold mb-2.5">Not sure which plan fits?</h3>
-            <p className="text-slate-500 text-sm mb-6 max-w-[540px] mx-auto">
+          {/* Footer card */}
+          <div className="bg-canvas rounded-card shadow-card p-8 mt-10 text-center">
+            <h3 className="text-[20px] font-bold mb-2.5 tracking-heading">Not sure which plan fits?</h3>
+            <p className="text-slate-ink text-[14px] mb-6 max-w-[500px] mx-auto leading-[1.7]">
               Tell us about your firm — number of billable resources, PSA platform, and how your team currently accesses operational data. We&apos;ll recommend the right fit.
             </p>
-            <Link href="/contact" className="inline-flex items-center px-7 py-3.5 rounded-xl bg-brand text-white font-bold hover:opacity-90 hover:-translate-y-0.5 transition-all">
+            <Link href="/contact" className="inline-flex items-center px-7 py-3 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity">
               Talk to Us
             </Link>
           </div>
@@ -158,14 +150,14 @@ export default function PricingPage() {
       </section>
 
       {/* ── EARLY ACCESS ── */}
-      <section className="bg-white border-y border-slate-200 py-16">
+      <section className="bg-canvas py-20">
         <div className="max-w-site mx-auto px-6 text-center">
-          <span className="text-xs font-semibold uppercase tracking-widest text-brand mb-4 block">Early Access Program</span>
-          <h2 className="text-[clamp(32px,5vw,48px)] font-extrabold mb-4">Join before we launch</h2>
-          <p className="text-lg text-slate-500 max-w-[600px] mx-auto leading-[1.7] mb-9">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-4 block">Early Access Program</span>
+          <h2 className="text-[clamp(28px,4vw,40px)] font-extrabold mb-4 tracking-heading">Join before we launch</h2>
+          <p className="text-[17px] text-slate-ink max-w-[560px] mx-auto leading-[1.7] mb-9">
             Early access customers get priority onboarding, locked-in founding rates, and direct input into our product roadmap. We&apos;re accepting a limited number of firms now.
           </p>
-          <Link href="/contact" className="inline-flex items-center px-7 py-3.5 rounded-xl bg-brand text-white font-bold hover:opacity-90 hover:-translate-y-0.5 transition-all">
+          <Link href="/contact" className="inline-flex items-center px-7 py-3 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity">
             Apply for Early Access
           </Link>
         </div>

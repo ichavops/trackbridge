@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* brand color channels for Tailwind opacity modifier support */
+    /* TrackBridge brand violet — channel triple for Tailwind opacity modifiers */
     --brand: 124 58 237;
   }
 
@@ -15,33 +15,48 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Tight tracking across all UI text — key Antimetal signature */
+    letter-spacing: -0.016em;
   }
 
-  /* Smooth page-level fade-in */
-  main > * {
-    animation: fadeUp 0.3s ease both;
-  }
-
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  h1, h2, h3, h4 {
+    letter-spacing: -0.025em;
   }
 }
 
 @layer utilities {
-  /* Pulsing status dot */
-  .status-pulse {
-    animation: pulse 2s infinite;
+  /* Subtle dot grid for hero overlay — technical atmosphere */
+  .hero-dots {
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.09) 1px,
+      transparent 1px
+    );
+    background-size: 28px 28px;
   }
 
-  @keyframes pulse {
+  /* Pulsing status indicator */
+  .status-pulse {
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+    50% { opacity: 0.45; }
+  }
+
+  /* Violet radial glow used at the bottom of dark CTA banners */
+  .cta-violet-glow {
+    background: radial-gradient(ellipse at 50% 100%, rgba(124, 58, 237, 0.45) 0%, transparent 70%);
+  }
+
+  /* Subtle page entrance */
+  .fade-up {
+    animation: fadeUp 0.35s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 }

@@ -26,14 +26,11 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={jakarta.variable}>
-      <body className="bg-slate-50 text-slate-950 font-sans">
+      {/* bg-canvas = #f8f9fc ghost canvas; text-navy = #1b2540 */}
+      <body className="bg-canvas text-navy font-sans">
         <Nav />
         <main className="pt-[68px]">{children}</main>
         <Footer />
