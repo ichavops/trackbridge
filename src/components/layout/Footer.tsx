@@ -49,33 +49,29 @@ export default function Footer() {
             <nav aria-label="Company links">
               <Link href="/who" className="block text-sm text-white/50 hover:text-white mb-2.5 transition-colors">Who We Serve</Link>
               <Link href="/contact" className="block text-sm text-white/50 hover:text-white mb-2.5 transition-colors">Contact</Link>
-              <a
-                href="https://trackbridge.ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-sm text-white/50 hover:text-white mb-2.5 transition-colors"
-              >
-                trackbridge.ai
-              </a>
             </nav>
           </div>
 
-          {/* Platforms */}
+          {/* Legal */}
           <div>
-            <h5 className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/30 mb-4">PSA Platforms</h5>
-            <p className="text-sm text-white/50 mb-2">NetSuite SuiteProjects Pro</p>
-            <p className="text-sm text-white/50 mb-2">Kantata (Mavenlink)</p>
-            <p className="text-sm text-white/50 mb-2">BigTime</p>
-            <p className="text-sm text-white/50 mb-2">Unanet</p>
+            <h5 className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/30 mb-4">Legal</h5>
+            <nav aria-label="Legal links">
+              <Link href="/privacy" className="block text-sm text-white/50 hover:text-white mb-2.5 transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="block text-sm text-white/50 hover:text-white mb-2.5 transition-colors">Terms of Service</Link>
+            </nav>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-white/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p className="text-xs text-white/30">© 2026 TrackBridge LLC · Richmond, Texas</p>
-          <div className="flex items-center gap-2 text-sm text-white/40">
-            <span className="w-2 h-2 rounded-full bg-green-400 status-pulse" aria-hidden="true" />
-            All systems operational
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="text-xs text-white/30 hover:text-white/60 transition-colors">Privacy</Link>
+            <Link href="/terms" className="text-xs text-white/30 hover:text-white/60 transition-colors">Terms</Link>
+            <div className="flex items-center gap-2 text-sm text-white/40">
+              <span className="w-2 h-2 rounded-full bg-green-400 status-pulse" aria-hidden="true" />
+              All systems operational
+            </div>
           </div>
         </div>
       </div>

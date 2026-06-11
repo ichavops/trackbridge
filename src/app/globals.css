@@ -45,6 +45,47 @@
     50% { opacity: 0.45; }
   }
 
+  /* ── Legal page prose ─────────────────────────────────────── */
+  .prose-custom h2 {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: #1b2540;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose-custom p {
+    font-size: 14px;
+    color: #6b7184;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  .prose-custom ul {
+    list-style: disc;
+    padding-left: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose-custom ul li {
+    font-size: 14px;
+    color: #6b7184;
+    line-height: 1.75;
+    margin-bottom: 0.25rem;
+  }
+
+  .prose-custom a {
+    color: rgb(124 58 237);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .prose-custom strong {
+    color: #1b2540;
+    font-weight: 600;
+  }
+
   /* Subtle page entrance */
   .fade-up {
     animation: fadeUp 0.35s ease both;
