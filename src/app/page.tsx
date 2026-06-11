@@ -82,21 +82,11 @@ const platforms = [
 export default function HomePage() {
   return (
     <>
-      {/* ── HERO — solid dark cosmos base, layered glow atmosphere ── */}
+      {/* ── HERO ── */}
       <section className="relative bg-cosmos min-h-[calc(100vh-72px)] flex flex-col items-center justify-center py-20 overflow-hidden">
 
         {/* Dot grid */}
         <div className="absolute inset-0 hero-dots opacity-[0.07]" aria-hidden="true" />
-
-        {/* Glow atmosphere — three overlapping ellipses */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute inset-0 hero-glow-indigo" />
-          <div className="absolute inset-0 hero-glow-right" />
-          <div className="absolute inset-0 hero-glow-violet" />
-        </div>
-
-        {/* Horizontal shimmer line across mid-hero */}
-        <div className="absolute top-[52%] left-1/2 -translate-x-1/2 w-[700px] h-px pointer-events-none hero-shimmer-line" aria-hidden="true" />
 
         <div className="relative z-10 max-w-site mx-auto px-6 text-center w-full">
 
@@ -137,10 +127,7 @@ export default function HomePage() {
 
           {/* Chat demo — floating product card */}
           <div className="relative max-w-[580px] mx-auto">
-            {/* Glow beneath card */}
-            <div className="absolute -inset-6 rounded-[32px] pointer-events-none hero-card-glow" aria-hidden="true" />
-
-            <div className="relative bg-white rounded-card shadow-[rgba(0,0,0,0.5)_0px_40px_80px_-12px,rgba(124,58,237,0.25)_0px_0px_0px_1px] overflow-hidden">
+            <div className="relative bg-white rounded-card shadow-card overflow-hidden ring-1 ring-white/10">
               {/* Browser chrome */}
               <div className="bg-[#f5f5f7] px-4 py-3 flex items-center gap-2 border-b border-black/[0.06]">
                 <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
@@ -304,8 +291,6 @@ export default function HomePage() {
       <div className="max-w-site mx-auto px-6 py-24">
         <div className="relative bg-cosmos rounded-card px-12 py-16 text-center overflow-hidden">
           <div className="absolute inset-0 hero-dots opacity-40" aria-hidden="true" />
-          {/* Violet glow bottom */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none cta-violet-glow-strong" aria-hidden="true" />
           <div className="relative z-10">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-4 block">Early Access</span>
             <h2 className="text-[clamp(26px,4vw,38px)] font-extrabold text-white mb-4 tracking-heading">

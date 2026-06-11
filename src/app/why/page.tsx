@@ -120,7 +120,6 @@ export default function WhyPage() {
       <div className="max-w-site mx-auto px-6 py-24">
         <div className="relative bg-cosmos rounded-card px-12 py-16 text-center overflow-hidden">
           <div className="absolute inset-0 hero-dots opacity-40" aria-hidden="true" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[280px] pointer-events-none cta-violet-glow" aria-hidden="true" />
           <div className="relative z-10">
             <h2 className="text-[clamp(24px,3.5vw,36px)] font-extrabold text-white mb-4 tracking-heading">Experience the difference</h2>
             <p className="text-[16px] text-white/60 mb-8 max-w-[460px] mx-auto leading-[1.65]">See how TrackBridge answers questions your PSA reports can&apos;t — in seconds, with full data fidelity.</p>

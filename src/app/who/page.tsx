@@ -8,10 +8,22 @@ export const metadata: Metadata = {
 }
 
 const personas = [
-  { emoji: '📋', title: 'Delivery Managers', body: "You're responsible for on-time, on-budget delivery across multiple concurrent projects. You need instant answers about project health, budget burn, and resource availability — not a 30-minute reporting exercise. TrackBridge gives you that in seconds." },
-  { emoji: '🗂️', title: 'PMO Leaders', body: 'You oversee the portfolio. You need to know which projects are at risk, where capacity gaps are developing, and how the bench looks next quarter. TrackBridge surfaces portfolio-level intelligence from your live PSA data — no aggregation required.' },
-  { emoji: '📈', title: 'VPs of Professional Services', body: "You're accountable for utilization targets, margin performance, and client satisfaction. TrackBridge gives you the operational view your PSA was supposed to provide — without the manual work that was always supposed to be automated." },
-  { emoji: '💼', title: 'CFOs & Finance Leaders', body: "You need accurate, real-time visibility into project financials, billing status, and revenue at risk. TrackBridge pulls directly from your PSA's financial data — the same source your team trusts — and makes it instantly queryable." },
+  {
+    icon: <svg className="w-5 h-5 stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>,
+    title: 'Delivery Managers', body: "You're responsible for on-time, on-budget delivery across multiple concurrent projects. You need instant answers about project health, budget burn, and resource availability — not a 30-minute reporting exercise. TrackBridge gives you that in seconds.",
+  },
+  {
+    icon: <svg className="w-5 h-5 stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>,
+    title: 'PMO Leaders', body: 'You oversee the portfolio. You need to know which projects are at risk, where capacity gaps are developing, and how the bench looks next quarter. TrackBridge surfaces portfolio-level intelligence from your live PSA data — no aggregation required.',
+  },
+  {
+    icon: <svg className="w-5 h-5 stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>,
+    title: 'VPs of Professional Services', body: "You're accountable for utilization targets, margin performance, and client satisfaction. TrackBridge gives you the operational view your PSA was supposed to provide — without the manual work that was always supposed to be automated.",
+  },
+  {
+    icon: <svg className="w-5 h-5 stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>,
+    title: 'CFOs & Finance Leaders', body: "You need accurate, real-time visibility into project financials, billing status, and revenue at risk. TrackBridge pulls directly from your PSA's financial data — the same source your team trusts — and makes it instantly queryable.",
+  },
 ]
 
 const verticals = [
@@ -35,7 +47,7 @@ export default function WhoPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {personas.map((p) => (
               <article key={p.title} className="bg-canvas rounded-card shadow-card p-7 flex gap-5 items-start hover:-translate-y-0.5 transition-transform duration-200">
-                <span className="text-[34px] leading-none flex-shrink-0 mt-0.5" aria-hidden="true">{p.emoji}</span>
+                <span className="w-11 h-11 rounded-xl bg-brand/[8%] flex items-center justify-center flex-shrink-0 shadow-pill">{p.icon}</span>
                 <div>
                   <h2 className="text-[16px] font-bold mb-2 tracking-heading">{p.title}</h2>
                   <p className="text-[14px] text-slate-ink leading-relaxed">{p.body}</p>
@@ -89,7 +101,6 @@ export default function WhoPage() {
       <div className="max-w-site mx-auto px-6 pb-24">
         <div className="relative bg-cosmos rounded-card px-12 py-16 text-center overflow-hidden">
           <div className="absolute inset-0 hero-dots opacity-40" aria-hidden="true" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[280px] pointer-events-none cta-violet-glow" aria-hidden="true" />
           <div className="relative z-10">
             <h2 className="text-[clamp(24px,3.5vw,36px)] font-extrabold text-white mb-4 tracking-heading">Sound like your firm?</h2>
             <p className="text-[16px] text-white/60 mb-8 max-w-[460px] mx-auto leading-[1.65]">Tell us about your PSA platform and team size — we&apos;ll reach out when TrackBridge is ready for you.</p>

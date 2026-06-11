@@ -45,50 +45,6 @@
     50% { opacity: 0.45; }
   }
 
-  /* ── Glow layers for dark sections ─────────────────────────── */
-
-  /* Violet ellipse at the bottom of dark banners / hero */
-  .cta-violet-glow {
-    background: radial-gradient(ellipse at 50% 100%, rgba(124, 58, 237, 0.45) 0%, transparent 70%);
-  }
-
-  /* Hero: large violet bloom from bottom-center */
-  .hero-glow-violet {
-    background: radial-gradient(ellipse at 50% 110%, rgba(124, 58, 237, 0.65) 0%, rgba(55, 48, 163, 0.3) 40%, transparent 70%);
-  }
-
-  /* Hero: indigo cloud from top-left quadrant */
-  .hero-glow-indigo {
-    background: radial-gradient(ellipse at 15% 0%, rgba(55, 48, 163, 0.55) 0%, transparent 60%);
-  }
-
-  /* Hero: faint right-side shimmer */
-  .hero-glow-right {
-    background: radial-gradient(ellipse at 100% 40%, rgba(124, 58, 237, 0.2) 0%, transparent 55%);
-  }
-
-  /* Horizontal violet shimmer line (mid-hero accent) */
-  .hero-shimmer-line {
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(124, 58, 237, 0.35) 30%,
-      rgba(124, 58, 237, 0.5) 50%,
-      rgba(124, 58, 237, 0.35) 70%,
-      transparent 100%
-    );
-  }
-
-  /* Violet halo beneath the floating chat demo card */
-  .hero-card-glow {
-    background: radial-gradient(ellipse at 50% 80%, rgba(124, 58, 237, 0.3) 0%, transparent 70%);
-  }
-
-  /* Stronger violet glow for CTA banner bottom (higher opacity than cta-violet-glow) */
-  .cta-violet-glow-strong {
-    background: radial-gradient(ellipse at 50% 100%, rgba(124, 58, 237, 0.5) 0%, transparent 70%);
-  }
-
   /* Subtle page entrance */
   .fade-up {
     animation: fadeUp 0.35s ease both;

@@ -45,10 +45,6 @@ const config: Config = {
         // Announcement pill / floating surface
         pill: 'rgba(255,255,255,0.88) 0px 1px 1px 0px inset, rgba(0,39,80,0.04) 0px 0px 0px 1px',
       },
-      backgroundImage: {
-        // Hero gradient: deep navy → indigo → TrackBridge violet
-        hero: 'linear-gradient(180deg, #001033 0%, #3730A3 55%, #7C3AED 100%)',
-      },
     },
   },
   plugins: [],
