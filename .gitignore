@@ -21,3 +21,9 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# TypeScript build cache
+tsconfig.tsbuildinfo
+
+# Next.js generated types (auto-regenerated on build)
+next-env.d.ts
