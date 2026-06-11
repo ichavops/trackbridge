@@ -72,12 +72,12 @@ const features = [
 ]
 
 const platforms = [
-  { name: 'NetSuite SuiteProjects Pro (OpenAir)', status: 'live' },
-  { name: 'Kantata (Mavenlink)', status: 'roadmap' },
-  { name: 'BigTime', status: 'roadmap' },
-  { name: 'Unanet', status: 'roadmap' },
-  { name: 'Microsoft Dynamics 365', status: 'roadmap' },
-  { name: 'Deltek Vantagepoint', status: 'roadmap' },
+  { name: 'NetSuite OpenAir', full: 'NetSuite SuiteProjects Pro (OpenAir)', icon: '/icons/netsuite.svg', status: 'live' },
+  { name: 'Kantata', full: 'Kantata (Mavenlink)', icon: '/icons/kantata.svg', status: 'roadmap' },
+  { name: 'BigTime', full: 'BigTime', icon: '/icons/bigtime.svg', status: 'roadmap' },
+  { name: 'Unanet', full: 'Unanet', icon: '/icons/unanet.svg', status: 'roadmap' },
+  { name: 'Dynamics 365', full: 'Microsoft Dynamics 365', icon: '/icons/dynamics365.svg', status: 'roadmap' },
+  { name: 'Deltek Vantagepoint', full: 'Deltek Vantagepoint', icon: '/icons/deltek.svg', status: 'roadmap' },
 ]
 
 export default function HomePage() {
@@ -140,45 +140,34 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Stat pills */}
-            <div className="flex flex-wrap gap-2.5">
-              {[
-                { val: '0 reports', lbl: 'to run' },
-                { val: '<5 sec', lbl: 'to answer' },
-                { val: 'Live', lbl: 'PSA data' },
-              ].map(({ val, lbl }) => (
-                <div key={val} className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] border border-white/[0.08] text-[13px]">
-                  <span className="font-bold text-white">{val}</span>
-                  <span className="text-white/40">{lbl}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
 
-      {/* ── PLATFORMS — ghost canvas ── */}
-      <section className="bg-canvas py-16" aria-label="Supported PSA platforms">
-        <div className="max-w-site mx-auto px-6 flex flex-col items-center gap-8">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-ash">
-            Works with your PSA platform
-          </p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            {platforms.map(({ name, status }) => (
+      {/* ── PLATFORMS — scrolling ticker ── */}
+      <section className="bg-canvas py-14 overflow-hidden" aria-label="Supported PSA platforms">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-ash text-center mb-8">
+          Works with your PSA platform
+        </p>
+        <div className="ticker-wrap">
+          {/* duplicate array for seamless infinite loop */}
+          <div className="ticker-track gap-3">
+            {[...platforms, ...platforms].map((p, i) => (
               <div
-                key={name}
-                className={`flex items-center gap-2.5 px-5 py-2.5 rounded-badge bg-white shadow-badge text-[13px] font-medium text-navy tracking-ui ${status === 'roadmap' ? 'opacity-50' : ''}`}
+                key={i}
+                className={`flex items-center gap-3 mx-1.5 px-5 py-3 rounded-badge bg-white shadow-badge text-[13px] font-medium text-navy tracking-ui flex-shrink-0 ${p.status === 'roadmap' ? 'opacity-55' : ''}`}
               >
-                {name}
-                {status === 'live' ? (
-                  <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-green-50 text-green-700 shadow-pill">
+                <img src={p.icon} alt={p.name} width={28} height={28} className="rounded-md flex-shrink-0" />
+                <span>{p.name}</span>
+                {p.status === 'live' ? (
+                  <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-green-50 text-green-700 shadow-pill flex-shrink-0">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500" aria-hidden="true" />
                     Live
                   </span>
                 ) : (
-                  <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-700 shadow-pill">
+                  <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-700 shadow-pill flex-shrink-0">
                     <span className="w-1.5 h-1.5 rounded-full bg-amber-400" aria-hidden="true" />
-                    Roadmap
+                    Soon
                   </span>
                 )}
               </div>
