@@ -84,12 +84,12 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO — split: content left, person image right ── */}
-      <section className="relative bg-cosmos overflow-hidden min-h-[calc(100vh-72px)]">
+      <section className="relative bg-cosmos overflow-hidden min-h-[calc(100vh-68px)]">
 
         {/* Dot grid on content side only */}
         <div className="absolute inset-y-0 left-0 w-1/2 hero-dots opacity-[0.07]" aria-hidden="true" />
 
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-72px)]">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-68px)]">
 
           {/* ── Left: content ── */}
           <div className="flex flex-col justify-center px-8 lg:px-16 py-20 relative z-10">
@@ -145,7 +145,7 @@ export default function HomePage() {
           </div>
 
           {/* ── Right: hero image ── */}
-          <div className="relative hidden lg:block">
+          <div className="relative hidden lg:block h-full min-h-[calc(100vh-68px)]">
             <Image
               src="/images/hero_1.jpeg"
               alt="Professional services delivery leader"
