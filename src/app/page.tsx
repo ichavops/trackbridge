@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -82,148 +83,77 @@ const platforms = [
 export default function HomePage() {
   return (
     <>
-      {/* ── HERO ── */}
-      <section className="relative bg-cosmos min-h-[calc(100vh-72px)] flex flex-col items-center justify-center py-20 overflow-hidden">
+      {/* ── HERO — split: content left, person image right ── */}
+      <section className="relative bg-cosmos overflow-hidden min-h-[calc(100vh-72px)]">
 
-        {/* Dot grid */}
-        <div className="absolute inset-0 hero-dots opacity-[0.07]" aria-hidden="true" />
+        {/* Dot grid on content side only */}
+        <div className="absolute inset-y-0 left-0 w-1/2 hero-dots opacity-[0.07]" aria-hidden="true" />
 
-        <div className="relative z-10 max-w-site mx-auto px-6 text-center w-full">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-72px)]">
 
-          {/* Announcement pill */}
-          <a href="/how" className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.06] mb-10 cursor-pointer hover:bg-white/[0.10] transition-colors group">
-            <span className="px-2 py-0.5 rounded-full bg-brand text-white text-[10px] font-bold uppercase tracking-wider">Live</span>
-            <span className="text-white/55 text-[12px] tracking-ui">NetSuite SuiteProjects Pro (OpenAir) — first integration</span>
-            <svg className="w-3.5 h-3.5 stroke-white/30 group-hover:stroke-white/60 transition-colors flex-shrink-0" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </a>
+          {/* ── Left: content ── */}
+          <div className="flex flex-col justify-center px-8 lg:px-16 py-20 relative z-10">
 
-          {/* Headline */}
-          <h1 className="text-[clamp(64px,10vw,108px)] font-extrabold text-white leading-[0.95] tracking-display mb-8">
-            Ask.<br />Know.<br />Decide.
-          </h1>
+            {/* Announcement pill */}
+            <a href="/how" className="inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.06] mb-10 hover:bg-white/[0.10] transition-colors group">
+              <span className="px-2 py-0.5 rounded-full bg-brand text-white text-[10px] font-bold uppercase tracking-wider">Live</span>
+              <span className="text-white/55 text-[12px] tracking-ui">NetSuite SuiteProjects Pro — first integration</span>
+              <svg className="w-3.5 h-3.5 stroke-white/30 group-hover:stroke-white/60 transition-colors flex-shrink-0" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </a>
 
-          {/* Sub */}
-          <p className="text-[clamp(16px,1.8vw,19px)] text-white/50 max-w-[480px] mx-auto leading-[1.7] mb-12">
-            The AI copilot for professional services delivery teams. Get instant, plain-English answers from your live PSA data — no reports, no dashboards.
-          </p>
+            {/* Headline */}
+            <h1 className="text-[clamp(52px,6vw,88px)] font-extrabold text-white leading-[0.95] tracking-display mb-7">
+              Ask.<br />Know.<br />Decide.
+            </h1>
 
-          {/* CTAs */}
-          <div className="flex flex-wrap gap-3 justify-center mb-20">
-            <Link
-              href="/contact"
-              className="px-8 py-3.5 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
-            >
-              Book a Demo
-            </Link>
-            <Link
-              href="/how"
-              className="px-8 py-3.5 rounded-full text-white text-[15px] font-medium tracking-ui border border-white/15 shadow-ghost-dark hover:bg-white/[0.07] transition-colors"
-            >
-              See How It Works
-            </Link>
-          </div>
+            {/* Sub */}
+            <p className="text-[clamp(15px,1.5vw,18px)] text-white/50 max-w-[440px] leading-[1.75] mb-10">
+              The AI copilot for professional services delivery teams. Instant, plain-English answers from your live PSA data — no reports, no dashboards.
+            </p>
 
-          {/* Chat demo — floating product card */}
-          <div className="relative max-w-[580px] mx-auto">
-            <div className="relative bg-white rounded-card shadow-card overflow-hidden ring-1 ring-white/10">
-              {/* Browser chrome */}
-              <div className="bg-[#f5f5f7] px-4 py-3 flex items-center gap-2 border-b border-black/[0.06]">
-                <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                <span className="w-3 h-3 rounded-full bg-[#ffbc2e]" />
-                <span className="w-3 h-3 rounded-full bg-[#28c840]" />
-                <div className="mx-auto flex items-center gap-2 px-4 py-1 rounded-full bg-white/80 border border-black/[0.08] text-[11px] text-[#6b7280]">
-                  <svg className="w-3 h-3 stroke-current opacity-50" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                  app.trackbridge.ai
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-3 mb-14">
+              <Link
+                href="/contact"
+                className="px-8 py-3.5 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
+              >
+                Book a Demo
+              </Link>
+              <Link
+                href="/how"
+                className="px-8 py-3.5 rounded-full text-white text-[15px] font-medium tracking-ui border border-white/15 shadow-ghost-dark hover:bg-white/[0.07] transition-colors"
+              >
+                See How It Works
+              </Link>
+            </div>
+
+            {/* Stat pills */}
+            <div className="flex flex-wrap gap-3">
+              {[
+                { val: '0 reports', lbl: 'to run' },
+                { val: '<5 sec', lbl: 'to answer' },
+                { val: 'Live', lbl: 'PSA data' },
+              ].map(({ val, lbl }) => (
+                <div key={val} className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] border border-white/[0.08] text-[13px]">
+                  <span className="font-bold text-white">{val}</span>
+                  <span className="text-white/40">{lbl}</span>
                 </div>
-              </div>
-
-              {/* Sidebar + chat layout */}
-              <div className="flex min-h-[300px]">
-                {/* Left sidebar */}
-                <div className="w-[52px] border-r border-black/[0.06] bg-[#fafafa] flex flex-col items-center py-4 gap-4 flex-shrink-0">
-                  <div className="w-7 h-7 rounded-lg bg-brand flex items-center justify-center">
-                    <span className="text-[9px] font-bold text-white">TB</span>
-                  </div>
-                  {[
-                    <svg key="a" className="w-4 h-4 stroke-[#9ca3af]" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
-                    <svg key="b" className="w-4 h-4 stroke-[#9ca3af]" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
-                    <svg key="c" className="w-4 h-4 stroke-[#9ca3af]" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>,
-                  ]}
-                </div>
-
-                {/* Chat pane */}
-                <div className="flex-1 flex flex-col">
-                  <div className="p-5 flex flex-col gap-4 flex-1">
-                    {/* User message */}
-                    <div className="flex flex-row-reverse gap-2.5 items-end">
-                      <span className="w-7 h-7 rounded-full bg-brand/[14%] flex items-center justify-center text-[9px] font-bold text-brand flex-shrink-0">JM</span>
-                      <div className="bg-brand text-white text-[13px] px-4 py-2.5 rounded-2xl rounded-br-sm font-medium max-w-[320px] leading-relaxed shadow-sm">
-                        Which projects are at risk of going over budget this month?
-                      </div>
-                    </div>
-
-                    {/* AI response */}
-                    <div className="flex gap-2.5 items-end">
-                      <span className="w-7 h-7 rounded-full bg-brand flex items-center justify-center text-[9px] font-bold text-white flex-shrink-0">TB</span>
-                      <div className="bg-[#f8f9fc] text-[#1b2540] text-[13px] px-4 py-2.5 rounded-2xl rounded-bl-sm max-w-[360px] leading-relaxed border border-black/[0.05]">
-                        <p className="mb-2.5 font-medium">3 projects showing elevated budget risk:</p>
-                        <div className="flex flex-col gap-1.5">
-                          <div className="flex items-center justify-between gap-4">
-                            <span className="font-semibold text-[#1b2540]">Apex Modernization</span>
-                            <span className="text-red-500 font-semibold text-[12px]">87% consumed</span>
-                          </div>
-                          <div className="w-full h-1.5 rounded-full bg-black/[0.06]">
-                            <div className="h-full w-[87%] rounded-full bg-red-400" />
-                          </div>
-                          <p className="text-[11px] text-[#6b7184] mt-0.5">34% complete — burn rate 2.6× plan</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Second user message */}
-                    <div className="flex flex-row-reverse gap-2.5 items-end">
-                      <span className="w-7 h-7 rounded-full bg-brand/[14%] flex items-center justify-center text-[9px] font-bold text-brand flex-shrink-0">JM</span>
-                      <div className="bg-brand text-white text-[13px] px-4 py-2.5 rounded-2xl rounded-br-sm font-medium max-w-[320px] shadow-sm">
-                        Show me Apex — who&apos;s on it?
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Input bar */}
-                  <div className="px-4 py-3 border-t border-black/[0.06] flex gap-2 items-center bg-white">
-                    <input
-                      className="flex-1 bg-[#f5f5f7] rounded-xl px-3.5 py-2 text-[12px] text-[#1b2540] placeholder:text-[#9ca3af] outline-none"
-                      type="text"
-                      placeholder="Ask about budget, utilization, projects…"
-                      readOnly
-                      aria-label="Chat input (demo)"
-                    />
-                    <button type="button" className="w-8 h-8 rounded-xl bg-brand flex items-center justify-center flex-shrink-0 shadow-sm" aria-label="Send" tabIndex={-1}>
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <line x1="22" y1="2" x2="11" y2="13" />
-                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Stat pills below card */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
-            {[
-              { val: '0 reports', lbl: 'to run' },
-              { val: '<5 sec', lbl: 'to answer' },
-              { val: 'Live', lbl: 'PSA data' },
-            ].map(({ val, lbl }) => (
-              <div key={val} className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] border border-white/[0.08] text-[13px]">
-                <span className="font-bold text-white">{val}</span>
-                <span className="text-white/40">{lbl}</span>
-              </div>
-            ))}
+          {/* ── Right: hero image ── */}
+          <div className="relative hidden lg:block">
+            <Image
+              src="/images/hero_1.jpeg"
+              alt="Professional services delivery leader"
+              fill
+              className="object-cover object-center"
+              priority
+              sizes="50vw"
+            />
           </div>
         </div>
       </section>
