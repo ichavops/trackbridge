@@ -89,15 +89,15 @@ export default function HomePage() {
         {/* Dot grid — left content area */}
         <div className="absolute inset-y-0 left-0 w-[45%] hero-dots opacity-[0.07]" aria-hidden="true" />
 
-        {/* Image — covers right ~70% of viewport, fades into cosmos on the left */}
-        <div className="absolute top-0 right-0 w-[72%] h-full hidden lg:block hero-image-fade">
+        {/* Image — full bleed */}
+        <div className="absolute inset-0">
           <Image
             src="/images/hero_1.jpeg"
             alt="Professional services delivery leader"
             fill
-            className="object-cover object-left-top"
+            className="object-cover object-center"
             priority
-            sizes="72vw"
+            sizes="100vw"
           />
         </div>
 
