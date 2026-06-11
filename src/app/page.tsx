@@ -82,115 +82,161 @@ const platforms = [
 export default function HomePage() {
   return (
     <>
-      {/* ── HERO — dark gradient, full viewport ── */}
-      <section className="relative bg-hero hero-dots min-h-[calc(100vh-68px)] flex flex-col items-center justify-center py-20 overflow-hidden">
+      {/* ── HERO — solid dark cosmos base, layered glow atmosphere ── */}
+      <section className="relative bg-cosmos min-h-[calc(100vh-72px)] flex flex-col items-center justify-center py-20 overflow-hidden">
 
-        {/* Radial violet glow from below */}
-        <div
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(124,58,237,0.45) 0%, transparent 70%)' }}
-          aria-hidden="true"
-        />
+        {/* Dot grid */}
+        <div className="absolute inset-0 hero-dots opacity-[0.07]" aria-hidden="true" />
+
+        {/* Glow atmosphere — three overlapping ellipses */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute inset-0 hero-glow-indigo" />
+          <div className="absolute inset-0 hero-glow-right" />
+          <div className="absolute inset-0 hero-glow-violet" />
+        </div>
+
+        {/* Horizontal shimmer line across mid-hero */}
+        <div className="absolute top-[52%] left-1/2 -translate-x-1/2 w-[700px] h-px pointer-events-none hero-shimmer-line" aria-hidden="true" />
 
         <div className="relative z-10 max-w-site mx-auto px-6 text-center w-full">
 
           {/* Announcement pill */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/8 border border-white/15 text-white text-sm mb-8 shadow-pill">
-            <span className="px-2.5 py-0.5 rounded-full bg-brand text-white text-[11px] font-semibold tracking-wide">
-              New
-            </span>
-            <span className="text-white/70 text-[13px]">Now live — NetSuite SuiteProjects Pro (OpenAir)</span>
-          </div>
+          <a href="/how" className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.06] mb-10 cursor-pointer hover:bg-white/[0.10] transition-colors group">
+            <span className="px-2 py-0.5 rounded-full bg-brand text-white text-[10px] font-bold uppercase tracking-wider">Live</span>
+            <span className="text-white/55 text-[12px] tracking-ui">NetSuite SuiteProjects Pro (OpenAir) — first integration</span>
+            <svg className="w-3.5 h-3.5 stroke-white/30 group-hover:stroke-white/60 transition-colors flex-shrink-0" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </a>
 
           {/* Headline */}
-          <h1 className="text-[clamp(56px,9vw,96px)] font-extrabold text-white leading-[1.0] tracking-display mb-6">
-            Ask. Know.<br />Decide.
+          <h1 className="text-[clamp(64px,10vw,108px)] font-extrabold text-white leading-[0.95] tracking-display mb-8">
+            Ask.<br />Know.<br />Decide.
           </h1>
 
           {/* Sub */}
-          <p className="text-[clamp(16px,2vw,20px)] text-white/60 max-w-[580px] mx-auto leading-[1.65] mb-10">
-            Fewer surprises. Better margins. Faster decisions. TrackBridge connects your PSA to an AI copilot so delivery leaders get the answers they need — instantly, in plain English, from live data.
+          <p className="text-[clamp(16px,1.8vw,19px)] text-white/50 max-w-[480px] mx-auto leading-[1.7] mb-12">
+            The AI copilot for professional services delivery teams. Get instant, plain-English answers from your live PSA data — no reports, no dashboards.
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-3 justify-center mb-14">
+          <div className="flex flex-wrap gap-3 justify-center mb-20">
             <Link
               href="/contact"
-              className="px-7 py-3 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
+              className="px-8 py-3.5 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
             >
               Book a Demo
             </Link>
             <Link
               href="/how"
-              className="px-7 py-3 rounded-full text-white text-[15px] font-medium tracking-ui border border-ice/25 shadow-ghost-dark hover:bg-white/5 transition-colors"
+              className="px-8 py-3.5 rounded-full text-white text-[15px] font-medium tracking-ui border border-white/15 shadow-ghost-dark hover:bg-white/[0.07] transition-colors"
             >
               See How It Works
             </Link>
           </div>
 
-          {/* Stats strip — frosted glass */}
-          <div className="inline-flex rounded-2xl overflow-hidden bg-white/8 border border-white/10 mb-16 mx-auto">
-            {[
-              { val: '0', lbl: 'Reports to run' },
-              { val: '<5s', lbl: 'Time to answer' },
-              { val: 'Live', lbl: 'PSA data, always' },
-            ].map(({ val, lbl }, i) => (
-              <div key={i} className="px-8 py-5 text-center border-r border-white/10 last:border-r-0">
-                <div className="text-[26px] font-extrabold text-white mb-1 tracking-tight">{val}</div>
-                <div className="text-[12px] text-white/50 whitespace-nowrap">{lbl}</div>
+          {/* Chat demo — floating product card */}
+          <div className="relative max-w-[580px] mx-auto">
+            {/* Glow beneath card */}
+            <div className="absolute -inset-6 rounded-[32px] pointer-events-none hero-card-glow" aria-hidden="true" />
+
+            <div className="relative bg-white rounded-card shadow-[rgba(0,0,0,0.5)_0px_40px_80px_-12px,rgba(124,58,237,0.25)_0px_0px_0px_1px] overflow-hidden">
+              {/* Browser chrome */}
+              <div className="bg-[#f5f5f7] px-4 py-3 flex items-center gap-2 border-b border-black/[0.06]">
+                <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                <span className="w-3 h-3 rounded-full bg-[#ffbc2e]" />
+                <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+                <div className="mx-auto flex items-center gap-2 px-4 py-1 rounded-full bg-white/80 border border-black/[0.08] text-[11px] text-[#6b7280]">
+                  <svg className="w-3 h-3 stroke-current opacity-50" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                  app.trackbridge.ai
+                </div>
               </div>
-            ))}
+
+              {/* Sidebar + chat layout */}
+              <div className="flex min-h-[300px]">
+                {/* Left sidebar */}
+                <div className="w-[52px] border-r border-black/[0.06] bg-[#fafafa] flex flex-col items-center py-4 gap-4 flex-shrink-0">
+                  <div className="w-7 h-7 rounded-lg bg-brand flex items-center justify-center">
+                    <span className="text-[9px] font-bold text-white">TB</span>
+                  </div>
+                  {[
+                    <svg key="a" className="w-4 h-4 stroke-[#9ca3af]" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+                    <svg key="b" className="w-4 h-4 stroke-[#9ca3af]" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
+                    <svg key="c" className="w-4 h-4 stroke-[#9ca3af]" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>,
+                  ]}
+                </div>
+
+                {/* Chat pane */}
+                <div className="flex-1 flex flex-col">
+                  <div className="p-5 flex flex-col gap-4 flex-1">
+                    {/* User message */}
+                    <div className="flex flex-row-reverse gap-2.5 items-end">
+                      <span className="w-7 h-7 rounded-full bg-brand/[14%] flex items-center justify-center text-[9px] font-bold text-brand flex-shrink-0">JM</span>
+                      <div className="bg-brand text-white text-[13px] px-4 py-2.5 rounded-2xl rounded-br-sm font-medium max-w-[320px] leading-relaxed shadow-sm">
+                        Which projects are at risk of going over budget this month?
+                      </div>
+                    </div>
+
+                    {/* AI response */}
+                    <div className="flex gap-2.5 items-end">
+                      <span className="w-7 h-7 rounded-full bg-brand flex items-center justify-center text-[9px] font-bold text-white flex-shrink-0">TB</span>
+                      <div className="bg-[#f8f9fc] text-[#1b2540] text-[13px] px-4 py-2.5 rounded-2xl rounded-bl-sm max-w-[360px] leading-relaxed border border-black/[0.05]">
+                        <p className="mb-2.5 font-medium">3 projects showing elevated budget risk:</p>
+                        <div className="flex flex-col gap-1.5">
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-semibold text-[#1b2540]">Apex Modernization</span>
+                            <span className="text-red-500 font-semibold text-[12px]">87% consumed</span>
+                          </div>
+                          <div className="w-full h-1.5 rounded-full bg-black/[0.06]">
+                            <div className="h-full w-[87%] rounded-full bg-red-400" />
+                          </div>
+                          <p className="text-[11px] text-[#6b7184] mt-0.5">34% complete — burn rate 2.6× plan</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Second user message */}
+                    <div className="flex flex-row-reverse gap-2.5 items-end">
+                      <span className="w-7 h-7 rounded-full bg-brand/[14%] flex items-center justify-center text-[9px] font-bold text-brand flex-shrink-0">JM</span>
+                      <div className="bg-brand text-white text-[13px] px-4 py-2.5 rounded-2xl rounded-br-sm font-medium max-w-[320px] shadow-sm">
+                        Show me Apex — who&apos;s on it?
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Input bar */}
+                  <div className="px-4 py-3 border-t border-black/[0.06] flex gap-2 items-center bg-white">
+                    <input
+                      className="flex-1 bg-[#f5f5f7] rounded-xl px-3.5 py-2 text-[12px] text-[#1b2540] placeholder:text-[#9ca3af] outline-none"
+                      type="text"
+                      placeholder="Ask about budget, utilization, projects…"
+                      readOnly
+                      aria-label="Chat input (demo)"
+                    />
+                    <button type="button" className="w-8 h-8 rounded-xl bg-brand flex items-center justify-center flex-shrink-0 shadow-sm" aria-label="Send" tabIndex={-1}>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <line x1="22" y1="2" x2="11" y2="13" />
+                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Chat demo — elevated white card on dark hero */}
-          <div className="max-w-[520px] mx-auto bg-white rounded-card shadow-card overflow-hidden ring-1 ring-brand/20">
-            {/* Window chrome */}
-            <div className="bg-canvas px-4 py-3 flex items-center gap-2 border-b border-fog/30">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#ffbc2e]" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#2ac63a]" />
-              <span className="mx-auto text-[12px] text-ash">TrackBridge AI</span>
-            </div>
-            {/* Messages */}
-            <div className="p-5 flex flex-col gap-3">
-              <div className="flex flex-row-reverse gap-2.5 items-start">
-                <span className="w-8 h-8 rounded-lg bg-brand/[12%] flex items-center justify-center text-[11px] font-bold text-brand flex-shrink-0">JM</span>
-                <div className="bg-brand text-white text-[13px] px-3.5 py-2.5 rounded-2xl font-medium max-w-[340px]">
-                  Which projects are at risk of going over budget this month?
-                </div>
+          {/* Stat pills below card */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+            {[
+              { val: '0 reports', lbl: 'to run' },
+              { val: '<5 sec', lbl: 'to answer' },
+              { val: 'Live', lbl: 'PSA data' },
+            ].map(({ val, lbl }) => (
+              <div key={val} className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] border border-white/[0.08] text-[13px]">
+                <span className="font-bold text-white">{val}</span>
+                <span className="text-white/40">{lbl}</span>
               </div>
-              <div className="flex gap-2.5 items-start">
-                <span className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center text-[11px] font-bold text-white flex-shrink-0">TB</span>
-                <div className="bg-canvas text-navy text-[13px] px-3.5 py-2.5 rounded-2xl max-w-[340px] leading-relaxed shadow-badge">
-                  3 projects showing elevated budget risk:<br /><br />
-                  <strong>Apex Modernization</strong> — 87% consumed, 34% complete<br />
-                  <strong>TriState Portal</strong> — burn rate 2.1× plan<br />
-                  <strong>Clearview Phase 2</strong> — $18K over baseline
-                </div>
-              </div>
-              <div className="flex flex-row-reverse gap-2.5 items-start">
-                <span className="w-8 h-8 rounded-lg bg-brand/[12%] flex items-center justify-center text-[11px] font-bold text-brand flex-shrink-0">JM</span>
-                <div className="bg-brand text-white text-[13px] px-3.5 py-2.5 rounded-2xl font-medium max-w-[340px]">
-                  Yes — show me Apex Modernization
-                </div>
-              </div>
-            </div>
-            {/* Input row */}
-            <div className="px-4 py-3 border-t border-fog/30 flex gap-2.5 items-center">
-              <input
-                className="flex-1 bg-canvas rounded-xl px-3.5 py-2 text-[13px] text-navy placeholder:text-ash outline-none"
-                type="text"
-                placeholder="Ask about utilization, budget, projects..."
-                readOnly
-                aria-label="Chat input (demo)"
-              />
-              <button type="button" className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center flex-shrink-0" aria-label="Send" tabIndex={-1}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <line x1="22" y1="2" x2="11" y2="13" />
-                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                </svg>
-              </button>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -259,11 +305,7 @@ export default function HomePage() {
         <div className="relative bg-cosmos rounded-card px-12 py-16 text-center overflow-hidden">
           <div className="absolute inset-0 hero-dots opacity-40" aria-hidden="true" />
           {/* Violet glow bottom */}
-          <div
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(124,58,237,0.5) 0%, transparent 70%)' }}
-            aria-hidden="true"
-          />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none cta-violet-glow-strong" aria-hidden="true" />
           <div className="relative z-10">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-4 block">Early Access</span>
             <h2 className="text-[clamp(26px,4vw,38px)] font-extrabold text-white mb-4 tracking-heading">
