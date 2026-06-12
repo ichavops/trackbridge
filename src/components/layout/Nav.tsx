@@ -26,7 +26,7 @@ export default function Nav() {
   return (
     <>
       <nav
-        className="fixed top-0 inset-x-0 z-50 h-[68px] bg-cosmos flex items-center"
+        className="fixed top-0 inset-x-0 z-50 h-[68px] bg-brand-gradient flex items-center"
         aria-label="Main navigation"
       >
         <div className="max-w-site mx-auto px-6 w-full flex items-center justify-between">
@@ -61,7 +61,7 @@ export default function Nav() {
           <div className="hidden md:flex items-center">
             <Link
               href="/contact"
-              className="px-5 py-[7px] rounded-full bg-brand text-white text-[14px] font-semibold tracking-ui shadow-cta hover:opacity-90 transition-opacity"
+              className="px-5 py-[7px] rounded-full bg-white text-[#7C3AED] text-[14px] font-semibold tracking-ui hover:bg-white/90 transition-colors"
             >
               Book a Demo
             </Link>
@@ -102,7 +102,7 @@ export default function Nav() {
       {open && (
         <div
           id="mobile-menu"
-          className="fixed top-[68px] inset-x-0 z-40 bg-cosmos border-b border-white/10 px-6 py-5 md:hidden"
+          className="fixed top-[68px] inset-x-0 z-40 bg-brand-gradient border-b border-white/10 px-6 py-5 md:hidden"
         >
           {navLinks.map(({ href, label }) => (
             <Link
@@ -117,7 +117,7 @@ export default function Nav() {
           <div className="mt-5">
             <Link
               href="/contact"
-              className="block py-3 rounded-full text-center bg-brand text-white text-sm font-semibold shadow-cta"
+              className="block py-3 rounded-full text-center bg-white text-[#7C3AED] text-sm font-semibold hover:bg-white/90 transition-colors"
               onClick={() => setOpen(false)}
             >
               Book a Demo

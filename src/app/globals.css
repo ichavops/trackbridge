@@ -102,6 +102,11 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  /* ── Brand gradient ─────────────────────────────────────── */
+  .bg-brand-gradient {
+    background: linear-gradient(to right, #7C3AED, #EC4899);
+  }
+
   /* ── PSA platform ticker ─────────────────────────────────── */
   .ticker-wrap {
     overflow: hidden;
