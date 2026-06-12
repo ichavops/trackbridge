@@ -205,31 +205,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CTA BANNER — cosmos dark with dot grid ── */}
+      {/* ── CTA BANNER ── */}
       <div className="max-w-site mx-auto px-6 py-24">
-        <div className="relative bg-brand-gradient rounded-card px-12 py-16 text-center overflow-hidden">
-          <div className="absolute inset-0 hero-dots opacity-10" aria-hidden="true" />
-          <div className="relative z-10">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/70 mb-4 block">Early Access</span>
-            <h2 className="text-[clamp(26px,4vw,38px)] font-extrabold text-white mb-4 tracking-heading">
-              Be first when we launch
-            </h2>
-            <p className="text-[17px] text-white/60 mb-9 max-w-[480px] mx-auto leading-[1.65]">
-              TrackBridge is in active development. Join the waitlist for early access and priority onboarding when we go live.
-            </p>
-            <div className="flex flex-wrap gap-3 justify-center">
-              <Link
-                href="/contact"
-                className="px-7 py-3 rounded-full bg-brand-gradient text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
-              >
-                Request Early Access
-              </Link>
-              <Link
-                href="/how"
-                className="px-7 py-3 rounded-full text-white text-[15px] font-medium tracking-ui border border-white/40 hover:bg-white/10 transition-colors"
-              >
-                See How It Works
-              </Link>
+        {/* Gradient border ring wrapping a dark card */}
+        <div className="bg-brand-gradient rounded-card p-[1.5px]">
+          <div className="relative bg-[#0b0118] rounded-[inherit] px-12 py-16 text-center overflow-hidden">
+            {/* Subtle inner glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-transparent to-pink-900/15 pointer-events-none" aria-hidden="true" />
+            <div className="absolute inset-0 hero-dots opacity-[0.06]" aria-hidden="true" />
+            <div className="relative z-10">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-4 block">Early Access</span>
+              <h2 className="text-[clamp(26px,4vw,38px)] font-extrabold text-white mb-4 tracking-heading">
+                Be first when we launch
+              </h2>
+              <p className="text-[17px] text-white/55 mb-9 max-w-[480px] mx-auto leading-[1.65]">
+                TrackBridge is in active development. Join the waitlist for early access and priority onboarding when we go live.
+              </p>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <Link
+                  href="/contact"
+                  className="px-7 py-3 rounded-full bg-brand-gradient text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
+                >
+                  Request Early Access
+                </Link>
+                <Link
+                  href="/how"
+                  className="px-7 py-3 rounded-full text-white text-[15px] font-medium tracking-ui border border-white/20 hover:bg-white/[0.07] transition-colors"
+                >
+                  See How It Works
+                </Link>
+              </div>
             </div>
           </div>
         </div>
