@@ -5,13 +5,14 @@ import { makeSessionToken } from '@/lib/session'
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Always stamp the pathname so root layout can conditionally render Nav/Footer
-  const response = NextResponse.next()
-  response.headers.set('x-pathname', pathname)
+  // Forward pathname as a REQUEST header so Server Components can read it via headers().
+  // NextResponse.next({ request: { headers } }) is the correct way to pass data to layouts.
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-pathname', pathname)
 
   if (pathname.startsWith('/admin')) {
     if (pathname === '/admin/login' || pathname.startsWith('/admin/logout')) {
-      return response
+      return NextResponse.next({ request: { headers: requestHeaders } })
     }
 
     const password = process.env.ADMIN_PASSWORD
@@ -27,10 +28,9 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  return response
+  return NextResponse.next({ request: { headers: requestHeaders } })
 }
 
 export const config = {
-  // Run on every route so x-pathname is always available in the root layout
   matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 }
