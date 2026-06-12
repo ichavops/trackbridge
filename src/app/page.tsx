@@ -85,7 +85,7 @@ export default function HomePage() {
     <>
       {/* ── HERO ── */}
       {/* Mobile: stacked (content → image). Desktop: side-by-side panels */}
-      <section className="bg-cosmos overflow-hidden flex flex-col lg:flex-row lg:h-[calc(100vh-68px)]">
+      <section className="bg-[#160733] overflow-hidden flex flex-col lg:flex-row lg:h-[calc(100vh-68px)]">
 
         {/* LEFT — solid dark panel, content only */}
         <div className="relative flex-shrink-0 w-full lg:w-[46%] flex items-center px-10 lg:px-16 xl:px-20 py-16 lg:py-0">
@@ -129,9 +129,9 @@ export default function HomePage() {
         {/* RIGHT — image panel. Mobile: full-width block below content. Desktop: fills remaining height */}
         <div className="relative w-full h-[80vw] lg:flex-1 lg:h-auto lg:w-auto">
           {/* Fade seam — desktop only */}
-          <div className="absolute inset-y-0 left-0 w-24 z-10 bg-gradient-to-r from-cosmos to-transparent hidden lg:block" aria-hidden="true" />
+          <div className="absolute inset-y-0 left-0 w-24 z-10 bg-gradient-to-r from-[#160733] to-transparent hidden lg:block" aria-hidden="true" />
           {/* Fade top on mobile so it blends into the dark content panel above */}
-          <div className="absolute inset-x-0 top-0 h-16 z-10 bg-gradient-to-b from-cosmos to-transparent lg:hidden" aria-hidden="true" />
+          <div className="absolute inset-x-0 top-0 h-16 z-10 bg-gradient-to-b from-[#160733] to-transparent lg:hidden" aria-hidden="true" />
           <Image
             src="/images/hero_1.jpeg"
             alt="Professional services delivery leader"
@@ -207,10 +207,10 @@ export default function HomePage() {
 
       {/* ── CTA BANNER — cosmos dark with dot grid ── */}
       <div className="max-w-site mx-auto px-6 py-24">
-        <div className="relative bg-cosmos rounded-card px-12 py-16 text-center overflow-hidden">
-          <div className="absolute inset-0 hero-dots opacity-40" aria-hidden="true" />
+        <div className="relative bg-brand-gradient rounded-card px-12 py-16 text-center overflow-hidden">
+          <div className="absolute inset-0 hero-dots opacity-10" aria-hidden="true" />
           <div className="relative z-10">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-4 block">Early Access</span>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/70 mb-4 block">Early Access</span>
             <h2 className="text-[clamp(26px,4vw,38px)] font-extrabold text-white mb-4 tracking-heading">
               Be first when we launch
             </h2>
@@ -226,7 +226,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/how"
-                className="px-7 py-3 rounded-full text-white text-[15px] font-medium tracking-ui border border-ice/25 shadow-ghost-dark hover:bg-white/5 transition-colors"
+                className="px-7 py-3 rounded-full text-white text-[15px] font-medium tracking-ui border border-white/40 hover:bg-white/10 transition-colors"
               >
                 See How It Works
               </Link>

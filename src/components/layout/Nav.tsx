@@ -26,7 +26,7 @@ export default function Nav() {
   return (
     <>
       <nav
-        className="fixed top-0 inset-x-0 z-50 h-[68px] bg-brand-gradient flex items-center"
+        className="fixed top-0 inset-x-0 z-50 h-[68px] bg-white shadow-[0_1px_0_rgba(0,0,0,0.07)] flex items-center"
         aria-label="Main navigation"
       >
         <div className="max-w-site mx-auto px-6 w-full flex items-center justify-between">
@@ -34,7 +34,7 @@ export default function Nav() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 font-bold text-[17px] text-white tracking-ui"
+            className="flex items-center gap-2.5 font-bold text-[17px] text-navy tracking-ui"
           >
             <LogoIcon />
             TrackBridge
@@ -48,8 +48,8 @@ export default function Nav() {
                 href={href}
                 className={`px-4 py-1.5 rounded-full text-[14px] font-medium tracking-ui transition-colors ${
                   pathname === href
-                    ? 'text-white bg-white/10'
-                    : 'text-white/60 hover:text-white hover:bg-white/8'
+                    ? 'text-[#7C3AED] bg-purple-50'
+                    : 'text-slate-500 hover:text-navy hover:bg-gray-100'
                 }`}
               >
                 {label}
@@ -61,7 +61,7 @@ export default function Nav() {
           <div className="hidden md:flex items-center">
             <Link
               href="/contact"
-              className="px-5 py-[7px] rounded-full bg-white text-[#7C3AED] text-[14px] font-semibold tracking-ui hover:bg-white/90 transition-colors"
+              className="px-5 py-[7px] rounded-full bg-brand-gradient text-white text-[14px] font-semibold tracking-ui hover:opacity-90 transition-opacity"
             >
               Book a Demo
             </Link>
@@ -70,7 +70,7 @@ export default function Nav() {
           {/* Mobile toggle */}
           <button
             type="button"
-            className="md:hidden p-1 text-white"
+            className="md:hidden p-1 text-navy"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open ? true : false}
@@ -102,13 +102,13 @@ export default function Nav() {
       {open && (
         <div
           id="mobile-menu"
-          className="fixed top-[68px] inset-x-0 z-40 bg-brand-gradient border-b border-white/10 px-6 py-5 md:hidden"
+          className="fixed top-[68px] inset-x-0 z-40 bg-white border-b border-gray-200 px-6 py-5 md:hidden"
         >
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className="block py-3 border-b border-white/8 text-white/70 font-medium text-sm tracking-ui last:border-0"
+              className="block py-3 border-b border-gray-100 text-slate-500 font-medium text-sm tracking-ui last:border-0"
               onClick={() => setOpen(false)}
             >
               {label}
@@ -117,7 +117,7 @@ export default function Nav() {
           <div className="mt-5">
             <Link
               href="/contact"
-              className="block py-3 rounded-full text-center bg-white text-[#7C3AED] text-sm font-semibold hover:bg-white/90 transition-colors"
+              className="block py-3 rounded-full text-center bg-brand-gradient text-white text-sm font-semibold hover:opacity-90 transition-opacity"
               onClick={() => setOpen(false)}
             >
               Book a Demo
