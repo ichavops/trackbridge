@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans } from 'next/font/google'
+import { headers } from 'next/headers'
 import './globals.css'
 import Nav from '@/components/layout/Nav'
 import Footer from '@/components/layout/Footer'
@@ -31,14 +32,17 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const hdrs = await headers()
+  const pathname = hdrs.get('x-pathname') ?? ''
+  const isAdmin = pathname.startsWith('/admin')
+
   return (
     <html lang="en" className={jakarta.variable} suppressHydrationWarning>
-      {/* bg-canvas = #f8f9fc ghost canvas; text-navy = #1b2540 */}
       <body className="bg-canvas text-navy font-sans">
-        <Nav />
-        <main className="pt-[68px]">{children}</main>
-        <Footer />
+        {!isAdmin && <Nav />}
+        <main className={!isAdmin ? 'pt-[68px]' : ''}>{children}</main>
+        {!isAdmin && <Footer />}
       </body>
     </html>
   )

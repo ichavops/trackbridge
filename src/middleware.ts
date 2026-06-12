@@ -5,9 +5,13 @@ import { makeSessionToken } from '@/lib/session'
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  // Always stamp the pathname so root layout can conditionally render Nav/Footer
+  const response = NextResponse.next()
+  response.headers.set('x-pathname', pathname)
+
   if (pathname.startsWith('/admin')) {
     if (pathname === '/admin/login' || pathname.startsWith('/admin/logout')) {
-      return NextResponse.next()
+      return response
     }
 
     const password = process.env.ADMIN_PASSWORD
@@ -23,9 +27,10 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  return NextResponse.next()
+  return response
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  // Run on every route so x-pathname is always available in the root layout
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 }
