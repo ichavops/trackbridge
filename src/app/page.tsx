@@ -110,14 +110,12 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <a
-                href={process.env.NEXT_PUBLIC_CALENDLY_URL ?? '/contact'}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/contact"
                 className="px-7 py-3 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
               >
                 Book a Demo
-              </a>
+              </Link>
               <Link
                 href="/how"
                 className="px-7 py-3 rounded-full text-white text-[15px] font-medium tracking-ui border border-white/20 hover:bg-white/[0.07] transition-colors"
@@ -220,14 +218,12 @@ export default function HomePage() {
               TrackBridge is in active development. Join the waitlist for early access and priority onboarding when we go live.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
-              <a
-                href={process.env.NEXT_PUBLIC_CALENDLY_URL ?? '/contact'}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/contact"
                 className="px-7 py-3 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
               >
                 Request Early Access
-              </a>
+              </Link>
               <Link
                 href="/how"
                 className="px-7 py-3 rounded-full text-white text-[15px] font-medium tracking-ui border border-ice/25 shadow-ghost-dark hover:bg-white/5 transition-colors"

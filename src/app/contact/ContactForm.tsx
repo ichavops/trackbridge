@@ -1,11 +1,11 @@
 'use client'
 
-import { useActionState } from 'react'
+import { useActionState, useEffect } from 'react'
 import { submitContact, type ContactState } from '@/app/actions/contact'
 
 const initialState: ContactState = {}
+const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL ?? ''
 
-// Antimetal-style: inputs use 0px radius (sharp corners contrast against pill buttons)
 const inputClass =
   'w-full bg-white border-b border-fog/60 px-0 py-2.5 text-[14px] text-navy outline-none focus:border-brand transition-colors placeholder:text-ash tracking-ui'
 
@@ -22,17 +22,48 @@ function FormField({ label, required, error, children, id }: { label: string; re
 export default function ContactForm() {
   const [state, action, pending] = useActionState(submitContact, initialState)
 
+  // Auto-open Calendly in new tab after form submission
+  useEffect(() => {
+    if (state.success && CALENDLY_URL) {
+      const t = setTimeout(() => {
+        window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer')
+      }, 1500)
+      return () => clearTimeout(t)
+    }
+  }, [state.success])
+
   if (state.success) {
     return (
-      <div className="text-center py-12">
+      <div className="text-center py-10">
+        {/* Check */}
         <div className="w-14 h-14 rounded-full bg-brand/[8%] flex items-center justify-center mx-auto mb-5">
           <svg className="w-7 h-7 stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
-        <h3 className="text-[20px] font-bold mb-2 tracking-heading">You&apos;re on the list</h3>
-        <p className="text-[14px] text-slate-ink leading-relaxed">
-          Thanks for reaching out. We&apos;ll be in touch within one business day to schedule your intro call.
+
+        <h3 className="text-[20px] font-bold mb-2 tracking-heading">Details received!</h3>
+        <p className="text-[14px] text-slate-ink leading-relaxed mb-8">
+          Now pick a time that works for you. A calendar tab is opening — if it didn&apos;t appear, click below.
+        </p>
+
+        {/* Primary CTA — book slot */}
+        {CALENDLY_URL && (
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
+          >
+            Book Your Demo Slot
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+        )}
+
+        <p className="text-[12px] text-ash mt-5">
+          We&apos;ll also send a confirmation to your email within one business day.
         </p>
       </div>
     )
@@ -108,7 +139,7 @@ export default function ContactForm() {
         disabled={pending}
         className="mt-8 w-full py-3.5 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {pending ? 'Sending…' : 'Submit — Request Demo / Waitlist'}
+        {pending ? 'Sending…' : 'Continue — Choose a Time →'}
       </button>
     </form>
   )

@@ -59,14 +59,12 @@ export default function Nav() {
 
           {/* Desktop right CTA */}
           <div className="hidden md:flex items-center">
-            <a
-              href={process.env.NEXT_PUBLIC_CALENDLY_URL ?? '/contact'}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/contact"
               className="px-5 py-[7px] rounded-full bg-brand text-white text-[14px] font-semibold tracking-ui shadow-cta hover:opacity-90 transition-opacity"
             >
               Book a Demo
-            </a>
+            </Link>
           </div>
 
           {/* Mobile toggle */}
@@ -75,7 +73,7 @@ export default function Nav() {
             className="md:hidden p-1 text-white"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? 'Close menu' : 'Open menu'}
-            aria-expanded={open}
+            aria-expanded={open ? true : false}
             aria-controls="mobile-menu"
           >
             <svg
@@ -117,15 +115,13 @@ export default function Nav() {
             </Link>
           ))}
           <div className="mt-5">
-            <a
-              href={process.env.NEXT_PUBLIC_CALENDLY_URL ?? '/contact'}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/contact"
               className="block py-3 rounded-full text-center bg-brand text-white text-sm font-semibold shadow-cta"
               onClick={() => setOpen(false)}
             >
               Book a Demo
-            </a>
+            </Link>
           </div>
         </div>
       )}
