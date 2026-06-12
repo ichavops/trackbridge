@@ -1,8 +1,14 @@
 'use server'
 
+import { timingSafeEqual } from 'crypto'
 import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { makeSessionToken } from '@/lib/session'
+
+function passwordsMatch(a: string, b: string): boolean {
+  if (a.length !== b.length) return false
+  return timingSafeEqual(Buffer.from(a, 'utf8'), Buffer.from(b, 'utf8'))
+}
 
 export type LoginState = { error: string } | null
 
@@ -13,7 +19,9 @@ const LOCKOUT_MS = 15 * 60 * 1000
 
 export async function loginAction(_prev: LoginState, formData: FormData): Promise<LoginState> {
   const hdrs = await headers()
-  const ip = hdrs.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+  const ip = hdrs.get('x-real-ip')
+    ?? hdrs.get('x-forwarded-for')?.split(',').at(-1)?.trim()
+    ?? 'unknown'
 
   const now = Date.now()
   const rec = attempts.get(ip) ?? { count: 0, lockedUntil: 0 }
@@ -24,7 +32,7 @@ export async function loginAction(_prev: LoginState, formData: FormData): Promis
 
   const password = formData.get('password') as string
 
-  if (!password || password !== process.env.ADMIN_PASSWORD) {
+  if (!password || !passwordsMatch(password, process.env.ADMIN_PASSWORD ?? '')) {
     await new Promise((r) => setTimeout(r, 400))
     const count = rec.count + 1
     attempts.set(ip, { count, lockedUntil: count >= MAX_ATTEMPTS ? now + LOCKOUT_MS : 0 })

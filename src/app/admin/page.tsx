@@ -55,9 +55,11 @@ export default async function AdminPage() {
           <Link href="/" className="text-xs text-white/40 hover:text-white/70 transition-colors">
             ← Site
           </Link>
-          <Link href="/admin/logout" className="text-xs text-white/40 hover:text-white/70 transition-colors">
-            Sign out
-          </Link>
+          <form method="post" action="/admin/logout">
+            <button type="submit" className="text-xs text-white/40 hover:text-white/70 transition-colors">
+              Sign out
+            </button>
+          </form>
         </div>
       </header>
 

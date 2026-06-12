@@ -22,8 +22,8 @@ export const metadata: Metadata = {
     'TrackBridge is an AI intelligence layer for professional services firms. Instant plain-English answers from your live PSA data.',
   metadataBase: new URL('https://trackbridge.ai'),
   icons: {
-    icon: '/logo.png',
-    apple: '/logo.png',
+    icon: '/favicon.png',
+    apple: '/favicon.png',
   },
   openGraph: {
     siteName: 'TrackBridge',

@@ -52,8 +52,12 @@ export async function submitContact(
   if (honey) return { success: true }
 
   // Rate limit by IP — 3 submissions per hour
+  // Use x-real-ip (set by Vercel, unspoofable) then fall back to the rightmost XFF entry
+  // (Vercel appends the real client IP last, so taking [0] would trust attacker-supplied values).
   const hdrs = await headers()
-  const ip = hdrs.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+  const ip = hdrs.get('x-real-ip')
+    ?? hdrs.get('x-forwarded-for')?.split(',').at(-1)?.trim()
+    ?? 'unknown'
   if (!checkRateLimit(ip)) {
     return { error: 'Too many submissions from your location. Please try again later.' }
   }

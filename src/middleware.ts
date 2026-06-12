@@ -1,18 +1,39 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { makeSessionToken } from '@/lib/session'
+import { verifySessionToken } from '@/lib/session'
+
+function buildCsp(nonce: string): string {
+  const isDev = process.env.NODE_ENV !== 'production'
+  const directives = [
+    "default-src 'self'",
+    isDev
+      ? `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval'`
+      : `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob:",
+    "font-src 'self'",
+    "connect-src 'self'",
+    "frame-ancestors 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+  ]
+  return directives.join('; ')
+}
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Forward pathname as a REQUEST header so Server Components can read it via headers().
-  // NextResponse.next({ request: { headers } }) is the correct way to pass data to layouts.
+  const nonce = btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(16))))
+
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('x-pathname', pathname)
+  requestHeaders.set('x-nonce', nonce)
 
   if (pathname.startsWith('/admin')) {
     if (pathname === '/admin/login' || pathname.startsWith('/admin/logout')) {
-      return NextResponse.next({ request: { headers: requestHeaders } })
+      const res = NextResponse.next({ request: { headers: requestHeaders } })
+      res.headers.set('Content-Security-Policy', buildCsp(nonce))
+      return res
     }
 
     const password = process.env.ADMIN_PASSWORD
@@ -20,15 +41,17 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/admin/login', request.url))
     }
 
-    const expectedToken = await makeSessionToken(password)
     const session = request.cookies.get('admin-session')
+    const valid = session ? await verifySessionToken(session.value, password) : false
 
-    if (!session || session.value !== expectedToken) {
+    if (!valid) {
       return NextResponse.redirect(new URL('/admin/login', request.url))
     }
   }
 
-  return NextResponse.next({ request: { headers: requestHeaders } })
+  const res = NextResponse.next({ request: { headers: requestHeaders } })
+  res.headers.set('Content-Security-Policy', buildCsp(nonce))
+  return res
 }
 
 export const config = {
