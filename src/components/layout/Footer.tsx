@@ -2,17 +2,8 @@ import Link from 'next/link'
 
 function LogoIcon() {
   return (
-    <span className="w-8 h-8 bg-brand rounded-lg flex items-center justify-center flex-shrink-0">
-      <svg
-        width="18" height="18" viewBox="0 0 24 24"
-        fill="none" stroke="white" strokeWidth="2.5"
-        strokeLinecap="round" strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M3 17L8 12L12 16L16 10L21 14" />
-        <path d="M19 6h2v2" />
-      </svg>
-    </span>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src="/logo.png" alt="" aria-hidden="true" className="w-8 h-8 rounded-lg flex-shrink-0" />
   )
 }
 
