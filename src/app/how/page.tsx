@@ -43,14 +43,17 @@ const roadmap = [
 function CtaBanner({ title, sub }: { title: string; sub: string }) {
   return (
     <div className="max-w-site mx-auto px-6 py-24">
-      <div className="relative bg-cosmos rounded-card px-12 py-16 text-center overflow-hidden">
-        <div className="absolute inset-0 hero-dots opacity-40" aria-hidden="true" />
-        <div className="relative z-10">
-          <h2 className="text-[clamp(24px,3.5vw,36px)] font-extrabold text-white mb-4 tracking-heading">{title}</h2>
-          <p className="text-[16px] text-white/60 mb-8 max-w-[460px] mx-auto leading-[1.65]">{sub}</p>
-          <Link href="/contact" className="px-7 py-3 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity">
-            Request Early Access
-          </Link>
+      <div className="bg-brand-gradient rounded-card p-[1.5px]">
+        <div className="relative bg-[#0b0118] rounded-[inherit] px-12 py-16 text-center overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-transparent to-pink-900/15 pointer-events-none" aria-hidden="true" />
+          <div className="absolute inset-0 hero-dots opacity-[0.06]" aria-hidden="true" />
+          <div className="relative z-10">
+            <h2 className="text-[clamp(24px,3.5vw,36px)] font-extrabold text-white mb-4 tracking-heading">{title}</h2>
+            <p className="text-[16px] text-white/55 mb-8 max-w-[460px] mx-auto leading-[1.65]">{sub}</p>
+            <Link href="/contact" className="px-7 py-3 rounded-full bg-brand-gradient text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity">
+              Request Early Access
+            </Link>
+          </div>
         </div>
       </div>
     </div>

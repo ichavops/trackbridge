@@ -63,7 +63,7 @@ export default function ContactForm() {
         )}
 
         <p className="text-[12px] text-ash mt-5">
-          We&apos;ll also send a confirmation to your email within one business day.
+          A confirmation has been sent to your email. Our team will follow up within one business day.
         </p>
       </div>
     )

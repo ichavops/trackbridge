@@ -99,14 +99,17 @@ export default function WhoPage() {
 
       {/* ── CTA ── */}
       <div className="max-w-site mx-auto px-6 pb-24">
-        <div className="relative bg-cosmos rounded-card px-12 py-16 text-center overflow-hidden">
-          <div className="absolute inset-0 hero-dots opacity-40" aria-hidden="true" />
-          <div className="relative z-10">
-            <h2 className="text-[clamp(24px,3.5vw,36px)] font-extrabold text-white mb-4 tracking-heading">Sound like your firm?</h2>
-            <p className="text-[16px] text-white/60 mb-8 max-w-[460px] mx-auto leading-[1.65]">Tell us about your PSA platform and team size — we&apos;ll reach out when TrackBridge is ready for you.</p>
-            <div className="flex flex-wrap gap-3 justify-center">
-              <Link href="/contact" className="px-7 py-3 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity">Get in Touch</Link>
-              <Link href="/why" className="px-7 py-3 rounded-full text-white text-[15px] font-medium tracking-ui border border-ice/25 shadow-ghost-dark hover:bg-white/5 transition-colors">Why TrackBridge</Link>
+        <div className="bg-brand-gradient rounded-card p-[1.5px]">
+          <div className="relative bg-[#0b0118] rounded-[inherit] px-12 py-16 text-center overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-transparent to-pink-900/15 pointer-events-none" aria-hidden="true" />
+            <div className="absolute inset-0 hero-dots opacity-[0.06]" aria-hidden="true" />
+            <div className="relative z-10">
+              <h2 className="text-[clamp(24px,3.5vw,36px)] font-extrabold text-white mb-4 tracking-heading">Sound like your firm?</h2>
+              <p className="text-[16px] text-white/55 mb-8 max-w-[460px] mx-auto leading-[1.65]">Tell us about your PSA platform and team size — we&apos;ll reach out when TrackBridge is ready for you.</p>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <Link href="/contact" className="px-7 py-3 rounded-full bg-brand-gradient text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity">Get in Touch</Link>
+                <Link href="/why" className="px-7 py-3 rounded-full text-white text-[15px] font-medium tracking-ui border border-white/20 hover:bg-white/[0.07] transition-colors">Why TrackBridge</Link>
+              </div>
             </div>
           </div>
         </div>

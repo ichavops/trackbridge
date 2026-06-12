@@ -1,7 +1,21 @@
 'use server'
 
+import { headers } from 'next/headers'
 import { Resend } from 'resend'
 import { contactSchema } from '@/lib/validations'
+
+// Sliding-window rate limiter — 3 submissions per IP per hour
+const ipWindows = new Map<string, number[]>()
+const RATE_LIMIT = 3
+const RATE_WINDOW_MS = 60 * 60 * 1000
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now()
+  const prev = (ipWindows.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS)
+  if (prev.length >= RATE_LIMIT) return false
+  ipWindows.set(ip, [...prev, now])
+  return true
+}
 
 export type ContactState = {
   success?: boolean
@@ -34,9 +48,15 @@ export async function submitContact(
   formData: FormData
 ): Promise<ContactState> {
   // Honeypot — bots fill hidden fields, real users never see them.
-  // Silently return success so bots think they succeeded.
   const honey = formData.get('_honey') as string
   if (honey) return { success: true }
+
+  // Rate limit by IP — 3 submissions per hour
+  const hdrs = await headers()
+  const ip = hdrs.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+  if (!checkRateLimit(ip)) {
+    return { error: 'Too many submissions from your location. Please try again later.' }
+  }
 
   const raw = Object.fromEntries(formData.entries())
 
@@ -102,6 +122,28 @@ export async function submitContact(
     console.error('Resend error:', error)
     return { error: 'Something went wrong sending your message. Please try again.' }
   }
+
+  // Confirmation email to the submitter — fire-and-forget so it never blocks the response
+  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL ?? ''
+  resend.emails.send({
+    from: fromAddress,
+    to: email,
+    replyTo: toEmail,
+    subject: `Your TrackBridge demo request — we'll be in touch`,
+    html: `
+      <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#0f172a">
+        <h2 style="color:#7c3aed;margin-bottom:4px">Thanks, ${esc(firstName)}!</h2>
+        <p style="color:#64748b;margin-top:0">We've received your demo request and will be in touch within one business day.</p>
+        <hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0"/>
+        ${calendlyUrl ? `
+        <p style="font-size:14px">Want to lock in a time right now? Pick a slot that works for you:</p>
+        <a href="${calendlyUrl}" style="display:inline-block;padding:12px 28px;background:linear-gradient(to right,#7c3aed,#ec4899);color:#fff;border-radius:9999px;text-decoration:none;font-weight:600;font-size:14px">Choose Your Demo Time →</a>
+        <hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0"/>
+        ` : ''}
+        <p style="font-size:12px;color:#94a3b8">TrackBridge LLC · Richmond, Texas · <a href="https://trackbridge.ai" style="color:#94a3b8">trackbridge.ai</a></p>
+      </div>
+    `,
+  }).catch((err) => console.error('Confirmation email failed:', err))
 
   return { success: true }
 }

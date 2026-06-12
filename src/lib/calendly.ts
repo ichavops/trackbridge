@@ -1,5 +1,24 @@
 const BASE = 'https://api.calendly.com'
 
+// Run at most `limit` async tasks at a time — prevents flooding Calendly's API
+// when there are many bookings.
+async function withConcurrency<T, R>(
+  items: T[],
+  limit: number,
+  fn: (item: T) => Promise<R>
+): Promise<R[]> {
+  const results: R[] = new Array(items.length)
+  let idx = 0
+  async function worker() {
+    while (idx < items.length) {
+      const i = idx++
+      results[i] = await fn(items[i])
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker))
+  return results
+}
+
 function authHeader() {
   const token = process.env.CALENDLY_API_TOKEN
   if (!token) throw new Error('CALENDLY_API_TOKEN is not set in environment variables')
@@ -67,16 +86,14 @@ export async function getBookings(): Promise<Booking[]> {
   // Events list is live — always fresh
   const { collection: events } = await calendlyGetFresh(`/scheduled_events?${params}`)
 
-  // Fetch invitees for each event in parallel — live data
-  const bookings = await Promise.all(
-    (events as any[]).map(async (ev) => {
-      const uuid = uuidFromUri(ev.uri as string)
-      const { collection: invitees } = await calendlyGetFresh(
-        `/scheduled_events/${uuid}/invitees`
-      )
-      return { ...ev, uuid, invitees } as Booking
-    })
-  )
+  // Fetch invitees with a concurrency cap — avoids flooding the API with 50+ parallel calls
+  const bookings = await withConcurrency(events as any[], 10, async (ev) => {
+    const uuid = uuidFromUri(ev.uri as string)
+    const { collection: invitees } = await calendlyGetFresh(
+      `/scheduled_events/${uuid}/invitees`
+    )
+    return { ...ev, uuid, invitees } as Booking
+  })
 
   return bookings
 }
