@@ -72,12 +72,12 @@ const features = [
 ]
 
 const platforms = [
-  { name: 'NetSuite OpenAir', full: 'NetSuite SuiteProjects Pro (OpenAir)', icon: '/icons/netsuite.svg', status: 'live' },
-  { name: 'Kantata', full: 'Kantata (Mavenlink)', icon: '/icons/kantata.svg', status: 'roadmap' },
+  { name: 'NetSuite OpenAir', full: 'NetSuite SuiteProjects Pro (OpenAir)', icon: '/icons/netsuite.png', status: 'live' },
+  { name: 'Kantata', full: 'Kantata (Mavenlink)', icon: '/icons/kantata.png', status: 'roadmap' },
   { name: 'BigTime', full: 'BigTime', icon: '/icons/bigtime.svg', status: 'roadmap' },
-  { name: 'Unanet', full: 'Unanet', icon: '/icons/unanet.svg', status: 'roadmap' },
+  { name: 'Unanet', full: 'Unanet', icon: '/icons/unanet.png', status: 'roadmap' },
   { name: 'Dynamics 365', full: 'Microsoft Dynamics 365', icon: '/icons/dynamics365.svg', status: 'roadmap' },
-  { name: 'Deltek Vantagepoint', full: 'Deltek Vantagepoint', icon: '/icons/deltek.svg', status: 'roadmap' },
+  { name: 'Deltek Vantagepoint', full: 'Deltek Vantagepoint', icon: '/icons/deltek.png', status: 'roadmap' },
 ]
 
 export default function HomePage() {
