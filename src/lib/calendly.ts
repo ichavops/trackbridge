@@ -6,7 +6,21 @@ function authHeader() {
   return { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
 }
 
-async function calendlyGet(path: string) {
+// User profile changes rarely — cache for 1 hour
+async function calendlyGetCached(path: string) {
+  const res = await fetch(`${BASE}${path}`, {
+    headers: authHeader(),
+    next: { revalidate: 3600 },
+  })
+  if (!res.ok) {
+    const body = await res.text().catch(() => '')
+    throw new Error(`Calendly ${res.status}: ${body}`)
+  }
+  return res.json()
+}
+
+// Bookings and invitees are live data — always fresh
+async function calendlyGetFresh(path: string) {
   const res = await fetch(`${BASE}${path}`, {
     headers: authHeader(),
     cache: 'no-store',
@@ -40,7 +54,8 @@ export type Booking = {
 }
 
 export async function getBookings(): Promise<Booking[]> {
-  const { resource: user } = await calendlyGet('/users/me')
+  // User profile is stable — served from cache after first load
+  const { resource: user } = await calendlyGetCached('/users/me')
 
   const params = new URLSearchParams({
     user: user.uri,
@@ -49,12 +64,14 @@ export async function getBookings(): Promise<Booking[]> {
     sort: 'start_time:asc',
   })
 
-  const { collection: events } = await calendlyGet(`/scheduled_events?${params}`)
+  // Events list is live — always fresh
+  const { collection: events } = await calendlyGetFresh(`/scheduled_events?${params}`)
 
+  // Fetch invitees for each event in parallel — live data
   const bookings = await Promise.all(
     (events as any[]).map(async (ev) => {
       const uuid = uuidFromUri(ev.uri as string)
-      const { collection: invitees } = await calendlyGet(
+      const { collection: invitees } = await calendlyGetFresh(
         `/scheduled_events/${uuid}/invitees`
       )
       return { ...ev, uuid, invitees } as Booking

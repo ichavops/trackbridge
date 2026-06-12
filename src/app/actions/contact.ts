@@ -19,10 +19,25 @@ const PSA_LABELS: Record<string, string> = {
   evaluating: 'Still evaluating / not sure',
 }
 
+// HTML entity encode every user-supplied string before inserting into email HTML
+function esc(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+}
+
 export async function submitContact(
   _prevState: ContactState,
   formData: FormData
 ): Promise<ContactState> {
+  // Honeypot — bots fill hidden fields, real users never see them.
+  // Silently return success so bots think they succeeded.
+  const honey = formData.get('_honey') as string
+  if (honey) return { success: true }
+
   const raw = Object.fromEntries(formData.entries())
 
   const parsed = contactSchema.safeParse(raw)
@@ -33,7 +48,7 @@ export async function submitContact(
 
   const apiKey = process.env.RESEND_API_KEY
   const toEmail = process.env.CONTACT_EMAIL_TO
-  const fromAddress = process.env.CONTACT_EMAIL_FROM ?? 'TrackBridge <noreply@resend.dev>'
+  const fromAddress = process.env.CONTACT_EMAIL_FROM ?? 'TrackBridge <onboarding@resend.dev>'
 
   if (!apiKey || !toEmail) {
     console.error('Missing RESEND_API_KEY or CONTACT_EMAIL_TO')
@@ -41,6 +56,14 @@ export async function submitContact(
   }
 
   const { firstName, lastName, company, email, psaPlatform, teamSize, message } = parsed.data
+
+  // Encode all user fields before placing into HTML
+  const safeName    = esc(`${firstName} ${lastName}`)
+  const safeCompany = esc(company)
+  const safeEmail   = esc(email)
+  const safePSA     = esc(PSA_LABELS[psaPlatform] ?? psaPlatform)
+  const safeTeam    = teamSize ? esc(teamSize) : 'Not specified'
+  const safeMsg     = message ? esc(message) : ''
 
   const resend = new Resend(apiKey)
 
@@ -56,23 +79,21 @@ export async function submitContact(
         <hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0"/>
 
         <table style="width:100%;border-collapse:collapse;font-size:14px">
-          <tr><td style="padding:8px 0;color:#64748b;width:160px">Name</td><td style="padding:8px 0;font-weight:600">${firstName} ${lastName}</td></tr>
-          <tr><td style="padding:8px 0;color:#64748b">Company</td><td style="padding:8px 0;font-weight:600">${company}</td></tr>
-          <tr><td style="padding:8px 0;color:#64748b">Email</td><td style="padding:8px 0"><a href="mailto:${email}" style="color:#7c3aed">${email}</a></td></tr>
-          <tr><td style="padding:8px 0;color:#64748b">PSA Platform</td><td style="padding:8px 0">${PSA_LABELS[psaPlatform] ?? psaPlatform}</td></tr>
-          <tr><td style="padding:8px 0;color:#64748b">Team Size</td><td style="padding:8px 0">${teamSize ?? 'Not specified'}</td></tr>
+          <tr><td style="padding:8px 0;color:#64748b;width:160px">Name</td><td style="padding:8px 0;font-weight:600">${safeName}</td></tr>
+          <tr><td style="padding:8px 0;color:#64748b">Company</td><td style="padding:8px 0;font-weight:600">${safeCompany}</td></tr>
+          <tr><td style="padding:8px 0;color:#64748b">Email</td><td style="padding:8px 0"><a href="mailto:${safeEmail}" style="color:#7c3aed">${safeEmail}</a></td></tr>
+          <tr><td style="padding:8px 0;color:#64748b">PSA Platform</td><td style="padding:8px 0">${safePSA}</td></tr>
+          <tr><td style="padding:8px 0;color:#64748b">Team Size</td><td style="padding:8px 0">${safeTeam}</td></tr>
         </table>
 
-        ${
-          message
-            ? `<hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0"/>
-               <p style="color:#64748b;font-size:13px;margin-bottom:8px">Message</p>
-               <p style="font-size:14px;line-height:1.6;white-space:pre-wrap">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>`
-            : ''
-        }
+        ${safeMsg
+          ? `<hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0"/>
+             <p style="color:#64748b;font-size:13px;margin-bottom:8px">Message</p>
+             <p style="font-size:14px;line-height:1.6;white-space:pre-wrap">${safeMsg}</p>`
+          : ''}
 
         <hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0"/>
-        <p style="font-size:12px;color:#94a3b8">Reply directly to this email to respond to ${firstName}.</p>
+        <p style="font-size:12px;color:#94a3b8">Reply directly to this email to respond to ${esc(firstName)}.</p>
       </div>
     `,
   })

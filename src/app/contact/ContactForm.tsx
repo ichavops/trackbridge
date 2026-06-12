@@ -73,6 +73,10 @@ export default function ContactForm() {
 
   return (
     <form action={action} noValidate>
+      {/* Honeypot — invisible to real users, bots fill it and get silently rejected */}
+      <div aria-hidden="true" className="absolute opacity-0 pointer-events-none h-0 overflow-hidden" tabIndex={-1}>
+        <input type="text" name="_honey" tabIndex={-1} autoComplete="off" />
+      </div>
       <h2 className="text-[20px] font-bold mb-7 tracking-heading">Book a Demo or Join the Waitlist</h2>
 
       {state.error && !state.fieldErrors && (
@@ -100,7 +104,7 @@ export default function ContactForm() {
         </FormField>
 
         <FormField id="psaPlatform" label="PSA Platform" required error={fe.psaPlatform?.[0]}>
-          <select id="psaPlatform" className={`${inputClass} bg-transparent cursor-pointer`} name="psaPlatform" required defaultValue="">
+          <select id="psaPlatform" title="PSA Platform" className={`${inputClass} bg-transparent cursor-pointer`} name="psaPlatform" required defaultValue="">
             <option value="" disabled>Select your primary PSA platform</option>
             <option value="spp">NetSuite SuiteProjects Pro (OpenAir)</option>
             <option value="kantata">Kantata (Mavenlink)</option>
@@ -113,7 +117,7 @@ export default function ContactForm() {
         </FormField>
 
         <FormField id="teamSize" label="Approximate billable resources" error={fe.teamSize?.[0]}>
-          <select id="teamSize" className={`${inputClass} bg-transparent cursor-pointer`} name="teamSize" defaultValue="">
+          <select id="teamSize" title="Approximate billable resources" className={`${inputClass} bg-transparent cursor-pointer`} name="teamSize" defaultValue="">
             <option value="" disabled>Select team size</option>
             <option value="1-10">1–10</option>
             <option value="10-50">10–50</option>

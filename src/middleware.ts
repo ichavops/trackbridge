@@ -1,21 +1,25 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { makeSessionToken } from '@/lib/session'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   if (pathname.startsWith('/admin')) {
-    // These paths don't need auth
     if (pathname === '/admin/login' || pathname.startsWith('/admin/logout')) {
       return NextResponse.next()
     }
 
-    const session = request.cookies.get('admin-session')
     const password = process.env.ADMIN_PASSWORD
+    if (!password) {
+      return NextResponse.redirect(new URL('/admin/login', request.url))
+    }
 
-    if (!password || !session || session.value !== password) {
-      const loginUrl = new URL('/admin/login', request.url)
-      return NextResponse.redirect(loginUrl)
+    const expectedToken = await makeSessionToken(password)
+    const session = request.cookies.get('admin-session')
+
+    if (!session || session.value !== expectedToken) {
+      return NextResponse.redirect(new URL('/admin/login', request.url))
     }
   }
 
