@@ -9,15 +9,18 @@ function LogoIcon() {
 
 export default function Footer() {
   return (
-    <footer className="bg-cosmos pt-16 pb-10">
-      <div className="max-w-site mx-auto px-6">
+    <footer className="bg-cosmos pb-10">
+      {/* Gradient top accent bar */}
+      <div className="h-[3px] bg-brand-gradient" />
+
+      <div className="max-w-site mx-auto px-6 pt-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
 
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-2.5 font-bold text-[17px] text-white tracking-ui w-fit mb-4">
               <LogoIcon />
-              TrackBridge
+              <span className="text-brand-gradient">TrackBridge</span>
             </Link>
             <p className="text-sm text-white/50 leading-7 max-w-[260px]">
               An AI intelligence layer for professional services firms. Instant answers from your live PSA data.
@@ -26,7 +29,7 @@ export default function Footer() {
 
           {/* Product */}
           <div>
-            <h5 className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/30 mb-4">Product</h5>
+            <h5 className="text-[11px] font-semibold uppercase tracking-[0.1em] text-brand-gradient mb-4">Product</h5>
             <nav aria-label="Product links">
               <Link href="/how" className="block text-sm text-white/50 hover:text-white mb-2.5 transition-colors">How It Works</Link>
               <Link href="/why" className="block text-sm text-white/50 hover:text-white mb-2.5 transition-colors">Why TrackBridge</Link>
@@ -36,7 +39,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h5 className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/30 mb-4">Company</h5>
+            <h5 className="text-[11px] font-semibold uppercase tracking-[0.1em] text-brand-gradient mb-4">Company</h5>
             <nav aria-label="Company links">
               <Link href="/who" className="block text-sm text-white/50 hover:text-white mb-2.5 transition-colors">Who We Serve</Link>
               <Link href="/contact" className="block text-sm text-white/50 hover:text-white mb-2.5 transition-colors">Contact</Link>
@@ -45,7 +48,7 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h5 className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/30 mb-4">Legal</h5>
+            <h5 className="text-[11px] font-semibold uppercase tracking-[0.1em] text-brand-gradient mb-4">Legal</h5>
             <nav aria-label="Legal links">
               <Link href="/privacy" className="block text-sm text-white/50 hover:text-white mb-2.5 transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="block text-sm text-white/50 hover:text-white mb-2.5 transition-colors">Terms of Service</Link>

@@ -107,6 +107,14 @@
     background: linear-gradient(to right, #7C3AED, #EC4899);
   }
 
+  /* Gradient text — for headings and accents */
+  .text-brand-gradient {
+    background: linear-gradient(to right, #7C3AED, #EC4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   /* ── PSA platform ticker ─────────────────────────────────── */
   .ticker-wrap {
     overflow: hidden;

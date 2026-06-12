@@ -112,7 +112,7 @@ export default function HomePage() {
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/contact"
-                className="px-7 py-3 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
+                className="px-7 py-3 rounded-full bg-brand-gradient text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
               >
                 Book a Demo
               </Link>
@@ -220,7 +220,7 @@ export default function HomePage() {
             <div className="flex flex-wrap gap-3 justify-center">
               <Link
                 href="/contact"
-                className="px-7 py-3 rounded-full bg-brand text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
+                className="px-7 py-3 rounded-full bg-brand-gradient text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
               >
                 Request Early Access
               </Link>
