@@ -87,12 +87,6 @@ function HeroChatMockup() {
       {/* Radial spotlight */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-brand/10 blur-[80px] pointer-events-none" aria-hidden="true" />
 
-      {/* Floating badge — live data */}
-      <div className="absolute top-8 left-8 hidden sm:flex items-center gap-2 bg-white/8 backdrop-blur-md border border-white/10 rounded-xl px-3 py-2 shadow-sm z-10">
-        <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" aria-hidden="true" />
-        <span className="text-white text-[11px] font-semibold tracking-ui">Live PSA data, always</span>
-      </div>
-
       {/* Chat window */}
       <div className="relative z-10 w-full max-w-[370px] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.55)] ring-1 ring-white/10">
 
