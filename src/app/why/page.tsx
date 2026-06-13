@@ -43,7 +43,7 @@ export default function WhyPage() {
             Not a generic AI tool.<br />A PSA intelligence specialist.
           </h1>
           <p className="text-[17px] text-slate-ink max-w-[600px] leading-[1.7] mb-14">
-            Anyone can wrap an LLM around a database and call it an AI reporting tool. TrackBridge was built by someone who has spent a decade inside these platforms — and that difference is measurable.
+            Most AI tools understand language. TrackBridge understands PSA operations.
           </p>
 
           {/* Founder card */}
