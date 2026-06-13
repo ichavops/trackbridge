@@ -4,6 +4,7 @@ import { timingSafeEqual } from 'crypto'
 import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { makeSessionToken } from '@/lib/session'
+import { loginAttemptAllowed, recordLoginFailure, clearLoginFailures } from '@/lib/rate-limit'
 
 function passwordsMatch(a: string, b: string): boolean {
   if (a.length !== b.length) return false
@@ -12,8 +13,6 @@ function passwordsMatch(a: string, b: string): boolean {
 
 export type LoginState = { error: string } | null
 
-// Module-level attempt tracker — resets on cold start, sufficient for an admin panel
-const attempts = new Map<string, { count: number; lockedUntil: number }>()
 const MAX_ATTEMPTS = 5
 const LOCKOUT_MS = 15 * 60 * 1000
 
@@ -23,10 +22,7 @@ export async function loginAction(_prev: LoginState, formData: FormData): Promis
     ?? hdrs.get('x-forwarded-for')?.split(',').at(-1)?.trim()
     ?? 'unknown'
 
-  const now = Date.now()
-  const rec = attempts.get(ip) ?? { count: 0, lockedUntil: 0 }
-
-  if (now < rec.lockedUntil) {
+  if (!(await loginAttemptAllowed(ip))) {
     return { error: 'Too many failed attempts. Please try again in 15 minutes.' }
   }
 
@@ -34,16 +30,16 @@ export async function loginAction(_prev: LoginState, formData: FormData): Promis
 
   if (!password || !passwordsMatch(password, process.env.ADMIN_PASSWORD ?? '')) {
     await new Promise((r) => setTimeout(r, 400))
-    const count = rec.count + 1
-    attempts.set(ip, { count, lockedUntil: count >= MAX_ATTEMPTS ? now + LOCKOUT_MS : 0 })
+    await recordLoginFailure(ip, MAX_ATTEMPTS, LOCKOUT_MS)
+    const stillAllowed = await loginAttemptAllowed(ip)
     return {
-      error: count >= MAX_ATTEMPTS
-        ? 'Too many failed attempts. Please try again in 15 minutes.'
-        : 'Incorrect password.',
+      error: stillAllowed
+        ? 'Incorrect password.'
+        : 'Too many failed attempts. Please try again in 15 minutes.',
     }
   }
 
-  attempts.delete(ip)
+  await clearLoginFailures(ip)
 
   const token = await makeSessionToken(process.env.ADMIN_PASSWORD!)
 
@@ -52,7 +48,7 @@ export async function loginAction(_prev: LoginState, formData: FormData): Promis
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',          // tighter than lax — admin is never reached cross-site
-    maxAge: 60 * 60 * 24 * 7,   // 7 days
+    maxAge: 60 * 60 * 8,         // 8 hours
     path: '/admin',              // scoped to /admin only — not sent on every request
   })
 

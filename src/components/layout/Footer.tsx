@@ -62,10 +62,6 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <Link href="/privacy" className="text-xs text-white/30 hover:text-white/60 transition-colors">Privacy</Link>
             <Link href="/terms" className="text-xs text-white/30 hover:text-white/60 transition-colors">Terms</Link>
-            <div className="flex items-center gap-2 text-sm text-white/40">
-              <span className="w-2 h-2 rounded-full bg-green-400 status-pulse" aria-hidden="true" />
-              All systems operational
-            </div>
           </div>
         </div>
       </div>

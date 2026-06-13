@@ -33,6 +33,10 @@ export async function middleware(request: NextRequest) {
     if (pathname === '/admin/login' || pathname.startsWith('/admin/logout')) {
       const res = NextResponse.next({ request: { headers: requestHeaders } })
       res.headers.set('Content-Security-Policy', buildCsp(nonce))
+      res.headers.set('X-Content-Type-Options', 'nosniff')
+      res.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+      res.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
+      res.headers.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains')
       return res
     }
 
@@ -51,6 +55,10 @@ export async function middleware(request: NextRequest) {
 
   const res = NextResponse.next({ request: { headers: requestHeaders } })
   res.headers.set('Content-Security-Policy', buildCsp(nonce))
+  res.headers.set('X-Content-Type-Options', 'nosniff')
+  res.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+  res.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
+  res.headers.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains')
   return res
 }
 

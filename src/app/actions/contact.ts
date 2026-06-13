@@ -3,19 +3,7 @@
 import { headers } from 'next/headers'
 import { Resend } from 'resend'
 import { contactSchema } from '@/lib/validations'
-
-// Sliding-window rate limiter — 3 submissions per IP per hour
-const ipWindows = new Map<string, number[]>()
-const RATE_LIMIT = 3
-const RATE_WINDOW_MS = 60 * 60 * 1000
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now()
-  const prev = (ipWindows.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS)
-  if (prev.length >= RATE_LIMIT) return false
-  ipWindows.set(ip, [...prev, now])
-  return true
-}
+import { slidingWindowAllow } from '@/lib/rate-limit'
 
 export type ContactState = {
   success?: boolean
@@ -58,7 +46,7 @@ export async function submitContact(
   const ip = hdrs.get('x-real-ip')
     ?? hdrs.get('x-forwarded-for')?.split(',').at(-1)?.trim()
     ?? 'unknown'
-  if (!checkRateLimit(ip)) {
+  if (!(await slidingWindowAllow(`contact:${ip}`, 3, 60 * 60 * 1000))) {
     return { error: 'Too many submissions from your location. Please try again later.' }
   }
 
