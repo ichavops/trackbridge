@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: 'TrackBridge — Ask. Know. Decide.',
   description:
     'Fewer surprises. Better margins. Faster decisions. TrackBridge connects your PSA to an AI copilot so delivery leaders get instant answers from live data.',
+  alternates: { canonical: 'https://trackbridge.ai' },
+  openGraph: {
+    title: 'TrackBridge — Ask. Know. Decide.',
+    description: 'Fewer surprises. Better margins. Faster decisions. The AI copilot for professional services teams.',
+    url: 'https://trackbridge.ai',
+  },
 }
 
 // ── Feature card data ────────────────────────────────────────────

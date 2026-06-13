@@ -2,8 +2,14 @@ import type { Metadata } from 'next'
 import ContactForm from './ContactForm'
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: 'Book a Demo',
   description: 'Book a demo or join the waitlist for TrackBridge. We review submissions within one business day.',
+  alternates: { canonical: 'https://trackbridge.ai/contact' },
+  openGraph: {
+    title: 'Book a TrackBridge Demo',
+    description: 'Book a demo or join the waitlist. We review submissions within one business day.',
+    url: 'https://trackbridge.ai/contact',
+  },
 }
 
 const nextSteps = [

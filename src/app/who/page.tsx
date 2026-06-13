@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: 'Who We Serve',
   description:
     'TrackBridge is built for delivery managers, PMO leaders, VPs of Professional Services, and CFOs who need operational clarity without more dashboards.',
+  alternates: { canonical: 'https://trackbridge.ai/who' },
+  openGraph: {
+    title: 'Who TrackBridge Serves',
+    description: 'Built for delivery managers, PMO leaders, VPs of Professional Services, and CFOs who need answers without more dashboards.',
+    url: 'https://trackbridge.ai/who',
+  },
 }
 
 const personas = [

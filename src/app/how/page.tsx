@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: 'How It Works',
   description:
     'TrackBridge connects to your PSA in three steps. Ask a question in plain English and get a precise answer from live data in seconds.',
+  alternates: { canonical: 'https://trackbridge.ai/how' },
+  openGraph: {
+    title: 'How TrackBridge Works',
+    description: 'Connect your PSA, ask in plain English, get precise answers from live data in seconds.',
+    url: 'https://trackbridge.ai/how',
+  },
 }
 
 const steps = [

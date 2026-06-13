@@ -3,7 +3,13 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Why TrackBridge',
-  description: 'Not a generic AI tool — a PSA intelligence specialist built by someone who has spent a decade inside these platforms.',
+  description: 'Most AI tools understand language. TrackBridge understands PSA operations — built by a practitioner with nearly a decade inside these platforms.',
+  alternates: { canonical: 'https://trackbridge.ai/why' },
+  openGraph: {
+    title: 'Why TrackBridge — PSA Intelligence Specialist',
+    description: 'Most AI tools understand language. TrackBridge understands PSA operations.',
+    url: 'https://trackbridge.ai/why',
+  },
 }
 
 const differentiators = [

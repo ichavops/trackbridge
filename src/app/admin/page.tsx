@@ -3,7 +3,10 @@ import Link from 'next/link'
 import { getBookings } from '@/lib/calendly'
 import type { Booking } from '@/lib/calendly'
 
-export const metadata: Metadata = { title: 'Admin — TrackBridge' }
+export const metadata: Metadata = {
+  title: 'Admin — TrackBridge',
+  robots: { index: false, follow: false },
+}
 export const dynamic = 'force-dynamic'
 
 function fmtDate(iso: string) {

@@ -4,6 +4,12 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Pricing',
   description: 'Simple, transparent pricing for every stage of growth. TrackBridge is currently in early access — contact us to lock in founding rates.',
+  alternates: { canonical: 'https://trackbridge.ai/pricing' },
+  openGraph: {
+    title: 'TrackBridge Pricing',
+    description: 'Simple, transparent pricing. Early access available — contact us to lock in founding rates.',
+    url: 'https://trackbridge.ai/pricing',
+  },
 }
 
 function CheckIcon({ muted = false }: { muted?: boolean }) {
