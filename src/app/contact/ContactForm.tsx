@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState, useEffect } from 'react'
+import { useActionState, useEffect, useState } from 'react'
 import { submitContact, type ContactState } from '@/app/actions/contact'
 
 const initialState: ContactState = {}
@@ -21,6 +21,9 @@ function FormField({ label, required, error, children, id }: { label: string; re
 
 export default function ContactForm() {
   const [state, action, pending] = useActionState(submitContact, initialState)
+  const [startMs, setStartMs] = useState(0)
+
+  useEffect(() => { setStartMs(Date.now()) }, [])
 
   // Auto-open Calendly in new tab after form submission
   useEffect(() => {
@@ -72,10 +75,12 @@ export default function ContactForm() {
   const fe = state.fieldErrors ?? {}
 
   return (
-    <form action={action} noValidate>
+    <form action={action}>
       {/* Honeypot — invisible to real users, bots fill it and get silently rejected */}
       <div aria-hidden="true" className="absolute opacity-0 pointer-events-none h-0 overflow-hidden" tabIndex={-1}>
         <input type="text" name="_honey" tabIndex={-1} autoComplete="off" />
+        {/* Timing token — set by JS after mount; missing or near-zero value signals a bot */}
+        <input type="hidden" name="_t" value={startMs} />
       </div>
       <h2 className="text-[20px] font-bold mb-7 tracking-heading">Book a Demo or Join the Waitlist</h2>
 

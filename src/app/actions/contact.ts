@@ -31,6 +31,22 @@ function esc(s: string): string {
     .replace(/'/g, '&#x27;')
 }
 
+// Strip characters that allow email header injection (CR, LF, tab)
+function sanitizeHeader(s: string): string {
+  return s.replace(/[\r\n\t]/g, ' ').trim()
+}
+
+// Only allow HTTPS Calendly URLs in outbound email links
+function safeHttpsUrl(raw: string): string {
+  if (!raw) return ''
+  try {
+    const u = new URL(raw)
+    return u.protocol === 'https:' ? raw : ''
+  } catch {
+    return ''
+  }
+}
+
 export async function submitContact(
   _prevState: ContactState,
   formData: FormData
@@ -38,6 +54,13 @@ export async function submitContact(
   // Honeypot — bots fill hidden fields, real users never see them.
   const honey = formData.get('_honey') as string
   if (honey) return { success: true }
+
+  // Timing check — legitimate users take several seconds to fill the form.
+  // Bots that skip JS won't set _t at all; bots that execute JS but submit
+  // immediately will have an elapsed time under the threshold.
+  const formTime = Number(formData.get('_t') ?? '0')
+  const elapsedMs = Date.now() - formTime
+  if (!formTime || elapsedMs < 2000) return { success: true }
 
   // Rate limit by IP — 3 submissions per hour
   // Use x-real-ip (set by Vercel, unspoofable) then fall back to the rightmost XFF entry
@@ -83,7 +106,7 @@ export async function submitContact(
     from: fromAddress,
     to: toEmail,
     replyTo: email,
-    subject: `New demo request — ${firstName} ${lastName} @ ${company}`,
+    subject: `New demo request — ${sanitizeHeader(firstName)} ${sanitizeHeader(lastName)} @ ${sanitizeHeader(company)}`,
     html: `
       <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#0f172a">
         <h2 style="color:#7c3aed;margin-bottom:4px">New TrackBridge Demo Request</h2>
@@ -116,7 +139,7 @@ export async function submitContact(
   }
 
   // Confirmation email to the submitter — fire-and-forget so it never blocks the response
-  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL ?? ''
+  const calendlyUrl = safeHttpsUrl(process.env.NEXT_PUBLIC_CALENDLY_URL ?? '')
   resend.emails.send({
     from: fromAddress,
     to: email,

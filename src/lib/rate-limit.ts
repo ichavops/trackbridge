@@ -18,6 +18,11 @@ export async function slidingWindowAllow(
   windowMs: number,
 ): Promise<boolean> {
   if (!kvAvailable()) {
+    if (process.env.NODE_ENV === 'production') {
+      console.error(
+        '[rate-limit] KV env vars missing in production — rate limits are per-instance only and not shared across serverless instances. Set KV_REST_API_URL and KV_REST_API_TOKEN.',
+      )
+    }
     const now = Date.now()
     const prev = (memWindows.get(key) ?? []).filter((t) => now - t < windowMs)
     if (prev.length >= limit) return false
