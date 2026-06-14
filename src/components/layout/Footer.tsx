@@ -58,7 +58,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-white/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <p className="text-xs text-white/30">© 2026 TrackBridge LLC · Richmond, Texas</p>
+          <p className="text-xs text-white/30">© 2026 TrackBridge LLC · Houston, Texas</p>
           <div className="flex items-center gap-4">
             <Link href="/privacy" className="text-xs text-white/30 hover:text-white/60 transition-colors">Privacy</Link>
             <Link href="/terms" className="text-xs text-white/30 hover:text-white/60 transition-colors">Terms</Link>

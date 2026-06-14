@@ -19,6 +19,10 @@ const personas = [
     title: 'Delivery Managers', body: "You're responsible for on-time, on-budget delivery across multiple concurrent projects. You need instant answers about project health, budget burn, and resource availability — not a 30-minute reporting exercise. TrackBridge gives you that in seconds.",
   },
   {
+    icon: <svg className="w-5 h-5 stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+    title: 'Resource Managers', body: "Finding the right resource shouldn't require five reports and three spreadsheets. TrackBridge gives you instant answers about availability, utilization, future demand, bench strength, and staffing conflicts directly from your PSA system — helping you optimize resource allocation across the business.",
+  },
+  {
     icon: <svg className="w-5 h-5 stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>,
     title: 'PMO Leaders', body: 'You oversee the portfolio. You need to know which projects are at risk, where capacity gaps are developing, and how the bench looks next quarter. TrackBridge surfaces portfolio-level intelligence from your live PSA data — no aggregation required.',
   },
@@ -36,7 +40,7 @@ const verticals = [
   { tag: 'Gov', tagClass: 'bg-blue-50 text-blue-700', title: 'Government Contractors', body: 'DCAA compliance is non-negotiable. TrackBridge understands timesheet accuracy requirements, project accounting integrity, and audit readiness — baked into every answer for government contracting environments.' },
   { tag: 'IT', tagClass: 'bg-violet-50 text-violet-700', title: 'IT & Technology Consulting', body: 'Managing multiple concurrent client engagements with complex billing structures, mixed contract types, and resource sharing across projects. TrackBridge handles the complexity your PSA already tracks.' },
   { tag: 'Eng', tagClass: 'bg-amber-50 text-amber-700', title: 'Engineering Firms', body: 'Running fixed-fee and time-and-materials projects simultaneously. TrackBridge understands the nuance — billing rule logic, revenue recognition, and the operational signals that matter.' },
-  { tag: 'Con', tagClass: 'bg-pink-50 text-pink-700', title: 'Mid-Market Consulting', body: "You've outgrown spreadsheet-based reporting but aren't ready for enterprise BI. TrackBridge gives you the intelligence layer that makes your PSA investment pay off — without the implementation complexity." },
+  { tag: 'Con', tagClass: 'bg-pink-50 text-pink-700', title: 'Professional Services Organizations', body: "You've outgrown spreadsheet-based reporting but aren't ready for enterprise BI. TrackBridge gives you the intelligence layer that makes your PSA investment pay off — without the implementation complexity." },
 ]
 
 export default function WhoPage() {

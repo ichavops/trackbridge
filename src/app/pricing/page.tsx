@@ -57,7 +57,7 @@ const plans = [
       { text: 'Resource utilization queries', on: true },
       { text: 'Slack integration', on: true },
       { text: 'DCAA compliance queries', on: true },
-      { text: 'Chat history & exports', on: true },
+      { text: 'Chat history', on: true },
       { text: 'Dedicated success manager', on: false },
     ],
   },

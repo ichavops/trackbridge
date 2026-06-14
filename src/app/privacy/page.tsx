@@ -12,13 +12,13 @@ export default function PrivacyPage() {
 
         <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-3 block">Legal</span>
         <h1 className="text-[clamp(28px,4vw,40px)] font-extrabold mb-3 tracking-heading">Privacy Policy</h1>
-        <p className="text-[14px] text-slate-ink mb-12">Effective date: June 10, 2026 · TrackBridge LLC · Richmond, Texas</p>
+        <p className="text-[14px] text-slate-ink mb-12">Effective date: June 10, 2026 · TrackBridge LLC · Houston, Texas</p>
 
         <div className="prose-custom">
 
           <h2>1. Who We Are</h2>
           <p>TrackBridge LLC (&ldquo;TrackBridge,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates the website at trackbridge.ai (the &ldquo;Site&rdquo;). This Privacy Policy explains what personal information we collect, how we use it, and your rights regarding that information.</p>
-          <p>Questions? Contact us at: <a href="mailto:privacy@trackbridge.ai">privacy@trackbridge.ai</a></p>
+          <p>Questions? Contact us at: <a href="mailto:hello@trackbridge.ai">hello@trackbridge.ai</a></p>
 
           <h2>2. Information We Collect</h2>
           <p>We collect personal information only when you voluntarily provide it — specifically through our contact and waitlist form. The information you may submit includes:</p>
@@ -66,7 +66,7 @@ export default function PrivacyPage() {
             <li><strong>Opt out</strong> of any marketing communications</li>
             <li><strong>Data portability</strong> — receive your data in a structured format</li>
           </ul>
-          <p>To exercise any of these rights, email <a href="mailto:privacy@trackbridge.ai">privacy@trackbridge.ai</a>. We will respond within 30 days.</p>
+          <p>To exercise any of these rights, email <a href="mailto:hello@trackbridge.ai">hello@trackbridge.ai</a>. We will respond within 30 days.</p>
           <p>If you are a resident of the European Economic Area (EEA) or United Kingdom, our legal basis for processing your information is your consent (provided when you submit the contact form) and our legitimate interest in responding to business inquiries.</p>
           <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA). We do not sell personal information. To submit a CCPA request, use the contact above.</p>
 
@@ -84,7 +84,7 @@ export default function PrivacyPage() {
           <p>We may update this Privacy Policy periodically. We will revise the &ldquo;Effective date&rdquo; at the top of this page when we do. Continued use of the Site after changes constitutes acceptance of the updated policy.</p>
 
           <h2>12. Contact</h2>
-          <p>TrackBridge LLC<br />Richmond, Texas, United States<br />Email: <a href="mailto:privacy@trackbridge.ai">privacy@trackbridge.ai</a></p>
+          <p>TrackBridge LLC<br />Houston, Texas, United States<br />Email: <a href="mailto:hello@trackbridge.ai">hello@trackbridge.ai</a></p>
 
         </div>
       </div>

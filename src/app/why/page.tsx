@@ -64,7 +64,7 @@ export default function WhyPage() {
               <h3 className="text-[18px] font-bold mb-1 tracking-heading">Built by a PSA practitioner</h3>
               <p className="text-[13px] text-brand font-semibold mb-4">Founder — Nearly a decade of hands-on PSA implementation experience</p>
               <p className="text-[14px] text-slate-ink leading-[1.7] mb-4">
-                TrackBridge was founded by a consultant with direct implementation and administration experience across NetSuite SuiteProjects Pro (OpenAir), Kantata (Mavenlink), BigTime, NetSuite Projects, Unanet, and adjacent platforms. That experience spans government contracting environments with DCAA compliance requirements — one of the most demanding operational contexts in professional services. The product isn&apos;t built from documentation. It&apos;s built from knowing what breaks, what gets misconfigured, and what questions actually matter.
+                TrackBridge was founded by a consultant with direct implementation and administration experience across NetSuite SuiteProjects Pro, Kantata (Mavenlink), BigTime, NetSuite Projects, Unanet, and adjacent platforms. That experience spans government contracting environments with DCAA compliance requirements — one of the most demanding operational contexts in professional services. The product isn&apos;t built from documentation. It&apos;s built from knowing what breaks, what gets misconfigured, and what questions actually matter.
               </p>
               <div className="flex flex-wrap gap-2">
                 {founderTags.map((tag) => (

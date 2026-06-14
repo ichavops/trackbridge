@@ -77,7 +77,7 @@ const features = [
 ]
 
 const platforms = [
-  { name: 'NetSuite SuiteProjects Pro (OpenAir)', full: 'NetSuite SuiteProjects Pro (OpenAir)', icon: '/icons/netsuite.png', status: 'live' },
+  { name: 'NetSuite SuiteProjects Pro (formerly OpenAir)', full: 'NetSuite SuiteProjects Pro (formerly OpenAir)', icon: '/icons/netsuite.png', status: 'live' },
   { name: 'Kantata', full: 'Kantata (Mavenlink)', icon: '/icons/kantata.png', status: 'roadmap' },
   { name: 'BigTime', full: 'BigTime', icon: '/icons/bigtime.png', status: 'roadmap' },
   { name: 'Unanet', full: 'Unanet', icon: '/icons/unanet.png', status: 'roadmap' },
@@ -185,8 +185,12 @@ export default function HomePage() {
               Ask.<br />Know.<br />Decide.
             </h1>
 
-            <p className="text-[16px] text-white/50 leading-[1.75] mb-9">
+            <p className="text-[16px] text-white/50 leading-[1.75] mb-5">
               The AI copilot for professional services teams. Instant answers from your live PSA data — no reports, no dashboards.
+            </p>
+
+            <p className="text-[13px] text-white/35 italic leading-[1.6] mb-8">
+              Built by a PSA practitioner who knows what breaks, what gets misconfigured, and what questions actually matter.
             </p>
 
             <div className="flex flex-wrap gap-3">
@@ -289,10 +293,10 @@ export default function HomePage() {
             <div className="relative z-10">
               <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-4 block">Early Access</span>
               <h2 className="text-[clamp(26px,4vw,38px)] font-extrabold text-white mb-4 tracking-heading">
-                Be first when we launch
+                Now accepting early access
               </h2>
               <p className="text-[17px] text-white/55 mb-9 max-w-[480px] mx-auto leading-[1.65]">
-                TrackBridge is in active development. Join the waitlist for early access and priority onboarding when we go live.
+                TrackBridge is live on NetSuite SuiteProjects Pro. We&apos;re onboarding a limited number of founding firms now — priority access, founding rates, direct input on the roadmap.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
                 <Link

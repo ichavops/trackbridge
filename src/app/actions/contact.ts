@@ -12,7 +12,7 @@ export type ContactState = {
 }
 
 const PSA_LABELS: Record<string, string> = {
-  spp: 'NetSuite SuiteProjects Pro (OpenAir)',
+  spp: 'NetSuite SuiteProjects Pro',
   kantata: 'Kantata (Mavenlink)',
   bigtime: 'BigTime',
   unanet: 'Unanet',
@@ -132,7 +132,7 @@ export async function submitContact(
         <a href="${calendlyUrl}" style="display:inline-block;padding:12px 28px;background:linear-gradient(to right,#7c3aed,#ec4899);color:#fff;border-radius:9999px;text-decoration:none;font-weight:600;font-size:14px">Choose Your Demo Time →</a>
         <hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0"/>
         ` : ''}
-        <p style="font-size:12px;color:#94a3b8">TrackBridge LLC · Richmond, Texas · <a href="https://trackbridge.ai" style="color:#94a3b8">trackbridge.ai</a></p>
+        <p style="font-size:12px;color:#94a3b8">TrackBridge LLC · Houston, Texas · <a href="https://trackbridge.ai" style="color:#94a3b8">trackbridge.ai</a></p>
       </div>
     `,
   }).catch((err) => console.error('Confirmation email failed:', err))

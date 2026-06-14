@@ -12,7 +12,7 @@ export default function TermsPage() {
 
         <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-3 block">Legal</span>
         <h1 className="text-[clamp(28px,4vw,40px)] font-extrabold mb-3 tracking-heading">Terms of Service</h1>
-        <p className="text-[14px] text-slate-ink mb-12">Effective date: June 10, 2026 · TrackBridge LLC · Richmond, Texas</p>
+        <p className="text-[14px] text-slate-ink mb-12">Effective date: June 10, 2026 · TrackBridge LLC · Houston, Texas</p>
 
         <div className="prose-custom">
 
@@ -70,7 +70,7 @@ export default function TermsPage() {
           <p>We reserve the right to modify these Terms at any time. Changes take effect when posted to the Site with a revised &ldquo;Effective date.&rdquo; Your continued use of the Site after any changes constitutes acceptance of the revised Terms.</p>
 
           <h2>12. Contact</h2>
-          <p>TrackBridge LLC<br />Richmond, Texas, United States<br />Email: <a href="mailto:legal@trackbridge.ai">legal@trackbridge.ai</a></p>
+          <p>TrackBridge LLC<br />Houston, Texas, United States<br />Email: <a href="mailto:hello@trackbridge.ai">hello@trackbridge.ai</a></p>
 
         </div>
       </div>

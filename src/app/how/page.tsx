@@ -32,8 +32,8 @@ const steps = [
 ]
 
 const deliveryOptions = [
-  { img: '/icons/trackbridge-app.svg', title: 'TrackBridge.ai', body: 'Dedicated web interface with full chat history, project views, and team collaboration features.', tag: 'Q3 2026', live: true },
-  { img: '/icons/slack.svg', title: 'Slack', body: 'Ask questions directly in your existing Slack workspace. Get answers without leaving the tool your team lives in.', tag: 'Q3 2026', live: true },
+  { img: '/icons/trackbridge-app.svg', title: 'TrackBridge.ai', body: 'Dedicated web interface with full chat history, project views, and team collaboration features.', tag: 'Coming Soon', live: true },
+  { img: '/icons/slack.svg', title: 'Slack', body: 'Ask questions directly in your existing Slack workspace. Get answers without leaving the tool your team lives in.', tag: 'Coming Soon', live: true },
   { img: '/icons/teams.svg', title: 'Microsoft Teams', body: 'Native Teams integration for organizations that run on Microsoft 365. Ask from any channel or DM.', tag: 'Roadmap', live: false },
   { img: '/icons/chrome.svg', title: 'Chrome Extension', body: 'A floating TrackBridge chat window inside your PSA platform. Ask without switching tabs.', tag: 'Roadmap', live: false },
 ]

@@ -106,7 +106,7 @@ export default function ContactForm() {
         <FormField id="psaPlatform" label="PSA Platform" required error={fe.psaPlatform?.[0]}>
           <select id="psaPlatform" title="PSA Platform" className={`${inputClass} bg-transparent cursor-pointer`} name="psaPlatform" required defaultValue="">
             <option value="" disabled>Select your primary PSA platform</option>
-            <option value="spp">NetSuite SuiteProjects Pro (OpenAir)</option>
+            <option value="spp">NetSuite SuiteProjects Pro</option>
             <option value="kantata">Kantata (Mavenlink)</option>
             <option value="bigtime">BigTime</option>
             <option value="unanet">Unanet</option>

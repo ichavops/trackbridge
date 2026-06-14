@@ -39,7 +39,7 @@ export default function ContactPage() {
             <div className="flex flex-col gap-4 mb-10">
               {[
                 {
-                  label: 'Headquarters', value: 'Richmond, Texas',
+                  label: 'Headquarters', value: 'Houston, Texas',
                   icon: <svg className="w-[18px] h-[18px] stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>,
                 },
                 {
@@ -47,7 +47,7 @@ export default function ContactPage() {
                   icon: <svg className="w-[18px] h-[18px] stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>,
                 },
                 {
-                  label: 'Current PSA support', value: 'NetSuite SuiteProjects Pro (OpenAir) — live now',
+                  label: 'Current PSA support', value: 'NetSuite SuiteProjects Pro — live now',
                   icon: <svg className="w-[18px] h-[18px] stroke-brand" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>,
                 },
               ].map(({ label, value, icon }) => (
