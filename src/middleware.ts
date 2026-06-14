@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
   requestHeaders.set('x-nonce', nonce)
 
   if (pathname.startsWith('/admin')) {
-    if (pathname === '/admin/login' || pathname.startsWith('/admin/logout')) {
+    if (pathname === '/admin/login') {
       const res = NextResponse.next({ request: { headers: requestHeaders } })
       res.headers.set('Content-Security-Policy', buildCsp(nonce))
       res.headers.set('X-Content-Type-Options', 'nosniff')

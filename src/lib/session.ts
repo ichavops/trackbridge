@@ -1,8 +1,10 @@
 // Session tokens: HMAC-SHA-256 over a random session ID + issue timestamp.
 // Each login gets a unique token; expiry is enforced server-side (not just via cookie maxAge).
+// TTL is kept in lock-step with the login cookie maxAge (8h) so a captured token
+// can't outlive the cookie that delivered it.
 // Bump ADMIN_SESSION_VERSION to revoke all active sessions without changing the password.
 
-const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000
+const SESSION_TTL_MS = 8 * 60 * 60 * 1000
 
 async function deriveKey(password: string): Promise<CryptoKey> {
   const version = process.env.ADMIN_SESSION_VERSION ?? '1'

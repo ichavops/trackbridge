@@ -138,9 +138,13 @@ export async function submitContact(
     return { error: 'Something went wrong sending your message. Please try again.' }
   }
 
-  // Confirmation email to the submitter — fire-and-forget so it never blocks the response
+  // Confirmation email to the submitter — fire-and-forget so it never blocks the response.
+  // Per-recipient cap so the same address can't be email-bombed via rotating source IPs:
+  // at most one confirmation per address per hour. (The lead email to us already went out.)
+  const confirmAllowed = await slidingWindowAllow(`confirm:${email}`, 1, 60 * 60 * 1000)
   const calendlyUrl = safeHttpsUrl(process.env.NEXT_PUBLIC_CALENDLY_URL ?? '')
-  resend.emails.send({
+  if (confirmAllowed) {
+    resend.emails.send({
     from: fromAddress,
     to: email,
     replyTo: toEmail,
@@ -158,7 +162,8 @@ export async function submitContact(
         <p style="font-size:12px;color:#94a3b8">TrackBridge LLC · Houston, Texas · <a href="https://trackbridge.ai" style="color:#94a3b8">trackbridge.ai</a></p>
       </div>
     `,
-  }).catch((err) => console.error('Confirmation email failed:', err))
+    }).catch((err) => console.error('Confirmation email failed:', err))
+  }
 
   return { success: true }
 }

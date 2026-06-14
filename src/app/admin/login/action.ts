@@ -1,14 +1,18 @@
 'use server'
 
-import { timingSafeEqual } from 'crypto'
+import { createHash, timingSafeEqual } from 'crypto'
 import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { makeSessionToken } from '@/lib/session'
 import { loginAttemptAllowed, recordLoginFailure, clearLoginFailures } from '@/lib/rate-limit'
 
 function passwordsMatch(a: string, b: string): boolean {
-  if (a.length !== b.length) return false
-  return timingSafeEqual(Buffer.from(a, 'utf8'), Buffer.from(b, 'utf8'))
+  // Hash both inputs to a fixed 32-byte digest first. This removes the
+  // length-mismatch early return, so neither the comparison time nor the
+  // control flow leaks the password length.
+  const ha = createHash('sha256').update(a, 'utf8').digest()
+  const hb = createHash('sha256').update(b, 'utf8').digest()
+  return timingSafeEqual(ha, hb)
 }
 
 export type LoginState = { error: string } | null

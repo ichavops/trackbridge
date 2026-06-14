@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getBookings } from '@/lib/calendly'
 import type { Booking } from '@/lib/calendly'
+import { logoutAction } from './logout/action'
 
 export const metadata: Metadata = {
   title: 'Admin — TrackBridge',
@@ -58,7 +59,7 @@ export default async function AdminPage() {
           <Link href="/" className="text-xs text-white/40 hover:text-white/70 transition-colors">
             ← Site
           </Link>
-          <form method="post" action="/admin/logout">
+          <form action={logoutAction}>
             <button type="submit" className="text-xs text-white/40 hover:text-white/70 transition-colors">
               Sign out
             </button>
