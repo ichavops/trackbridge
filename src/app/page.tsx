@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import HeroChatMockup from '@/components/HeroChatMockup'
 
 export const metadata: Metadata = {
   title: 'TrackBridge — Ask. Know. Decide.',
@@ -85,80 +86,6 @@ const platforms = [
   { name: 'Deltek Vantagepoint', full: 'Deltek Vantagepoint', icon: '/icons/deltek.png', status: 'roadmap' },
 ]
 
-function HeroChatMockup() {
-  return (
-    <div className="relative w-full h-full flex items-center justify-center p-8 lg:p-14">
-      {/* Ambient glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/25 via-transparent to-pink-900/15 pointer-events-none" aria-hidden="true" />
-      {/* Radial spotlight */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-brand/10 blur-[80px] pointer-events-none" aria-hidden="true" />
-
-      {/* Chat window */}
-      <div className="relative z-10 w-full max-w-[370px] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.55)] ring-1 ring-white/10">
-
-        {/* Title bar */}
-        <div className="bg-[#13072b] px-4 py-3 flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" aria-hidden="true" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" aria-hidden="true" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" aria-hidden="true" />
-          <span className="text-white/50 text-[12px] font-medium tracking-ui mx-auto">TrackBridge AI</span>
-        </div>
-
-        {/* Message thread */}
-        <div className="bg-[#f6f5fb] px-4 py-4 space-y-3">
-
-          {/* User bubble */}
-          <div className="flex justify-end">
-            <div className="bg-brand text-white text-[12.5px] leading-[1.5] px-4 py-2.5 rounded-2xl rounded-tr-sm max-w-[87%] shadow-sm">
-              Which projects are at risk of going over budget this month?
-            </div>
-          </div>
-
-          {/* AI bubble */}
-          <div className="flex gap-2.5 items-start">
-            <div className="w-6 h-6 rounded-md bg-gradient-to-br from-purple-600 to-pink-500 flex-shrink-0 flex items-center justify-center text-white text-[9px] font-bold mt-0.5">
-              TB
-            </div>
-            <div className="bg-white text-[12px] leading-[1.6] px-3.5 py-3 rounded-2xl rounded-tl-sm shadow-sm max-w-[90%]">
-              <p className="font-semibold text-navy mb-2">3 projects showing elevated budget risk:</p>
-              <div className="space-y-1.5 mb-2">
-                <p><span className="font-semibold text-navy">Apex Modernization</span><span className="text-slate-500"> — 87% consumed, 34% complete</span></p>
-                <p><span className="font-semibold text-navy">TriState Portal</span><span className="text-slate-500"> — burn rate 2.1× plan, escalating</span></p>
-                <p><span className="font-semibold text-navy">Clearview Phase 2</span><span className="text-slate-500"> — $18K over baseline, change order pending</span></p>
-              </div>
-              <p className="text-[11px] text-slate-400">Want me to break down the root cause for any of these?</p>
-            </div>
-          </div>
-
-          {/* User follow-up */}
-          <div className="flex justify-end">
-            <div className="bg-brand text-white text-[12.5px] px-4 py-2.5 rounded-2xl rounded-tr-sm shadow-sm">
-              Yes — show me Apex Modernization
-            </div>
-          </div>
-        </div>
-
-        {/* Input bar */}
-        <div className="bg-white border-t border-gray-100 px-3 py-2.5 flex items-center gap-2">
-          <span className="flex-1 text-[11.5px] text-slate-300 select-none">
-            Ask about utilization, budget, projects…
-          </span>
-          <div className="w-7 h-7 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center flex-shrink-0">
-            <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      {/* Floating badge — response time */}
-      <div className="absolute bottom-8 right-8 hidden sm:block bg-white/8 backdrop-blur-md border border-white/10 rounded-xl px-3.5 py-2.5 shadow-sm z-10 text-right">
-        <p className="text-white/40 text-[10px] uppercase tracking-[0.1em] mb-0.5">Avg response</p>
-        <p className="text-white font-extrabold text-[20px] leading-none">&lt;&nbsp;3s</p>
-      </div>
-    </div>
-  )
-}
 
 export default function HomePage() {
   return (
@@ -224,7 +151,7 @@ export default function HomePage() {
       {/* ── PLATFORMS — scrolling ticker ── */}
       <section className="bg-canvas py-14 overflow-hidden" aria-label="Supported PSA platforms">
         <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-ash text-center mb-8">
-          Works with your PSA platform
+          Works with your PSA platform (NetSuite SuiteProjects)
         </p>
         <div className="ticker-wrap">
           {/* duplicate array for seamless infinite loop */}
