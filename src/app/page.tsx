@@ -79,6 +79,7 @@ const features = [
 
 const platforms = [
   { name: 'NetSuite SuiteProjects Pro (formerly OpenAir)', full: 'NetSuite SuiteProjects Pro (formerly OpenAir)', icon: '/icons/netsuite.png', status: 'live' },
+  { name: 'NetSuite SuiteProjects', full: 'NetSuite SuiteProjects', icon: '/icons/netsuite.png', status: 'roadmap' },
   { name: 'Kantata', full: 'Kantata (Mavenlink)', icon: '/icons/kantata.png', status: 'roadmap' },
   { name: 'BigTime', full: 'BigTime', icon: '/icons/bigtime.png', status: 'roadmap' },
   { name: 'Unanet', full: 'Unanet', icon: '/icons/unanet.png', status: 'roadmap' },
@@ -151,8 +152,8 @@ export default function HomePage() {
       {/* ── PLATFORMS — scrolling ticker ── */}
       <section className="bg-canvas py-14 overflow-hidden" aria-label="Supported PSA platforms">
         <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-ash text-center mb-8">
-          Works with your PSA platform (NetSuite SuiteProjects)
-        </p>
+          Works with your PSA platform
+</p>
         <div className="ticker-wrap">
           {/* duplicate array for seamless infinite loop */}
           <div className="ticker-track gap-3">

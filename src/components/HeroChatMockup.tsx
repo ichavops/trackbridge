@@ -116,7 +116,7 @@ export default function HeroChatMockup() {
     const delay = (ms: number) => new Promise<void>((r) => setTimeout(r, ms))
 
     const run = async () => {
-      await delay(700) // brief pause before first message on mount
+      await delay(1000) // brief pause before first message on mount
 
       while (!cancelled) {
         for (let i = 0; i < PAIRS.length; i++) {
@@ -124,33 +124,33 @@ export default function HeroChatMockup() {
 
           // User types
           setTyping('user')
-          await delay(800)
+          await delay(1400)
           if (cancelled) return
 
           // User message appears
           setTyping(null)
           setShown((prev) => [...prev, { role: 'user', pairIdx: i, id: msgId.current++ }])
-          await delay(400)
+          await delay(700)
           if (cancelled) return
 
           // AI types
           setTyping('ai')
-          await delay(1300)
+          await delay(2200)
           if (cancelled) return
 
           // AI response appears
           setTyping(null)
           setShown((prev) => [...prev, { role: 'ai', pairIdx: i, id: msgId.current++ }])
-          await delay(2400) // reading time
+          await delay(3500) // reading time
           if (cancelled) return
         }
 
         // Pause at end of loop, then reset
-        await delay(1800)
+        await delay(2500)
         if (cancelled) return
         setShown([])
         setTyping(null)
-        await delay(900)
+        await delay(1200)
       }
     }
 
@@ -165,7 +165,7 @@ export default function HeroChatMockup() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-brand/10 blur-[80px] pointer-events-none" aria-hidden="true" />
 
       {/* Chat window */}
-      <div className="relative z-10 w-full max-w-[370px] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.55)] ring-1 ring-white/10">
+      <div className="relative z-10 w-full max-w-[440px] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.55)] ring-1 ring-white/10">
 
         {/* Title bar */}
         <div className="bg-[#13072b] px-4 py-3 flex items-center gap-2">
@@ -176,7 +176,7 @@ export default function HeroChatMockup() {
         </div>
 
         {/* Message thread — fixed height, flex-end so new messages push old ones up and out */}
-        <div className="bg-[#f6f5fb] px-4 py-4 flex flex-col justify-end gap-3 h-[216px] overflow-hidden">
+        <div className="bg-[#f6f5fb] px-4 py-4 flex flex-col justify-end gap-3 h-[280px] overflow-hidden">
           {shown.map((msg) => {
             const p = PAIRS[msg.pairIdx]
 
