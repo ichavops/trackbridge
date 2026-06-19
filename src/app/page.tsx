@@ -78,7 +78,6 @@ const features = [
 
 const platforms = [
   { name: 'NetSuite SuiteProjects Pro (formerly OpenAir)', full: 'NetSuite SuiteProjects Pro (formerly OpenAir)', icon: '/icons/netsuite.png', status: 'live' },
-  { name: 'NetSuite Projects', full: 'NetSuite Projects', icon: '/icons/netsuite.png', status: 'roadmap' },
   { name: 'Kantata', full: 'Kantata (Mavenlink)', icon: '/icons/kantata.png', status: 'roadmap' },
   { name: 'BigTime', full: 'BigTime', icon: '/icons/bigtime.png', status: 'roadmap' },
   { name: 'Unanet', full: 'Unanet', icon: '/icons/unanet.png', status: 'roadmap' },
