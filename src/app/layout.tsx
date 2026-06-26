@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans } from 'next/font/google'
 import { headers } from 'next/headers'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import Nav from '@/components/layout/Nav'
 import Footer from '@/components/layout/Footer'
@@ -92,6 +93,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {!isAdmin && <Nav />}
         <main className={!isAdmin ? 'pt-[68px]' : ''}>{children}</main>
         {!isAdmin && <Footer />}
+        <SpeedInsights />
       </body>
     </html>
   )
