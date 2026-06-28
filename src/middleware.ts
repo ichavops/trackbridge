@@ -7,12 +7,13 @@ function buildCsp(nonce: string): string {
   const directives = [
     "default-src 'self'",
     isDev
-      ? `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval'`
-      : `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob:",
-    "font-src 'self'",
-    "connect-src 'self'",
+      ? `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval' https://assets.calendly.com`
+      : `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://assets.calendly.com`,
+    "style-src 'self' 'unsafe-inline' https://assets.calendly.com",
+    "img-src 'self' data: blob: https://*.calendly.com",
+    "font-src 'self' https://assets.calendly.com",
+    "connect-src 'self' https://calendly.com https://api.calendly.com",
+    "frame-src https://calendly.com",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",

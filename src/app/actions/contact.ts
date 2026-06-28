@@ -83,7 +83,7 @@ export async function submitContact(
 
   const apiKey = process.env.RESEND_API_KEY
   const toEmail = process.env.CONTACT_EMAIL_TO
-  const fromAddress = process.env.CONTACT_EMAIL_FROM ?? 'TrackBridge <onboarding@resend.dev>'
+  const fromAddress = process.env.CONTACT_EMAIL_FROM ?? 'TrackBridge <hello@send.trackbridge.ai>'
 
   if (!apiKey || !toEmail) {
     console.error('Missing RESEND_API_KEY or CONTACT_EMAIL_TO')
