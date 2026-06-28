@@ -92,10 +92,10 @@ export default function PricingPage() {
           <div className="text-center mb-14">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-4 block">Pricing</span>
             <h1 className="text-[clamp(30px,4vw,44px)] font-extrabold mb-4 tracking-heading">
-              Simple, transparent pricing<br />for every stage of growth
+              Founding pricing for early customers
             </h1>
             <p className="text-[17px] text-slate-ink max-w-[560px] mx-auto leading-[1.7]">
-              Currently in early access. Pricing below reflects our planned tiers — contact us to lock in founding rates.
+              We&apos;re onboarding a limited number of founding firms at locked-in founding rates. Tell us about your firm and we&apos;ll tailor a plan.
             </p>
           </div>
 

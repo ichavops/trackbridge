@@ -120,9 +120,6 @@ export default function HowPage() {
           <div className="text-center mb-12">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-4 block">Delivery Options</span>
             <h2 className="text-[clamp(28px,4vw,40px)] font-extrabold mb-4 tracking-heading">TrackBridge is built to meet your team where they work</h2>
-            <p className="text-[17px] text-slate-ink max-w-[520px] mx-auto leading-[1.7]">
-              TrackBridge delivers answers through the channels your team already uses — no new tools to adopt.
-            </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {deliveryOptions.map((d) => (

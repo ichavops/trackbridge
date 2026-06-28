@@ -83,8 +83,6 @@ const platforms = [
   { name: 'Kantata', full: 'Kantata (Mavenlink)', icon: '/icons/kantata.png', status: 'roadmap' },
   { name: 'BigTime', full: 'BigTime', icon: '/icons/bigtime.png', status: 'roadmap' },
   { name: 'Unanet', full: 'Unanet', icon: '/icons/unanet.png', status: 'roadmap' },
-  { name: 'Dynamics 365', full: 'Microsoft Dynamics 365', icon: '/icons/dynamics365.svg', status: 'roadmap' },
-  { name: 'Deltek Vantagepoint', full: 'Deltek Vantagepoint', icon: '/icons/deltek.png', status: 'roadmap' },
 ]
 
 

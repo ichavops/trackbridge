@@ -240,10 +240,9 @@ export default function HeroChatMockup() {
         </div>
       </div>
 
-      {/* Floating badge — response time */}
-      <div className="absolute bottom-8 right-8 hidden sm:block bg-white/8 backdrop-blur-md border border-white/10 rounded-xl px-3.5 py-2.5 shadow-sm z-10 text-right">
-        <p className="text-white/40 text-[10px] uppercase tracking-[0.1em] mb-0.5">Avg response</p>
-        <p className="text-white font-extrabold text-[20px] leading-none">&lt;&nbsp;3s</p>
+      {/* Floating badge */}
+      <div className="absolute bottom-8 right-8 hidden sm:block bg-white/8 backdrop-blur-md border border-white/10 rounded-xl px-4 py-2.5 shadow-sm z-10 text-right">
+        <p className="text-white font-semibold text-[13px] leading-snug">Live PSA data · No migration</p>
       </div>
     </div>
   )
