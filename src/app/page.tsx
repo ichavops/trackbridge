@@ -114,27 +114,12 @@ export default function HomePage() {
             </h1>
 
             <p className="text-[16px] text-white/50 leading-[1.75] mb-5">
-              The AI copilot for professional services teams. Instant answers from your live PSA data — no reports, no dashboards.
+              The intelligence layer for the PSA you already run. Instant, plain-English answers from your live data — no migration, no dashboards, no new system to learn.
             </p>
 
-            <p className="text-[13px] text-white/35 italic leading-[1.6] mb-8">
-              Built by a PSA practitioner who knows what breaks, what gets misconfigured, and what questions actually matter.
+            <p className="text-[13px] text-white/40 leading-[1.6] mb-8">
+              Live PSA data · No migration
             </p>
-
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/contact"
-                className="px-7 py-3 rounded-full bg-brand-gradient text-white font-semibold text-[15px] tracking-ui shadow-cta hover:opacity-90 transition-opacity"
-              >
-                Book a Demo
-              </Link>
-              <Link
-                href="/how"
-                className="px-7 py-3 rounded-full text-white text-[15px] font-medium tracking-ui border border-white/20 hover:bg-white/[0.07] transition-colors"
-              >
-                See How It Works
-              </Link>
-            </div>
           </div>
         </div>
 

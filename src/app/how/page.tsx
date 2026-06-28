@@ -75,7 +75,7 @@ export default function HowPage() {
           <div className="text-center mb-16">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-4 block">How It Works</span>
             <h1 className="text-[clamp(30px,4vw,44px)] font-extrabold mb-4 tracking-heading">
-              Three steps.<br />Seconds to an answer.
+              Three steps.<br />Answers in plain English.
             </h1>
             <p className="text-[17px] text-slate-ink max-w-[560px] mx-auto leading-[1.7]">
               TrackBridge connects directly to your PSA, interprets your live operational data, and delivers plain-English intelligence wherever your team works.
@@ -119,7 +119,7 @@ export default function HowPage() {
         <div className="max-w-site mx-auto px-6">
           <div className="text-center mb-12">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-4 block">Delivery Options</span>
-            <h2 className="text-[clamp(28px,4vw,40px)] font-extrabold mb-4 tracking-heading">Meet your team where they work</h2>
+            <h2 className="text-[clamp(28px,4vw,40px)] font-extrabold mb-4 tracking-heading">TrackBridge is built to meet your team where they work</h2>
             <p className="text-[17px] text-slate-ink max-w-[520px] mx-auto leading-[1.7]">
               TrackBridge delivers answers through the channels your team already uses — no new tools to adopt.
             </p>

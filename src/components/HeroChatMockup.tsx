@@ -37,7 +37,7 @@ const PAIRS: Pair[] = [
     items: [
       { bold: 'Booked revenue', detail: ' — $1.24M vs $1.18M plan (+5.1%)' },
       { bold: 'At-risk revenue', detail: ' — $87K across 2 scope disputes' },
-      { bold: 'Pipeline conversion', detail: ' — 34% (down from 41% last quarter)' },
+      { bold: 'Recognized revenue', detail: ' — $1.02M (82% of booked, on track)' },
     ],
     note: 'Meridian & Crestview disputes are the primary close risk.',
   },
