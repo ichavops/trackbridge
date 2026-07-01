@@ -119,9 +119,9 @@ export default function HowPage() {
         <div className="max-w-site mx-auto px-6">
           <div className="text-center mb-12">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand mb-4 block">Delivery Options</span>
-            <h2 className="text-[clamp(28px,4vw,40px)] font-extrabold mb-4 tracking-heading">TrackBridge is built to meet your team where they work</h2>
-            <p className="text-[17px] text-slate-ink max-w-[560px] mx-auto leading-[1.7]">
-              TrackBridge delivers answers through the channels your team already uses.
+            <h2 className="text-[clamp(28px,4vw,40px)] font-extrabold mb-4 tracking-heading">Meet your team where they work</h2>
+            <p className="text-[17px] text-slate-ink max-w-[680px] mx-auto leading-[1.7] whitespace-nowrap">
+              TrackBridge is built to meet your team where they work - no new tools to adopt
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
