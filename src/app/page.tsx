@@ -112,11 +112,11 @@ export default function HomePage() {
             </h1>
 
             <p className="text-[16px] text-white/50 leading-[1.75] mb-5">
-              The intelligence layer for the PSA you already run. Instant, plain-English answers from your live data — no migration, no dashboards, no new system to learn.
+              The AI copilot for professional services teams. Instant answers from your live PSA data — no reports, no dashboards.
             </p>
 
             <p className="text-[13px] text-white/40 leading-[1.6] mb-8">
-              Live PSA data · No migration
+              Built by a PSA practitioner who knows what breaks, what gets misconfigured, and what questions actually matter.
             </p>
           </div>
         </div>
