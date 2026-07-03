@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans } from 'next/font/google'
-import { headers } from 'next/headers'
 import './globals.css'
 import Nav from '@/components/layout/Nav'
 import Footer from '@/components/layout/Footer'
@@ -75,11 +74,7 @@ const orgSchema = {
   },
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const hdrs = await headers()
-  const pathname = hdrs.get('x-pathname') ?? ''
-  const isAdmin = pathname.startsWith('/admin')
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={jakarta.variable} suppressHydrationWarning>
       <head>
@@ -89,9 +84,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body className="bg-canvas text-navy font-sans">
-        {!isAdmin && <Nav />}
-        <main className={!isAdmin ? 'pt-[68px]' : ''}>{children}</main>
-        {!isAdmin && <Footer />}
+        <Nav />
+        <main className="pt-[68px]">{children}</main>
+        <Footer />
       </body>
     </html>
   )
